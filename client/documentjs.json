@@ -1,0 +1,9 @@
+{
+  "sites": {
+    "docs": {
+      "glob" : "js/*.{js,md}",
+      "dest" : "docs/",
+      "parent": "/src/js/utils/utils.js"
+    }
+  }
+}

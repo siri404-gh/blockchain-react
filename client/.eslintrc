@@ -1,0 +1,17 @@
+{
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "ecmaFeatures": {
+        "jsx": true,
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-cond-assign": [ "error", "always" ],
+        "semi": [ "error", "always" ],
+        "indent": ["error", 4]
+    },
+    "parser": "babel-eslint"
+}

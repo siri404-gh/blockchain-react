@@ -1,0 +1,25 @@
+{
+  "name": "skiptrace-ui-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs": "./node_modules/.bin/documentjs",
+    "start": "nodemon api",
+    "test": "mocha"
+  },
+  "author": "Sreeram Padmanabhan",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "chai": "^3.5.0",
+    "documentjs": "^0.4.4",
+    "express": "^4.14.0",
+    "mocha": "^3.0.2",
+    "mongoose": "^4.5.9",
+    "nodemon": "^1.10.2",
+    "path": "^0.12.7",
+    "supertest": "^2.0.0",
+    "web3": "^0.17.0-alpha"
+  }
+}
