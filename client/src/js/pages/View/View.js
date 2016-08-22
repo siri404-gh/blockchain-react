@@ -38,7 +38,7 @@ module.exports = React.createClass({
                         </div>
                     </div>
                 </div>
-                <NavBar logged={sessionStorage.getItem('logged')}/>
+                <NavBar logged={sessionStorage.getItem('logged')} bank={sessionStorage.getItem('username')}/>
                 <h3>View Customer Details</h3>
                 <div className='row middle-row'>
                     <div className='col-md-10'>
@@ -56,7 +56,7 @@ module.exports = React.createClass({
         ) :
         (
             <div>
-                <NavBar logged={sessionStorage.getItem('logged')}/>
+                <NavBar logged={sessionStorage.getItem('logged')} bank={sessionStorage.getItem('username')}/>
                 <h3>View Customer Details</h3>
                 <div className='row middle-row'>
                     <div className='col-md-10'>

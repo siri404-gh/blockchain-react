@@ -11,23 +11,24 @@
 var React = require('react');
 var moment = require('moment');
 var Link = require('react-router').Link;
-var notificationDelay = 7000;
 var dummyCustomers = require('./customers');
+var variables = require('../../../../variables');
 var Web3 = require('web3');
 var web3 = new Web3();
-var server = "http://192.168.101.200:3000";
-var provider = "http://192.168.101.201";
-var SkipTraceContractAddress = "0x5af0669b0d83b52664847f41539b0b7954bea365";
-var SkipTraceContractSequence = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() { SkipTraceRecordCountEvent(sequenceNo); } }";
+var api = variables.api+':'+variables.port;
+var provider = variables.provider;
+var notificationDelay = variables.notificationDelay;
+var SkipTraceContractAddress = variables.SkipTraceContractAddress;
+var SkipTraceContractSequence = variables.SkipTraceContractSequence;
 var SkipTraceCompiled;
 var SkipTraceContract;
-var updatePanelMessage = "Search for the user to update using the searchbar. You may search by Customer Id. You could also select a user to update from the recently updated list shown below.";
-var viewPanelMessage = "Search for users using the searchbar. You may search by Customer Id. You could also select a user from the recently updated list shown below.";
-var homePanelMessage = "";
-var addPanelMessage = "";
+var updatePanelMessage = variables.updatePanelMessage;
+var viewPanelMessage = variables.viewPanelMessage;
+var homePanelMessage = variables.homePanelMessage;
+var addPanelMessage = variables.addPanelMessage;
 
 module.exports = {
-    server: server,
+    api: api,
     homePanelMessage: homePanelMessage,
     addPanelMessage: addPanelMessage,
     updatePanelMessage: updatePanelMessage,
@@ -122,7 +123,7 @@ module.exports = {
         } else {
             $.ajax({
                 async: false,
-                url: self2.server+'/customers/'+id,
+                url: self2.api+'/customers/'+id,
                 method: 'GET',
                 success: function(res) {
                     singleCustomer = res;
@@ -192,7 +193,7 @@ module.exports = {
         var self = this;
         $.ajax({
             async: false,
-            url: self.server+'/customers/',
+            url: self.api+'/customers/',
             method: 'POST',
             data: {
                 port: sessionStorage.getItem('port'),
@@ -235,7 +236,7 @@ module.exports = {
         var self = this;
         $.ajax({
             async: false,
-            url: self.server+'/customers/'+customerID,
+            url: self.api+'/customers/'+customerID,
             method: 'PUT',
             data: {
                 port: sessionStorage.getItem('port'),
@@ -342,7 +343,7 @@ module.exports = {
         ];
         $.ajax({
             // async: false,
-            url: self2.server+'/customers',
+            url: self2.api+'/customers',
             method: 'GET',
             data: {
                 port: sessionStorage.getItem('port'),

@@ -14,7 +14,7 @@ module.exports = React.createClass({
         var addForm = forms.addForm(this);
         return (
             <div>
-                <NavBar logged={sessionStorage.getItem('logged')}/>
+                <NavBar logged={sessionStorage.getItem('logged')} bank={sessionStorage.getItem('username')}/>
                 <h3>Add New Customer</h3>
                 <div className='row middle-row'>
                     <div className='col-md-10'>

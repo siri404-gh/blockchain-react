@@ -7,6 +7,7 @@ var liveReload = require('gulp-livereload');
 var open = require('gulp-open');
 var less = require('gulp-less');
 var path = require('path');
+var variables = require('../variables');
 var browser = os.platform() === 'linux' ? 'google-chrome' : (
   os.platform() === 'darwin' ? 'google chrome' : (
   os.platform() === 'win32' ? 'chrome' : 'firefox'));
@@ -38,7 +39,7 @@ gulp.task('copy', function(){
 
 gulp.task('open', function(){
     var options = {
-        uri: 'http://localhost:3000',
+        uri: variables.client+':'+variables.port,
         app: browser
     };
     gulp.src(__filename)

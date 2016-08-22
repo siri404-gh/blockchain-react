@@ -29,7 +29,7 @@ module.exports = React.createClass({
         var loginForm = forms.loginForm(this);
         return  (this.state.logged)? (
             <div>
-                <NavBar logged={sessionStorage.getItem('logged')}/>
+                <NavBar logged={sessionStorage.getItem('logged')} bank={sessionStorage.getItem('username')}/>
                 <h3>Home</h3>
                 <div className='row middle-row'>
                     <PanelCollapse message="Consortium Efficiency – Reducing Numbers" target="chart1"/>
@@ -58,7 +58,7 @@ module.exports = React.createClass({
             </div>
         ) : (
             <div>
-                <NavBar logged={sessionStorage.getItem('logged')}/>
+                <NavBar logged={sessionStorage.getItem('logged')} bank={sessionStorage.getItem('username')}/>
                 <h3>Home</h3>
                 <div className='row middle-row'>
                     <Panel message={this.state.panelMessage} type={this.state.panelClass}/>

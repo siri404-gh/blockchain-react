@@ -3,9 +3,9 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var app = new express();
 var utils = require('./utils');
-var dummyCustomers = require('./customers');
+var variables = require('../variables');
 
-app.set('port', 3000);
+app.set('port', variables.port);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

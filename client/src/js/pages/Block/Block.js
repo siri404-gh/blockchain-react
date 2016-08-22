@@ -30,7 +30,7 @@ module.exports = React.createClass({
         var transactionDetails = [];
         var block = $.ajax({
             // async: false,
-            url: utils.server+'/blocks/'+self.props.params.id,
+            url: utils.api+'/blocks/'+self.props.params.id,
             method: 'GET',
             data: {
                 port: sessionStorage.getItem('port'),
@@ -79,7 +79,7 @@ module.exports = React.createClass({
     render: function() {
         return (
             <div>
-                <NavBar logged={sessionStorage.getItem('logged')}/>
+                <NavBar logged={sessionStorage.getItem('logged')} bank={sessionStorage.getItem('username')}/>
                 <h3>Ethereum Block - <b>{this.props.params.id}</b></h3>
                 <div className='row middle-row'>
                     <div className='col-md-10'>

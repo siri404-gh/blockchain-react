@@ -62892,7 +62892,23 @@ var Link = require('react-router').Link;
 
 module.exports = React.createClass({displayName: "exports",
     render: function() {
-        return (this.props.logged)? (
+        var logged = (this.props.logged === 'true')? true : false;
+        var links = [];
+        var bankName = 'favicon';
+        var brandName = 'Skiptrace';
+        if(logged) {
+            bankName = this.props.bank;
+            brandName = this.props.bank;
+            links.push(React.createElement("ul", {className: "nav navbar-nav navbar-right", key: "2"}, 
+                    React.createElement("li", null, React.createElement(Link, {to: "/home"}, React.createElement("span", {className: "glyphicon glyphicon-home"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Home"))), 
+                    React.createElement("li", null, React.createElement(Link, {to: "/blocks"}, React.createElement("span", {className: "glyphicon glyphicon-th-list"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Blocks"))), 
+                    React.createElement("li", null, React.createElement(Link, {to: "/add"}, React.createElement("span", {className: "glyphicon glyphicon-plus"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Add"))), 
+                    React.createElement("li", null, React.createElement(Link, {to: "/view"}, React.createElement("span", {className: "glyphicon glyphicon-eye-open"}), " ", React.createElement("span", {className: "navbar-link-text"}, "View"))), 
+                    React.createElement("li", null, React.createElement(Link, {to: "/update"}, React.createElement("span", {className: "glyphicon glyphicon-edit"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Update"))), 
+                    React.createElement("li", null, React.createElement(Link, {to: "/logout"}, React.createElement("span", {className: "glyphicon glyphicon-off"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Logout")))
+                ));
+        }
+        return (
             React.createElement("div", {className: "row"}, 
                 React.createElement("header", {className: "col-md-12"}, 
                     React.createElement("nav", {className: "navbar navbar-default"}, 
@@ -62904,42 +62920,11 @@ module.exports = React.createClass({displayName: "exports",
                             React.createElement("span", {className: "icon-bar"}), 
                             React.createElement("span", {className: "icon-bar"})
                           ), 
-                          React.createElement("a", {className: "navbar-brand", href: "/"}, React.createElement("img", {className: "brand-img", src: '/images/'+sessionStorage.getItem('username')+'.png'})), 
-                          React.createElement("a", {className: "navbar-brand", href: "#"}, sessionStorage.getItem('username'))
+                          React.createElement("a", {className: "navbar-brand", href: "/"}, React.createElement("img", {className: "brand-img", src: '/images/'+bankName+'.png'})), 
+                          React.createElement("a", {className: "navbar-brand", href: "#"}, brandName)
                         ), 
                         React.createElement("div", {className: "collapse navbar-collapse", id: "bs-example-navbar-collapse-1"}, 
-                          React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
-                            React.createElement("li", null, React.createElement(Link, {to: "/home"}, React.createElement("span", {className: "glyphicon glyphicon-home"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Home"))), 
-                            React.createElement("li", null, React.createElement(Link, {to: "/blocks"}, React.createElement("span", {className: "glyphicon glyphicon-th-list"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Blocks"))), 
-                            React.createElement("li", null, React.createElement(Link, {to: "/add"}, React.createElement("span", {className: "glyphicon glyphicon-plus"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Add"))), 
-                            React.createElement("li", null, React.createElement(Link, {to: "/view"}, React.createElement("span", {className: "glyphicon glyphicon-eye-open"}), " ", React.createElement("span", {className: "navbar-link-text"}, "View"))), 
-                            React.createElement("li", null, React.createElement(Link, {to: "/update"}, React.createElement("span", {className: "glyphicon glyphicon-edit"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Update"))), 
-                            React.createElement("li", null, React.createElement(Link, {to: "/logout"}, React.createElement("span", {className: "glyphicon glyphicon-off"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Logout")))
-                          )
-                        )
-                      )
-                    )
-                )
-            )
-        ):
-        (
-            React.createElement("div", {className: "row"}, 
-                React.createElement("header", {className: "col-md-12"}, 
-                    React.createElement("nav", {className: "navbar navbar-default"}, 
-                      React.createElement("div", {className: "container-fluid"}, 
-                        React.createElement("div", {className: "navbar-header"}, 
-                          React.createElement("button", {type: "button", className: "navbar-toggle collapsed", "data-toggle": "collapse", "data-target": "#bs-example-navbar-collapse-1", "aria-expanded": "false"}, 
-                            React.createElement("span", {className: "sr-only"}, "Toggle navigation"), 
-                            React.createElement("span", {className: "icon-bar"}), 
-                            React.createElement("span", {className: "icon-bar"}), 
-                            React.createElement("span", {className: "icon-bar"})
-                          ), 
-                          React.createElement("a", {className: "navbar-brand", href: "/"}, " ", React.createElement("img", {className: "brand-img", src: "/images/favicon.png"}))
-                        ), 
-                        React.createElement("div", {className: "collapse navbar-collapse", id: "bs-example-navbar-collapse-1"}, 
-                          React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
-                            React.createElement("li", null, React.createElement(Link, {to: "/home"}, React.createElement("span", {className: "glyphicon glyphicon-home"}), "  ", React.createElement("span", {className: "navbar-link-text"}, "Home")))
-                          )
+                            links
                         )
                       )
                     )
@@ -63035,7 +63020,7 @@ module.exports = React.createClass({displayName: "exports",
         var addForm = forms.addForm(this);
         return (
             React.createElement("div", null, 
-                React.createElement(NavBar, {logged: sessionStorage.getItem('logged')}), 
+                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "Add New Customer"), 
                 React.createElement("div", {className: "row middle-row"}, 
                     React.createElement("div", {className: "col-md-10"}, 
@@ -63390,7 +63375,7 @@ module.exports = React.createClass({displayName: "exports",
         var transactionDetails = [];
         var block = $.ajax({
             // async: false,
-            url: utils.server+'/blocks/'+self.props.params.id,
+            url: utils.api+'/blocks/'+self.props.params.id,
             method: 'GET',
             data: {
                 port: sessionStorage.getItem('port'),
@@ -63439,7 +63424,7 @@ module.exports = React.createClass({displayName: "exports",
     render: function() {
         return (
             React.createElement("div", null, 
-                React.createElement(NavBar, {logged: sessionStorage.getItem('logged')}), 
+                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "Ethereum Block - ", React.createElement("b", null, this.props.params.id)), 
                 React.createElement("div", {className: "row middle-row"}, 
                     React.createElement("div", {className: "col-md-10"}, 
@@ -63526,7 +63511,7 @@ module.exports = React.createClass({displayName: "exports",
         var self = this;
         $.ajax({
             // async: false,
-            url: utils.server+'/blocks',
+            url: utils.api+'/blocks',
             method: 'GET',
             data: {
                 port: sessionStorage.getItem('port'),
@@ -63580,7 +63565,7 @@ module.exports = React.createClass({displayName: "exports",
     },
     render: function() {
         return (React.createElement("div", null, 
-                React.createElement(NavBar, {logged: sessionStorage.getItem('logged')}), 
+                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "Ethereum Blocks Browser"), 
                 React.createElement("div", {className: "row middle-row"}, 
                     React.createElement("div", {className: "col-md-12"}, 
@@ -63636,7 +63621,7 @@ module.exports = React.createClass({displayName: "exports",
         var loginForm = forms.loginForm(this);
         return  (this.state.logged)? (
             React.createElement("div", null, 
-                React.createElement(NavBar, {logged: sessionStorage.getItem('logged')}), 
+                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "Home"), 
                 React.createElement("div", {className: "row middle-row"}, 
                     React.createElement(PanelCollapse, {message: "Consortium Efficiency – Reducing Numbers", target: "chart1"}), 
@@ -63665,7 +63650,7 @@ module.exports = React.createClass({displayName: "exports",
             )
         ) : (
             React.createElement("div", null, 
-                React.createElement(NavBar, {logged: sessionStorage.getItem('logged')}), 
+                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "Home"), 
                 React.createElement("div", {className: "row middle-row"}, 
                     React.createElement(Panel, {message: this.state.panelMessage, type: this.state.panelClass}), 
@@ -63854,7 +63839,7 @@ module.exports = React.createClass({displayName: "exports",
         var searchForm = forms.searchForm(this);
         return (this.state.show)? (
             React.createElement("div", null, 
-                React.createElement(NavBar, {logged: sessionStorage.getItem('logged')}), 
+                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "Update Customer Details"), 
                 React.createElement("div", {className: "row middle-row"}, 
                     React.createElement("div", {className: "col-md-10"}, 
@@ -63873,7 +63858,7 @@ module.exports = React.createClass({displayName: "exports",
         ) :
         (
             React.createElement("div", null, 
-                React.createElement(NavBar, {logged: sessionStorage.getItem('logged')}), 
+                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "Update Customer Details"), 
                 React.createElement("div", {className: "row middle-row"}, 
                     React.createElement("div", {className: "col-md-10"}, 
@@ -64267,7 +64252,7 @@ module.exports = React.createClass({displayName: "exports",
                         )
                     )
                 ), 
-                React.createElement(NavBar, {logged: sessionStorage.getItem('logged')}), 
+                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "View Customer Details"), 
                 React.createElement("div", {className: "row middle-row"}, 
                     React.createElement("div", {className: "col-md-10"}, 
@@ -64285,7 +64270,7 @@ module.exports = React.createClass({displayName: "exports",
         ) :
         (
             React.createElement("div", null, 
-                React.createElement(NavBar, {logged: sessionStorage.getItem('logged')}), 
+                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "View Customer Details"), 
                 React.createElement("div", {className: "row middle-row"}, 
                     React.createElement("div", {className: "col-md-10"}, 
@@ -64981,23 +64966,24 @@ module.exports = [
 var React = require('react');
 var moment = require('moment');
 var Link = require('react-router').Link;
-var notificationDelay = 7000;
 var dummyCustomers = require('./customers');
+var variables = require('../../../../variables');
 var Web3 = require('web3');
 var web3 = new Web3();
-var server = "http://192.168.101.200:3000";
-var provider = "http://192.168.101.201";
-var SkipTraceContractAddress = "0x5af0669b0d83b52664847f41539b0b7954bea365";
-var SkipTraceContractSequence = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() { SkipTraceRecordCountEvent(sequenceNo); } }";
+var api = variables.api+':'+variables.port;
+var provider = variables.provider;
+var notificationDelay = variables.notificationDelay;
+var SkipTraceContractAddress = variables.SkipTraceContractAddress;
+var SkipTraceContractSequence = variables.SkipTraceContractSequence;
 var SkipTraceCompiled;
 var SkipTraceContract;
-var updatePanelMessage = "Search for the user to update using the searchbar. You may search by Customer Id. You could also select a user to update from the recently updated list shown below.";
-var viewPanelMessage = "Search for users using the searchbar. You may search by Customer Id. You could also select a user from the recently updated list shown below.";
-var homePanelMessage = "";
-var addPanelMessage = "";
+var updatePanelMessage = variables.updatePanelMessage;
+var viewPanelMessage = variables.viewPanelMessage;
+var homePanelMessage = variables.homePanelMessage;
+var addPanelMessage = variables.addPanelMessage;
 
 module.exports = {
-    server: server,
+    api: api,
     homePanelMessage: homePanelMessage,
     addPanelMessage: addPanelMessage,
     updatePanelMessage: updatePanelMessage,
@@ -65092,7 +65078,7 @@ module.exports = {
         } else {
             $.ajax({
                 async: false,
-                url: self2.server+'/customers/'+id,
+                url: self2.api+'/customers/'+id,
                 method: 'GET',
                 success: function(res) {
                     singleCustomer = res;
@@ -65162,7 +65148,7 @@ module.exports = {
         var self = this;
         $.ajax({
             async: false,
-            url: self.server+'/customers/',
+            url: self.api+'/customers/',
             method: 'POST',
             data: {
                 port: sessionStorage.getItem('port'),
@@ -65205,7 +65191,7 @@ module.exports = {
         var self = this;
         $.ajax({
             async: false,
-            url: self.server+'/customers/'+customerID,
+            url: self.api+'/customers/'+customerID,
             method: 'PUT',
             data: {
                 port: sessionStorage.getItem('port'),
@@ -65312,7 +65298,7 @@ module.exports = {
         ];
         $.ajax({
             // async: false,
-            url: self2.server+'/customers',
+            url: self2.api+'/customers',
             method: 'GET',
             data: {
                 port: sessionStorage.getItem('port'),
@@ -65349,4 +65335,21 @@ module.exports = {
     }
 };
 
-},{"./customers":436,"moment":159,"react":343,"react-router":199,"web3":368}]},{},[417]);
+},{"../../../../variables":439,"./customers":436,"moment":159,"react":343,"react-router":199,"web3":368}],439:[function(require,module,exports){
+module.exports={
+    port: '3000',
+    api:'http://192.168.101.200',
+    client: 'http://192.168.101.200',
+    provider: 'http://192.168.101.201',
+    totalRecentCustomers: 10,
+    totalRecentTransactions: 15,
+    SkipTraceContractAddress: "0x5af0669b0d83b52664847f41539b0b7954bea365",
+    SkipTraceContractSequence: "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() { SkipTraceRecordCountEvent(sequenceNo); } }",
+    notificationDelay: 7000,
+    updatePanelMessage: "Search for the user to update using the searchbar. You may search by Customer Id. You could also select a user to update from the recently updated list shown below.",
+    viewPanelMessage: "Search for users using the searchbar. You may search by Customer Id. You could also select a user from the recently updated list shown below.",
+    homePanelMessage: "",
+    addPanelMessage: ""
+};
+
+},{}]},{},[417]);

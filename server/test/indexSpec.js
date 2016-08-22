@@ -1,6 +1,7 @@
 var should = require('chai').should();
 var supertest = require("supertest");
-var url = supertest("http://localhost:3000");
+var variables = require('../../variables');
+var url = supertest(variables.api+':'+variables.port);
 var port = '8545';
 var coinBaseAddress = '0x16a385071c49074f2f86a2af6d8746813ecbc27f';
 
@@ -64,7 +65,7 @@ describe("Testing API response for getting a single user's details", function(er
                     throw err;
                 }
                 var response = JSON.parse(res.text);
-                response.firstName.should.be.equal('Allen');
+                response.firstName.should.be.equal('Allen-A-B');
                 done();
             });
     });

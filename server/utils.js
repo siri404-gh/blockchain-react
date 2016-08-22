@@ -1,10 +1,11 @@
-var totalRecentTransactions = 15;
-var totalRecentCustomers = 10;
 var Web3 = require('web3');
 var web3 = new Web3();
-var provider = "http://192.168.101.201";
-var SkipTraceContractAddress = "0x5af0669b0d83b52664847f41539b0b7954bea365";
-var SkipTraceContractSequence = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() { SkipTraceRecordCountEvent(sequenceNo); } }";
+var variables = require('../variables');
+var provider = variables.provider;
+var totalRecentTransactions = variables.totalRecentTransactions;
+var totalRecentCustomers = variables.totalRecentCustomers;
+var SkipTraceContractAddress = variables.SkipTraceContractAddress;
+var SkipTraceContractSequence = variables.SkipTraceContractSequence;
 var SkipTraceCompiled;
 var SkipTraceContract;
 
@@ -252,58 +253,5 @@ module.exports = {
     },
     cleanUp : function (str) {
         return (str)? (((str.replace("\"", "~")).replace("\'", "~")).replace("|", "~")).replace(":", "~") : str;
-    },
-//     watchTransactionEvent: function(self) {
-//         console.log('calling watch trans');
-//         web3.eth.filter('latest').watch(function(){
-//             console.log('Watching for transactions..');
-//             self.displayTransactions();
-//         });
-//     },
-//     watchAddEvent: function(self) {
-//         console.log('calling watch add');
-//         this.web3Init();
-//         var addEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceAddEvent();
-//         addEvent.watch(function(error, result){
-//             console.log('Watching for user add..');
-//             var blocks = +sessionStorage.getItem('blocks');
-//             var profile = result.args.profile.split('|');
-//             var firstName = profile[0].replace('firstName:','');
-//             var lastName = profile[2].replace('lastName:', '');
-//             console.log(blocks, result, result.blockNumber);
-//             if(blocks > 0 && result && result.blockNumber !== blocks) {
-//                 $('.customer-added-alert').show();
-//                 $('.customer-added-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName + ' ' + lastName + ' ' + ' successfully created.');
-//                 $('.customer-added-alert').delay(notificationDelay).fadeOut();
-//             }
-//             // addEvent.stopWatching();
-//             debugger;sessionStorage.setItem('blocks', result.blockNumber);
-//         });
-//     },
-//     watchUpdateEvent: function(self) {
-//         console.log('calling watch update');
-//         this.web3Init();
-//         var updateEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceUpdateEvent();
-//         updateEvent.watch(function(error, result){
-//             console.log('Watching for user updates..');
-//             var blocks = +sessionStorage.getItem('updateBlocks');
-//             var profile = result.args.profile.split('|');
-//             var firstName = profile[0].replace('firstName:','');
-//             var lastName = profile[2].replace('lastName:', '');
-//             if (blocks > 0 && result && result.blockNumber !== blocks) {
-//                 $('.customer-updated-alert').show();
-//                 $('.customer-updated-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName + ' ' + lastName + ' ' + ' successfully overwritten.');
-//                 $('.customer-updated-alert').delay(notificationDelay).fadeOut();
-//             }
-//             // updateEvent.stopWatching();
-//             sessionStorage.setItem('updateBlocks', result.blockNumber);
-//     	});
-//     },
-//     watchQueryEvent : function(self) {
-//         var self2 = this;
-//         var queryEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceQueryEvent();
-//         queryEvent.watch(function(error, result) {
-//             queryEvent.stopWatching();
-//         });
-//     }
+    }
 };
