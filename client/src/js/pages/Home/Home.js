@@ -125,8 +125,10 @@ module.exports = React.createClass({
         var svg = d3.select("#pie").append("svg").attr("width", 300).attr("height",300);
         svg.append("g").attr("id","chartPie");
         Donut3D.draw("chartPie", chartFunc(chartData), 150, 150, 130, 100, 30, 0.4);
-        utils.watchTransactionEvent(this);
-        utils.watchAddEvent();
-        utils.watchUpdateEvent();
+        if(sessionStorage.getItem('logged')) {
+            utils.watchTransactionEvent(this);
+            utils.watchAddEvent();
+            utils.watchUpdateEvent();
+        }
     }
 });

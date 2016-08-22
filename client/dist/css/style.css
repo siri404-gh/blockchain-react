@@ -1,7 +1,16 @@
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/Open_Sans/OpenSans-Regular.ttf');
+}
 body {
-  font-family: verdana !important;
-  font-size: 13px;
+  font-family: 'Open Sans', verdana, arial;
+  font-size: 14px;
   color: #5D5D5D;
+}
+.navbar-link-text {
+  font-family: 'Open Sans', verdana, arial;
+  font-size: 15px;
+  font-weight: bold;
 }
 .container {
   overflow-y: hidden;
@@ -27,7 +36,6 @@ body {
   margin: 0px;
   min-height: 200px;
   padding: 10px;
-  border: solid 1px #ccc;
 }
 .row-underline:nth-child(even) {
   background: #f4f4f4;

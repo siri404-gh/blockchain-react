@@ -20,12 +20,12 @@ module.exports = React.createClass({
                         </div>
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                           <ul className="nav navbar-nav navbar-right">
-                            <li><Link to="/home"><span className='glyphicon glyphicon-home'> Home </span></Link></li>
-                            <li><Link to="/blocks"><span className='glyphicon glyphicon-th-list'> Blocks </span></Link></li>
-                            <li><Link to="/add"><span className='glyphicon glyphicon-plus'> Add </span></Link></li>
-                            <li><Link to="/view"><span className='glyphicon glyphicon-eye-open'> View </span></Link></li>
-                            <li><Link to="/update"><span className='glyphicon glyphicon-edit'> Update </span></Link></li>
-                            <li><Link to="/logout"><span className='glyphicon glyphicon-off'> Logout </span></Link></li>
+                            <li><Link to="/home"><span className='glyphicon glyphicon-home'></span> <span className='navbar-link-text'>Home</span></Link></li>
+                            <li><Link to="/blocks"><span className='glyphicon glyphicon-th-list'></span> <span className='navbar-link-text'>Blocks</span></Link></li>
+                            <li><Link to="/add"><span className='glyphicon glyphicon-plus'></span> <span className='navbar-link-text'>Add</span></Link></li>
+                            <li><Link to="/view"><span className='glyphicon glyphicon-eye-open'></span> <span className='navbar-link-text'>View</span></Link></li>
+                            <li><Link to="/update"><span className='glyphicon glyphicon-edit'></span> <span className='navbar-link-text'>Update</span></Link></li>
+                            <li><Link to="/logout"><span className='glyphicon glyphicon-off'></span> <span className='navbar-link-text'>Logout</span></Link></li>
                           </ul>
                         </div>
                       </div>
@@ -45,11 +45,11 @@ module.exports = React.createClass({
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                           </button>
-                          <a className="navbar-brand" href="/"> <img className='brand-img' src='./images/favicon.png'/></a>
+                          <a className="navbar-brand" href="/"> <img className='brand-img' src='/images/favicon.png'/></a>
                         </div>
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                           <ul className="nav navbar-nav navbar-right">
-                            <li><Link to="/home"><span className='glyphicon glyphicon-home'> Home </span></Link></li>
+                            <li><Link to="/home"><span className='glyphicon glyphicon-home'></span>  <span className='navbar-link-text'>Home</span></Link></li>
                           </ul>
                         </div>
                       </div>

@@ -15,6 +15,7 @@ var notificationDelay = 7000;
 var dummyCustomers = require('./customers');
 var Web3 = require('web3');
 var web3 = new Web3();
+var server = "http://10.209.41.6:3000";
 var provider = "http://10.208.95.22";
 var SkipTraceContractAddress = "0x5af0669b0d83b52664847f41539b0b7954bea365";
 var SkipTraceContractSequence = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() { SkipTraceRecordCountEvent(sequenceNo); } }";
@@ -26,6 +27,7 @@ var homePanelMessage = "";
 var addPanelMessage = "";
 
 module.exports = {
+    server: server,
     homePanelMessage: homePanelMessage,
     addPanelMessage: addPanelMessage,
     updatePanelMessage: updatePanelMessage,
@@ -104,6 +106,7 @@ module.exports = {
         });
     },
     populate: function(el, i, self, customers) {
+        var self2 = this;
         var id = (el)? +(el.target.id) : ((i)? i : 0);
         var singleCustomer;
         if(customers) {
@@ -111,7 +114,7 @@ module.exports = {
         } else {
             $.ajax({
                 async: false,
-                url: 'http://localhost:3000/customers/'+id,
+                url: self2.server+'/customers/'+id,
                 method: 'GET',
                 success: function(res) {
                     singleCustomer = res;
@@ -174,9 +177,10 @@ module.exports = {
     },
     addSkipTraceRecordOnChain: function (firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks) {
         var transHash;
+        var self = this;
         $.ajax({
             async: false,
-            url: 'http://localhost:3000/customers/',
+            url: self.server+'/customers/',
             method: 'POST',
             data: {
                 port: sessionStorage.getItem('port'),
@@ -216,9 +220,10 @@ module.exports = {
     },
     updateSkipTraceRecordOnChain: function (customerID, firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks) {
         var transHash;
+        var self = this;
         $.ajax({
             async: false,
-            url: 'http://localhost:3000/customers/'+customerID,
+            url: self.server+'/customers/'+customerID,
             method: 'PUT',
             data: {
                 port: sessionStorage.getItem('port'),
@@ -306,6 +311,7 @@ module.exports = {
     	});
     },
     getRecentUpdations: function(self) {
+        var self2 = this;
         var recentUpdations = [
             <div className='row row-underline' key={Math.random()}>
                 <div className='col-xs-1'>
@@ -324,7 +330,7 @@ module.exports = {
         ];
         $.ajax({
             // async: false,
-            url: 'http://localhost:3000/customers',
+            url: self2.server+'/customers',
             method: 'GET',
             data: {
                 port: sessionStorage.getItem('port'),

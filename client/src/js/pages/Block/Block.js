@@ -30,7 +30,7 @@ module.exports = React.createClass({
         var transactionDetails = [];
         var block = $.ajax({
             // async: false,
-            url: 'http://localhost:3000/blocks/'+self.props.params.id,
+            url: utils.server+'/blocks/'+self.props.params.id,
             method: 'GET',
             data: {
                 port: sessionStorage.getItem('port'),

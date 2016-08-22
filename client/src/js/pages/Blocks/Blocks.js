@@ -18,7 +18,7 @@ module.exports = React.createClass({
         var self = this;
         $.ajax({
             // async: false,
-            url: 'http://localhost:3000/blocks',
+            url: utils.server+'/blocks',
             method: 'GET',
             data: {
                 port: sessionStorage.getItem('port'),

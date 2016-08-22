@@ -30,7 +30,8 @@ gulp.task('less', function () {
 
 gulp.task('copy', function(){
     gulp.src('./src/*.html').pipe(gulp.dest('./dist'));
-    gulp.src('./src/fonts/*.*').pipe(gulp.dest('./dist/fonts'));
+    gulp.src('./src/css/**/*.*').pipe(gulp.dest('./dist/css'));
+    gulp.src('./src/fonts/**/*.*').pipe(gulp.dest('./dist/fonts'));
     gulp.src('./src/images/*.*').pipe(gulp.dest('./dist/images'));
     gulp.src('./src/js/vendor/*.*').pipe(gulp.dest('./dist/js/vendor'));
 });
