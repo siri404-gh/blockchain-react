@@ -63264,7 +63264,7 @@ module.exports = {
                     React.createElement(Panel, {message: "Address 2", type: "info"}), 
                     React.createElement("div", {className: "row"}, 
                         React.createElement("div", {className: "form-group col-md-12"}, 
-                            React.createElement("input", {type: "text", className: "form-control", id: "currentAddress2", value: self.state.currentAddress2, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "currentAddress2", value: self.state.currentAddress2, onChange: self.append})
                         )
                         /*<div className="form-group col-md-4">
                             <label htmlFor="">Line 2 </label>
@@ -63278,7 +63278,7 @@ module.exports = {
                     React.createElement(Panel, {message: "Address 3", type: "info"}), 
                     React.createElement("div", {className: "row"}, 
                         React.createElement("div", {className: "form-group col-md-12"}, 
-                            React.createElement("input", {type: "text", className: "form-control", id: "currentAddress3", value: self.state.currentAddress3, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "currentAddress3", value: self.state.currentAddress3, onChange: self.append})
                         )
                         /*<div className="form-group col-md-4">
                             <label htmlFor="">Line 2 </label>
@@ -63621,13 +63621,13 @@ module.exports = React.createClass({displayName: "exports",
                 React.createElement(NavBar, {logged: sessionStorage.getItem('logged')}), 
                 React.createElement("h3", null, "Home"), 
                 React.createElement("div", {className: "row middle-row"}, 
-                    React.createElement(PanelCollapse, {message: "Accounts traced through consortium Vs Total Skip Trace Accounts - Quarterly TRACKER", target: "chart1"}), 
+                    React.createElement(PanelCollapse, {message: "Collection Efficiency", target: "chart1"}), 
                     React.createElement("div", {id: "chart1", className: "dataTable collapse in"}, 
-                        React.createElement("img", {className: "chart", src: "/images/chart_4.png"})
+                        React.createElement("img", {className: "chart", src: "/images/chart_1.png"})
                     ), 
-                    React.createElement(PanelCollapse, {message: "Bad Debts Recovered through consortium (Financials) (Principal & Interest)", target: "chart2"}), 
+                    React.createElement(PanelCollapse, {message: "Consortium Efficiency", target: "chart2"}), 
                     React.createElement("div", {id: "chart2", className: "dataTable collapse"}, 
-                        React.createElement("img", {className: "chart", src: "/images/chart_5.png"})
+                        React.createElement("img", {className: "chart", src: "/images/chart_2.png"})
                     ), 
                     React.createElement(PanelCollapse, {message: "Portfolio Ageing of Skip trace accounts as on Date", target: "chart4"}), 
                     React.createElement("div", {id: "chart4", className: "dataTable collapse"}, 
@@ -64314,29 +64314,29 @@ module.exports = {
                     React.createElement("div", {className: "row"}, 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "SSN Number 1"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.ssn, disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.ssn.slice(0, -4)+'xxxx', disabled: true})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "SSN Number 2"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.ssn2, disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.ssn2.slice(0, -4)+'xxxx', disabled: true})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "SSN Number 3"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.ssn3, disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.ssn3.slice(0, -4)+'xxxx', disabled: true})
                         )
                     ), 
                     React.createElement("div", {className: "row"}, 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "Passport 1"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.passportNumber, disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.passportNumber.slice(0, -2)+'xx', disabled: true})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "Passport 2"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.passportNumber2, disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.passportNumber2.slice(0, -2)+'xx', disabled: true})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "Passport 3"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.passportNumber3, disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.passportNumber3.slice(0, -2)+'xx', disabled: true})
                         )
                     ), 
                     React.createElement(Panel, {message: "Additional Details", type: "info"}), 
@@ -64925,13 +64925,11 @@ module.exports = [
 var React = require('react');
 var moment = require('moment');
 var Link = require('react-router').Link;
-var totalRecentCustomers = 10;
-var totalRecentTransactions = 15;
 var notificationDelay = 7000;
 var dummyCustomers = require('./customers');
 var Web3 = require('web3');
 var web3 = new Web3();
-var provider = "http://192.168.101.201";
+var provider = "http://10.208.95.22";
 var SkipTraceContractAddress = "0x5af0669b0d83b52664847f41539b0b7954bea365";
 var SkipTraceContractSequence = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() { SkipTraceRecordCountEvent(sequenceNo); } }";
 var SkipTraceCompiled;

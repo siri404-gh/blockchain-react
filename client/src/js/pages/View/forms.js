@@ -39,29 +39,29 @@ module.exports = {
                     <div className='row'>
                         <div className="form-group col-md-4">
                             <label htmlFor="">SSN Number 1</label>
-                            <input type="text" className="form-control"  id="" value={self.state.ssn} disabled/>
+                            <input type="text" className="form-control"  id="" value={self.state.ssn.slice(0, -4)+'xxxx'} disabled/>
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">SSN Number 2</label>
-                            <input type="text" className="form-control"  id="" value={self.state.ssn2} disabled/>
+                            <input type="text" className="form-control"  id="" value={self.state.ssn2.slice(0, -4)+'xxxx'} disabled/>
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">SSN Number 3</label>
-                            <input type="text" className="form-control"  id="" value={self.state.ssn3} disabled/>
+                            <input type="text" className="form-control"  id="" value={self.state.ssn3.slice(0, -4)+'xxxx'} disabled/>
                         </div>
                     </div>
                     <div className='row'>
                         <div className="form-group col-md-4">
                             <label htmlFor="">Passport 1</label>
-                            <input type="text" className="form-control"  id="" value={self.state.passportNumber} disabled/>
+                            <input type="text" className="form-control"  id="" value={self.state.passportNumber.slice(0, -2)+'xx'} disabled/>
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">Passport 2</label>
-                            <input type="text" className="form-control"  id="" value={self.state.passportNumber2} disabled/>
+                            <input type="text" className="form-control"  id="" value={self.state.passportNumber2.slice(0, -2)+'xx'} disabled/>
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">Passport 3</label>
-                            <input type="text" className="form-control"  id="" value={self.state.passportNumber3} disabled/>
+                            <input type="text" className="form-control"  id="" value={self.state.passportNumber3.slice(0, -2)+'xx'} disabled/>
                         </div>
                     </div>
                     <Panel message="Additional Details" type="info"/>

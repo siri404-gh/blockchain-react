@@ -32,13 +32,13 @@ module.exports = React.createClass({
                 <NavBar logged={sessionStorage.getItem('logged')}/>
                 <h3>Home</h3>
                 <div className='row middle-row'>
-                    <PanelCollapse message="Accounts traced through consortium Vs Total Skip Trace Accounts - Quarterly TRACKER" target="chart1"/>
+                    <PanelCollapse message="Collection Efficiency" target="chart1"/>
                     <div id='chart1' className='dataTable collapse in'>
-                        <img className='chart' src='/images/chart_4.png'/>
+                        <img className='chart' src='/images/chart_1.png'/>
                     </div>
-                    <PanelCollapse message="Bad Debts Recovered through consortium (Financials) (Principal & Interest)" target="chart2"/>
+                    <PanelCollapse message="Consortium Efficiency" target="chart2"/>
                     <div id='chart2' className='dataTable collapse'>
-                        <img className='chart' src='/images/chart_5.png'/>
+                        <img className='chart' src='/images/chart_2.png'/>
                     </div>
                     <PanelCollapse message="Portfolio Ageing of Skip trace accounts as on Date" target="chart4"/>
                     <div id='chart4' className='dataTable collapse'>

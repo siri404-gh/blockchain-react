@@ -190,7 +190,7 @@ module.exports = {
                     <Panel message="Address 2" type="info"/>
                     <div className='row'>
                         <div className="form-group col-md-12">
-                            <input type="text" className="form-control"  id="currentAddress2" value={self.state.currentAddress2} onChange={self.append} required/>
+                            <input type="text" className="form-control"  id="currentAddress2" value={self.state.currentAddress2} onChange={self.append} />
                         </div>
                         {/*<div className="form-group col-md-4">
                             <label htmlFor="">Line 2 </label>
@@ -204,7 +204,7 @@ module.exports = {
                     <Panel message="Address 3" type="info"/>
                     <div className='row'>
                         <div className="form-group col-md-12">
-                            <input type="text" className="form-control"  id="currentAddress3" value={self.state.currentAddress3} onChange={self.append} required/>
+                            <input type="text" className="form-control"  id="currentAddress3" value={self.state.currentAddress3} onChange={self.append} />
                         </div>
                         {/*<div className="form-group col-md-4">
                             <label htmlFor="">Line 2 </label>
