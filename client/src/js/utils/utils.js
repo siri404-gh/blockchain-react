@@ -15,8 +15,8 @@ var notificationDelay = 7000;
 var dummyCustomers = require('./customers');
 var Web3 = require('web3');
 var web3 = new Web3();
-var server = "http://10.209.41.6:3000";
-var provider = "http://10.208.95.22";
+var server = "http://192.168.101.200:3000";
+var provider = "http://192.168.101.201";
 var SkipTraceContractAddress = "0x5af0669b0d83b52664847f41539b0b7954bea365";
 var SkipTraceContractSequence = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() { SkipTraceRecordCountEvent(sequenceNo); } }";
 var SkipTraceCompiled;
@@ -35,7 +35,11 @@ module.exports = {
     dummyCustomers: dummyCustomers,
     getInitialState:{
         firstName: '',
+        firstName2: '',
+        firstName3: '',
         lastName: '',
+        lastName2: '',
+        lastName3: '',
         middleName: '',
         aliasName: '',
         dob: '',
@@ -74,7 +78,11 @@ module.exports = {
     append: function(self) {
         self.setState({
             firstName: $('#firstName').val(),
+            firstName2: $('#firstName2').val(),
+            firstName3: $('#firstName3').val(),
             lastName: $('#lastName').val(),
+            lastName2: $('#lastName2').val(),
+            lastName3: $('#lastName3').val(),
             middleName: $('#middleName').val(),
             aliasName: $('#aliasName').val(),
             dob: $('#dob').val(),
@@ -130,8 +138,12 @@ module.exports = {
             }
             self.setState({
                 customerID: singleCustomer.customerID,
-                firstName: singleCustomer.firstName,
-                lastName: singleCustomer.lastName,
+                firstName: singleCustomer.firstName.split('-')[0],
+                firstName2: singleCustomer.firstName.split('-')[1],
+                firstName3: singleCustomer.firstName.split('-')[2],
+                lastName: singleCustomer.lastName.split('-')[0],
+                lastName2: singleCustomer.lastName.split('-')[1],
+                lastName3: singleCustomer.lastName.split('-')[2],
                 middleName: singleCustomer.middleName,
                 aliasName: singleCustomer.aliasName,
                 dob: moment(singleCustomer.DOB, 'D-MMM-YY').format('YYYY-MM-DD'),
@@ -285,7 +297,7 @@ module.exports = {
             var lastName = profile[2].replace('lastName:', '');
             if(blocks > 0 && result && result.blockNumber !== blocks) {
                 $('.customer-added-alert').show();
-                $('.customer-added-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName + ' ' + lastName + ' ' + ' successfully created.');
+                $('.customer-added-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName.split('-')[0] + ' ' + lastName.split('-')[0] + ' ' + ' successfully created.');
                 $('.customer-added-alert').delay(notificationDelay).fadeOut();
             }
             // addEvent.stopWatching();
@@ -303,7 +315,7 @@ module.exports = {
             var lastName = profile[2].replace('lastName:', '');
             if (blocks > 0 && result && result.blockNumber !== blocks) {
                 $('.customer-updated-alert').show();
-                $('.customer-updated-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName + ' ' + lastName + ' ' + ' successfully overwritten.');
+                $('.customer-updated-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName.split('-')[0] + ' ' + lastName.split('-')[0] + ' ' + ' successfully overwritten.');
                 $('.customer-updated-alert').delay(notificationDelay).fadeOut();
             }
             // updateEvent.stopWatching();
@@ -347,7 +359,7 @@ module.exports = {
                                 {c.customerID}
                             </div>
                             <div className='col-xs-4'>
-                                <a href='#' id={c.customerID} onClick={self.populate}>{c.firstName+' '+c.lastName}</a>
+                                <a href='#' id={c.customerID} onClick={self.populate}>{c.firstName.split('-')[0]+' '+c.lastName.split('-')[0]}</a>
                             </div>
                             <div className='col-xs-3'>
                             <span className='bank-name'>{c.bankID}</span>

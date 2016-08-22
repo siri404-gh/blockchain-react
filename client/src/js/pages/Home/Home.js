@@ -32,23 +32,23 @@ module.exports = React.createClass({
                 <NavBar logged={sessionStorage.getItem('logged')}/>
                 <h3>Home</h3>
                 <div className='row middle-row'>
-                    <PanelCollapse message="Collection Efficiency" target="chart1"/>
+                    <PanelCollapse message="Consortium Efficiency – Reducing Numbers" target="chart1"/>
                     <div id='chart1' className='dataTable collapse in'>
                         <img className='chart' src='/images/chart_1.png'/>
                     </div>
-                    <PanelCollapse message="Consortium Efficiency" target="chart2"/>
+                    <PanelCollapse message="Consortium Efficiency – Increasing Settlements" target="chart2"/>
                     <div id='chart2' className='dataTable collapse'>
                         <img className='chart' src='/images/chart_2.png'/>
                     </div>
-                    <PanelCollapse message="Portfolio Ageing of Skip trace accounts as on Date" target="chart4"/>
+                    <PanelCollapse message="Data sharing efficiency" target="chart4"/>
                     <div id='chart4' className='dataTable collapse'>
                         <img className='chart' src='/images/chart_2.png'/>
                     </div>
-                    <PanelCollapse message="Skip trace ageing month on month Analysis" target="chart5"/>
+                    <PanelCollapse message="Portfolio Ageing" target="chart5"/>
                     <div id='chart5' className='dataTable collapse'>
                         <img className='chart' src='/images/chart_3.png'/>
                     </div>
-                    <PanelCollapse message="Quarterly Distribution of Skip trace customers consumed by more than one Bank" target="chart3"/>
+                    <PanelCollapse message="Untraced Accounts Ageing" target="chart3"/>
                     <div id='chart3' className='dataTable collapse'>
                         <b>Percentage of Customers</b>
                         <div id='pie'></div>

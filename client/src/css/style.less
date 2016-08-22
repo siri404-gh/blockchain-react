@@ -2,16 +2,48 @@
     font-family: 'Open Sans';
     src: url('../fonts/Open_Sans/OpenSans-Regular.ttf');
 }
-
 body {
     font-family: 'Open Sans', verdana, arial;
     font-size: 14px;
     color: #5D5D5D;
 }
+h3 {
+    margin-top: 0px;
+    margin-left: 10px;
+    font-size: 16px;
+}
+.m-l-5 {
+    margin-left: 5px;
+}
+.navbar {
+    margin-bottom: 10px;
+}
+.navbar-default {
+    background: none;
+    border: none;
+}
+.brand-img {
+    height: 30px;
+    width: 30px;
+    margin-top: -5px;
+}
 .navbar-link-text {
     font-family: 'Open Sans', verdana, arial;
     font-size: 15px;
+    // font-weight: bold;
+}
+.logo-small {
+    height :15px;
+    width: 15px;
+    padding: 2px;
+}
+a.navbar-brand {
+    font-size: 22px;
+}
+a.navbar-brand::first-letter {
+    text-transform: capitalize;
     font-weight: bold;
+    margin-right: 3px;
 }
 .container {
     overflow-y: hidden;
@@ -29,37 +61,14 @@ body {
     padding: 0 10px;
     margin-bottom: 10px;
 }
-.navbar-default {
-    background: none;
-    border: none;
-}
 .middle-row {
     margin: 0px;
     min-height: 200px;
     padding: 10px;
+    border-top: solid 1px #ccc;
 }
 .row-underline:nth-child(even) {
     background: #f4f4f4;
-}
-.footer {
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    margin-top: 20px;
-    display: none;
-}
-.navbar {
-    margin-bottom: 10px;
-}
-.brand-img {
-    height: 30px;
-    width: 30px;
-    margin-top: -5px;
-}
-.logo-small {
-    height :15px;
-    width: 15px;
-    padding: 2px;
 }
 .form-control[disabled] {
     border: none;
@@ -67,14 +76,6 @@ body {
 }
 .row-underline {
     border-bottom: solid 1px #e4e4e4;
-}
-h3 {
-    margin-top: 0px;
-    margin-left: 10px;
-    font-size: 14px;
-}
-.m-l-5 {
-    margin-left: 5px;
 }
 @media (max-width: 768px) {
     .bank-name, .difficulty-col {
@@ -88,23 +89,25 @@ h3 {
     display: none;
     position: fixed;
     top: 10px;
-    right: 0px;
+    right: 10px;
     background: #000;
     color: white;
     padding: 10px;
-    opacity: 0.8s;
+    opacity: 0.9;
     font-size: 15px;
+    border-radius: 4px;
 }
 .customer-updated-alert {
     display: none;
     position: fixed;
     bottom: 10px;
-    right: 0px;
+    right: 10px;
     background: #000;
     color: white;
     padding: 10px;
-    opacity: 0.8s;
+    opacity: 0.9;
     font-size: 15px;
+    border-radius: 4px;
 }
 .chart {
     padding: 10px;
@@ -129,14 +132,6 @@ svg text.percent{
 .recent-transactions {
     /*display: none;*/
 }
-a.navbar-brand {
-    font-size: 22px;
-}
-a.navbar-brand::first-letter {
-    text-transform: capitalize;
-    font-weight: bold;
-    margin-right: 3px;
-}
 .loader {
     margin: 10px auto;
     border: 10px solid #f3f3f3; /* Light grey */
@@ -144,10 +139,16 @@ a.navbar-brand::first-letter {
     border-radius: 50%;
     width: 80px;
     height: 80px;
-    animation: spin 2s linear infinite;
+    animation: spin 1s linear infinite;
 }
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-/*S09cse86&-5*/
+.footer {
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    margin-top: 20px;
+    display: none;
+}

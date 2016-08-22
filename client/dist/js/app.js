@@ -63060,10 +63060,10 @@ module.exports = React.createClass({displayName: "exports",
     },
     saveToDB: function(ev) {
         ev.preventDefault();
-        var transHash = utils.addSkipTraceRecordOnChain(this.state.firstName, this.state.middleName, this.state.lastName, this.state.aliasName, moment(this.state.dob, 'YYYY-MM-DD').format('D-MMM-YY'), this.state.ssn+this.state.ssn2+this.state.ssn3, this.state.passportNumber+this.state.passportNumber2+this.state.passportNumber3, this.state.homePhone1, this.state.homePhone2, this.state.homePhone3, this.state.workPhone1, this.state.workPhone2, this.state.workPhone3, this.state.mobilePhone1, this.state.mobilePhone2, this.state.mobilePhone3, this.state.currentAddress1, this.state.currentAddress2, this.state.currentAddress3, this.state.employerName1, this.state.employerName2, this.state.employerName3, this.state.productName1, this.state.productName2, this.state.productName3, this.state.remarks);
+        var transHash = utils.addSkipTraceRecordOnChain(this.state.firstName+'-'+this.state.firstName2+'-'+this.state.firstName3, this.state.middleName, this.state.lastName+'-'+this.state.lastName2+'-'+this.state.lastName3, this.state.aliasName, moment(this.state.dob, 'YYYY-MM-DD').format('D-MMM-YY'), this.state.ssn+this.state.ssn2+this.state.ssn3, this.state.passportNumber+this.state.passportNumber2+this.state.passportNumber3, this.state.homePhone1, this.state.homePhone2, this.state.homePhone3, this.state.workPhone1, this.state.workPhone2, this.state.workPhone3, this.state.mobilePhone1, this.state.mobilePhone2, this.state.mobilePhone3, this.state.currentAddress1, this.state.currentAddress2, this.state.currentAddress3, this.state.employerName1, this.state.employerName2, this.state.employerName3, this.state.productName1, this.state.productName2, this.state.productName3, this.state.remarks);
         if(transHash) {
             this.setState(utils.getInitialState);
-            $('#transaction-alert').show().html("<div class='alert alert-success'><strong>Transaction submitted to the block chain with the following with the following id : </strong> "+transHash+"</div>");
+            $('#transaction-alert').show().html("<div class='alert alert-success'><strong>Transaction submitted to the block chain with the following id : </strong> "+transHash+"</div>");
             $('body').animate({
                 scrollTop : $("#transaction-alert").offset().top
             }, 250);
@@ -63084,13 +63084,31 @@ module.exports = {
                 React.createElement("div", {id: "profile", className: "collapse"}, 
                     React.createElement(Panel, {message: "Customer Details", type: "info"}), 
                     React.createElement("div", {className: "row"}, 
-                        React.createElement("div", {className: "form-group col-md-6"}, 
-                            React.createElement("label", {htmlFor: ""}, "First Name"), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "First Name 1"), 
                             React.createElement("input", {type: "text", className: "form-control", id: "firstName", value: self.state.firstName, onChange: self.append, required: true})
                         ), 
-                        React.createElement("div", {className: "form-group col-md-6"}, 
-                            React.createElement("label", {htmlFor: ""}, "Last Name"), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "First Name 2"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "firstName2", value: self.state.firstName2, onChange: self.append, required: true})
+                        ), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "First Name 3"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "firstName3", value: self.state.firstName3, onChange: self.append, required: true})
+                        )
+                    ), 
+                    React.createElement("div", {className: "row"}, 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "Last Name 1"), 
                             React.createElement("input", {type: "text", className: "form-control", id: "lastName", value: self.state.lastName, onChange: self.append, required: true})
+                        ), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "Last Name 2"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "lastName2", value: self.state.lastName2, onChange: self.append, required: true})
+                        ), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "Last Name 3"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "lastName3", value: self.state.lastName3, onChange: self.append, required: true})
                         )
                     ), 
                     React.createElement("div", {className: "row"}, 
@@ -63621,23 +63639,23 @@ module.exports = React.createClass({displayName: "exports",
                 React.createElement(NavBar, {logged: sessionStorage.getItem('logged')}), 
                 React.createElement("h3", null, "Home"), 
                 React.createElement("div", {className: "row middle-row"}, 
-                    React.createElement(PanelCollapse, {message: "Collection Efficiency", target: "chart1"}), 
+                    React.createElement(PanelCollapse, {message: "Consortium Efficiency – Reducing Numbers", target: "chart1"}), 
                     React.createElement("div", {id: "chart1", className: "dataTable collapse in"}, 
                         React.createElement("img", {className: "chart", src: "/images/chart_1.png"})
                     ), 
-                    React.createElement(PanelCollapse, {message: "Consortium Efficiency", target: "chart2"}), 
+                    React.createElement(PanelCollapse, {message: "Consortium Efficiency – Increasing Settlements", target: "chart2"}), 
                     React.createElement("div", {id: "chart2", className: "dataTable collapse"}, 
                         React.createElement("img", {className: "chart", src: "/images/chart_2.png"})
                     ), 
-                    React.createElement(PanelCollapse, {message: "Portfolio Ageing of Skip trace accounts as on Date", target: "chart4"}), 
+                    React.createElement(PanelCollapse, {message: "Data sharing efficiency", target: "chart4"}), 
                     React.createElement("div", {id: "chart4", className: "dataTable collapse"}, 
                         React.createElement("img", {className: "chart", src: "/images/chart_2.png"})
                     ), 
-                    React.createElement(PanelCollapse, {message: "Skip trace ageing month on month Analysis", target: "chart5"}), 
+                    React.createElement(PanelCollapse, {message: "Portfolio Ageing", target: "chart5"}), 
                     React.createElement("div", {id: "chart5", className: "dataTable collapse"}, 
                         React.createElement("img", {className: "chart", src: "/images/chart_3.png"})
                     ), 
-                    React.createElement(PanelCollapse, {message: "Quarterly Distribution of Skip trace customers consumed by more than one Bank", target: "chart3"}), 
+                    React.createElement(PanelCollapse, {message: "Untraced Accounts Ageing", target: "chart3"}), 
                     React.createElement("div", {id: "chart3", className: "dataTable collapse"}, 
                         React.createElement("b", null, "Percentage of Customers"), 
                         React.createElement("div", {id: "pie"})
@@ -63817,7 +63835,7 @@ module.exports = React.createClass({displayName: "exports",
     },
     saveToDB: function(ev) {
         ev.preventDefault();
-        var transHash = utils.updateSkipTraceRecordOnChain(this.state.customerID, this.state.firstName, this.state.middleName, this.state.lastName, this.state.aliasName, moment(this.state.dob, 'YYYY-MM-DD').format('D-MMM-YY'), this.state.ssn+this.state.ssn2+this.state.ssn3, this.state.passportNumber+this.state.passportNumber2+this.state.passportNumber3, this.state.homePhone1, this.state.homePhone2, this.state.homePhone3, this.state.workPhone1, this.state.workPhone2, this.state.workPhone3, this.state.mobilePhone1, this.state.mobilePhone2, this.state.mobilePhone3, this.state.currentAddress1, this.state.currentAddress2, this.state.currentAddress3, this.state.employerName1, this.state.employerName2, this.state.employerName3, this.state.productName1, this.state.productName2, this.state.productName3, this.state.remarks);
+        var transHash = utils.updateSkipTraceRecordOnChain(this.state.customerID, this.state.firstName+'-'+this.state.firstName2+'-'+this.state.firstName3, this.state.middleName, this.state.lastName+'-'+this.state.lastName2+'-'+this.state.lastName3, this.state.aliasName, moment(this.state.dob, 'YYYY-MM-DD').format('D-MMM-YY'), this.state.ssn+this.state.ssn2+this.state.ssn3, this.state.passportNumber+this.state.passportNumber2+this.state.passportNumber3, this.state.homePhone1, this.state.homePhone2, this.state.homePhone3, this.state.workPhone1, this.state.workPhone2, this.state.workPhone3, this.state.mobilePhone1, this.state.mobilePhone2, this.state.mobilePhone3, this.state.currentAddress1, this.state.currentAddress2, this.state.currentAddress3, this.state.employerName1, this.state.employerName2, this.state.employerName3, this.state.productName1, this.state.productName2, this.state.productName3, this.state.remarks);
         if(transHash) {
             var initialState = utils.getInitialState;
             initialState.recentUpdations = this.state.recentUpdations;
@@ -63825,7 +63843,7 @@ module.exports = React.createClass({displayName: "exports",
             this.setState({
                 show: true
             });
-            $('#transaction-alert').show().html("<div class='alert alert-success'><strong>Transaction submitted to the block chain with the following with the following id : </strong> "+transHash+"</div>");
+            $('#transaction-alert').show().html("<div class='alert alert-success'><strong>Transaction submitted to the block chain with the following id : </strong> "+transHash+"</div>");
             $('body').animate({
                 scrollTop : $("#transaction-alert").offset().top
             }, 250);
@@ -63894,13 +63912,31 @@ module.exports = {
                 React.createElement("div", {id: "profile", className: "collapse"}, 
                     React.createElement(Panel, {message: "Customer Details", type: "info"}), 
                     React.createElement("div", {className: "row"}, 
-                        React.createElement("div", {className: "form-group col-md-6"}, 
-                            React.createElement("label", {htmlFor: ""}, "First Name"), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "First Name 1"), 
                             React.createElement("input", {type: "text", className: "form-control", id: "firstName", value: self.state.firstName, onChange: self.append, required: true})
                         ), 
-                        React.createElement("div", {className: "form-group col-md-6"}, 
-                            React.createElement("label", {htmlFor: ""}, "Last Name"), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "First Name 2"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "firstName2", value: self.state.firstName2, onChange: self.append, required: true})
+                        ), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "First Name 3"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "firstName3", value: self.state.firstName3, onChange: self.append, required: true})
+                        )
+                    ), 
+                    React.createElement("div", {className: "row"}, 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "Last Name 1"), 
                             React.createElement("input", {type: "text", className: "form-control", id: "lastName", value: self.state.lastName, onChange: self.append, required: true})
+                        ), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "Last Name 2"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "lastName2", value: self.state.lastName2, onChange: self.append, required: true})
+                        ), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "Last Name 3"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "lastName3", value: self.state.lastName3, onChange: self.append, required: true})
                         )
                     ), 
                     React.createElement("div", {className: "row"}, 
@@ -64288,13 +64324,31 @@ module.exports = {
                 React.createElement("div", {id: "profile", className: "collapse"}, 
                     React.createElement(Panel, {message: "Customer Details", type: "info"}), 
                     React.createElement("div", {className: "row"}, 
-                        React.createElement("div", {className: "form-group col-md-6"}, 
-                            React.createElement("label", {htmlFor: ""}, "First Name"), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "First Name 1"), 
                             React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.firstName, disabled: true})
                         ), 
-                        React.createElement("div", {className: "form-group col-md-6"}, 
-                            React.createElement("label", {htmlFor: ""}, "Last Name"), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "First Name 2"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.firstName2, disabled: true})
+                        ), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "First Name 3"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.firstName3, disabled: true})
+                        )
+                    ), 
+                    React.createElement("div", {className: "row"}, 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "Last Name 1"), 
                             React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.lastName, disabled: true})
+                        ), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "Last Name 2"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.lastName2, disabled: true})
+                        ), 
+                        React.createElement("div", {className: "form-group col-md-4"}, 
+                            React.createElement("label", {htmlFor: ""}, "Last Name 3"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.lastName3, disabled: true})
                         )
                     ), 
                     React.createElement("div", {className: "row"}, 
@@ -64316,29 +64370,29 @@ module.exports = {
                     React.createElement("div", {className: "row"}, 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "SSN Number 1"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.ssn.slice(0, -4)+'xxxx', disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: 'XXX-XXX-'+self.state.ssn.slice(self.state.ssn.length-4), disabled: true})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "SSN Number 2"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.ssn2.slice(0, -4)+'xxxx', disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: 'XXX-XXX-'+self.state.ssn2.slice(self.state.ssn2.length-4), disabled: true})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "SSN Number 3"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.ssn3.slice(0, -4)+'xxxx', disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: 'XXX-XXX-'+self.state.ssn3.slice(self.state.ssn3.length-4), disabled: true})
                         )
                     ), 
                     React.createElement("div", {className: "row"}, 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "Passport 1"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.passportNumber.slice(0, -2)+'xx', disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: 'XXXXXX-'+self.state.passportNumber.slice(self.state.passportNumber.length-2), disabled: true})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "Passport 2"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.passportNumber2.slice(0, -2)+'xx', disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: 'XXXXXX-'+self.state.passportNumber2.slice(self.state.passportNumber2.length-2), disabled: true})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "Passport 3"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: self.state.passportNumber3.slice(0, -2)+'xx', disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: 'XXXXXX-'+self.state.passportNumber3.slice(self.state.passportNumber3.length-2), disabled: true})
                         )
                     ), 
                     React.createElement(Panel, {message: "Additional Details", type: "info"}), 
@@ -64610,9 +64664,9 @@ module.exports = (
 
 },{"./pages/Add/Add":423,"./pages/Block/Block":425,"./pages/Blocks/Blocks":426,"./pages/Home/Home":427,"./pages/Logout/Logout":429,"./pages/Master/Master":430,"./pages/Update/Update":431,"./pages/View/View":433,"react":343,"react-router":199}],436:[function(require,module,exports){
 module.exports = [{
-	"firstName": "Test1",
+	"firstName": "Test1-name2-name3",
 	"middleName": "Stupper",
-	"lastName": "Brook",
+	"lastName": "Brook-last1-last2",
 	"aliasName": "Ridhi",
 	"DOB": "4-Aug-69",
 	"SSN": "034-594-7778034-554-7778034-594-7776",
@@ -64638,9 +64692,9 @@ module.exports = [{
 	"remarks": "A long time defaulter and could not be traced for months",
     "timestamp":"1470714859"
 }, {
-	"firstName": "Test2",
+	"firstName": "Test2-name2-name3",
 	"middleName": "Stupper",
-	"lastName": "Brook",
+	"lastName": "Brook-last1-last2",
 	"aliasName": "Ridhi",
 	"DOB": "4-Aug-69",
 	"SSN": "034-594-7778034-554-7778034-594-7776",
@@ -64666,9 +64720,9 @@ module.exports = [{
 	"remarks": "A long time defaulter and could not be traced for months",
     "timestamp":"1470714859"
 }, {
-	"firstName": "Test3",
+	"firstName": "Test3-name2-name3",
 	"middleName": "Stupper",
-	"lastName": "Brook",
+	"lastName": "Brook-last1-last2",
 	"aliasName": "Ridhi",
 	"DOB": "4-Aug-69",
 	"SSN": "034-594-7778034-554-7778034-594-7776",
@@ -64694,9 +64748,9 @@ module.exports = [{
 	"remarks": "A long time defaulter and could not be traced for months",
     "timestamp":"1470714859"
 }, {
-	"firstName": "Test4",
+	"firstName": "Test4-name2-name3",
 	"middleName": "Stupper",
-	"lastName": "Brook",
+	"lastName": "Brook-last1-last2",
 	"aliasName": "Ridhi",
 	"DOB": "4-Aug-69",
 	"SSN": "034-594-7778034-554-7778034-594-7776",
@@ -64722,9 +64776,9 @@ module.exports = [{
 	"remarks": "A long time defaulter and could not be traced for months",
     "timestamp":"1470714859"
 }, {
-	"firstName": "Test5",
+	"firstName": "Test5-name2-name3",
 	"middleName": "Stupper",
-	"lastName": "Brook",
+	"lastName": "Brook-last1-last2",
 	"aliasName": "Ridhi",
 	"DOB": "4-Aug-69",
 	"SSN": "034-594-7778034-554-7778034-594-7776",
@@ -64750,9 +64804,9 @@ module.exports = [{
 	"remarks": "A long time defaulter and could not be traced for months",
     "timestamp":"1470714859"
 }, {
-	"firstName": "Test6",
+	"firstName": "Test6-name2-name3",
 	"middleName": "Stupper",
-	"lastName": "Brook",
+	"lastName": "Brook-last1-last2",
 	"aliasName": "Ridhi",
 	"DOB": "4-Aug-69",
 	"SSN": "034-594-7778034-554-7778034-594-7776",
@@ -64778,9 +64832,9 @@ module.exports = [{
 	"remarks": "A long time defaulter and could not be traced for months",
     "timestamp":"1470714859"
 }, {
-	"firstName": "Test7",
+	"firstName": "Test7-name2-name3",
 	"middleName": "Stupper",
-	"lastName": "Brook",
+	"lastName": "Brook-last1-last2",
 	"aliasName": "Ridhi",
 	"DOB": "4-Aug-69",
 	"SSN": "034-594-7778034-554-7778034-594-7776",
@@ -64806,9 +64860,9 @@ module.exports = [{
 	"remarks": "A long time defaulter and could not be traced for months",
     "timestamp":"1470714859"
 }, {
-	"firstName": "Test8",
+	"firstName": "Test8-name2-name3",
 	"middleName": "Stupper",
-	"lastName": "Brook",
+	"lastName": "Brook-last1-last2",
 	"aliasName": "Ridhi",
 	"DOB": "4-Aug-69",
 	"SSN": "034-594-7778034-554-7778034-594-7776",
@@ -64834,9 +64888,9 @@ module.exports = [{
 	"remarks": "A long time defaulter and could not be traced for months",
     "timestamp":"1470714859"
 }, {
-	"firstName": "Test9",
+	"firstName": "Test9-name2-name3",
 	"middleName": "Stupper",
-	"lastName": "Brook",
+	"lastName": "Brook-last1-last2",
 	"aliasName": "Ridhi",
 	"DOB": "4-Aug-69",
 	"SSN": "034-594-7778034-554-7778034-594-7776",
@@ -64862,9 +64916,9 @@ module.exports = [{
 	"remarks": "A long time defaulter and could not be traced for months",
     "timestamp":"1470714859"
 }, {
-	"firstName": "Test10",
+	"firstName": "Test10-name2-name3",
 	"middleName": "Stupper",
-	"lastName": "Brook",
+	"lastName": "Brook-last1-last2",
 	"aliasName": "Ridhi",
 	"DOB": "4-Aug-69",
 	"SSN": "034-594-7778034-554-7778034-594-7776",
@@ -64931,8 +64985,8 @@ var notificationDelay = 7000;
 var dummyCustomers = require('./customers');
 var Web3 = require('web3');
 var web3 = new Web3();
-var server = "http://10.209.41.6:3000";
-var provider = "http://10.208.95.22";
+var server = "http://192.168.101.200:3000";
+var provider = "http://192.168.101.201";
 var SkipTraceContractAddress = "0x5af0669b0d83b52664847f41539b0b7954bea365";
 var SkipTraceContractSequence = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() { SkipTraceRecordCountEvent(sequenceNo); } }";
 var SkipTraceCompiled;
@@ -64951,7 +65005,11 @@ module.exports = {
     dummyCustomers: dummyCustomers,
     getInitialState:{
         firstName: '',
+        firstName2: '',
+        firstName3: '',
         lastName: '',
+        lastName2: '',
+        lastName3: '',
         middleName: '',
         aliasName: '',
         dob: '',
@@ -64990,7 +65048,11 @@ module.exports = {
     append: function(self) {
         self.setState({
             firstName: $('#firstName').val(),
+            firstName2: $('#firstName2').val(),
+            firstName3: $('#firstName3').val(),
             lastName: $('#lastName').val(),
+            lastName2: $('#lastName2').val(),
+            lastName3: $('#lastName3').val(),
             middleName: $('#middleName').val(),
             aliasName: $('#aliasName').val(),
             dob: $('#dob').val(),
@@ -65046,8 +65108,12 @@ module.exports = {
             }
             self.setState({
                 customerID: singleCustomer.customerID,
-                firstName: singleCustomer.firstName,
-                lastName: singleCustomer.lastName,
+                firstName: singleCustomer.firstName.split('-')[0],
+                firstName2: singleCustomer.firstName.split('-')[1],
+                firstName3: singleCustomer.firstName.split('-')[2],
+                lastName: singleCustomer.lastName.split('-')[0],
+                lastName2: singleCustomer.lastName.split('-')[1],
+                lastName3: singleCustomer.lastName.split('-')[2],
                 middleName: singleCustomer.middleName,
                 aliasName: singleCustomer.aliasName,
                 dob: moment(singleCustomer.DOB, 'D-MMM-YY').format('YYYY-MM-DD'),
@@ -65201,7 +65267,7 @@ module.exports = {
             var lastName = profile[2].replace('lastName:', '');
             if(blocks > 0 && result && result.blockNumber !== blocks) {
                 $('.customer-added-alert').show();
-                $('.customer-added-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName + ' ' + lastName + ' ' + ' successfully created.');
+                $('.customer-added-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName.split('-')[0] + ' ' + lastName.split('-')[0] + ' ' + ' successfully created.');
                 $('.customer-added-alert').delay(notificationDelay).fadeOut();
             }
             // addEvent.stopWatching();
@@ -65219,7 +65285,7 @@ module.exports = {
             var lastName = profile[2].replace('lastName:', '');
             if (blocks > 0 && result && result.blockNumber !== blocks) {
                 $('.customer-updated-alert').show();
-                $('.customer-updated-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName + ' ' + lastName + ' ' + ' successfully overwritten.');
+                $('.customer-updated-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName.split('-')[0] + ' ' + lastName.split('-')[0] + ' ' + ' successfully overwritten.');
                 $('.customer-updated-alert').delay(notificationDelay).fadeOut();
             }
             // updateEvent.stopWatching();
@@ -65263,7 +65329,7 @@ module.exports = {
                                 c.customerID
                             ), 
                             React.createElement("div", {className: "col-xs-4"}, 
-                                React.createElement("a", {href: "#", id: c.customerID, onClick: self.populate}, c.firstName+' '+c.lastName)
+                                React.createElement("a", {href: "#", id: c.customerID, onClick: self.populate}, c.firstName.split('-')[0]+' '+c.lastName.split('-')[0])
                             ), 
                             React.createElement("div", {className: "col-xs-3"}, 
                             React.createElement("span", {className: "bank-name"}, c.bankID), 

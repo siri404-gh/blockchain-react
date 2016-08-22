@@ -11,13 +11,31 @@ module.exports = {
                 <div  id='profile' className='collapse'>
                     <Panel message="Customer Details" type="info"/>
                     <div className='row'>
-                        <div className="form-group col-md-6">
-                            <label htmlFor="">First Name</label>
+                        <div className="form-group col-md-4">
+                            <label htmlFor="">First Name 1</label>
                             <input type="text" className="form-control"  id="firstName" value={self.state.firstName} onChange={self.append} required/>
                         </div>
-                        <div className="form-group col-md-6">
-                            <label htmlFor="">Last Name</label>
+                        <div className="form-group col-md-4">
+                            <label htmlFor="">First Name 2</label>
+                            <input type="text" className="form-control"  id="firstName2" value={self.state.firstName2} onChange={self.append} required/>
+                        </div>
+                        <div className="form-group col-md-4">
+                            <label htmlFor="">First Name 3</label>
+                            <input type="text" className="form-control"  id="firstName3" value={self.state.firstName3} onChange={self.append} required/>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className="form-group col-md-4">
+                            <label htmlFor="">Last Name 1</label>
                             <input type="text" className="form-control"  id="lastName" value={self.state.lastName} onChange={self.append} required/>
+                        </div>
+                        <div className="form-group col-md-4">
+                            <label htmlFor="">Last Name 2</label>
+                            <input type="text" className="form-control"  id="lastName2" value={self.state.lastName2} onChange={self.append} required/>
+                        </div>
+                        <div className="form-group col-md-4">
+                            <label htmlFor="">Last Name 3</label>
+                            <input type="text" className="form-control"  id="lastName3" value={self.state.lastName3} onChange={self.append} required/>
                         </div>
                     </div>
                     <div className='row'>
