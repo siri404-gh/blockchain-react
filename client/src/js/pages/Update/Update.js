@@ -53,7 +53,7 @@ module.exports = React.createClass({
                         <Panel message={panelMessage} type="warning"/>
                         <Searchbar formSubmit={this.formSubmit}/>
                         <PanelCollapse message="Recently updated customers" target="recent"/>
-                        <div id='recent' className='dataTable collapse in'>
+                        <div id='recent' className='recent-updations dataTable collapse in'>
                             {this.state.recentUpdations}
                         </div>
                         {(this.state.show)? updateForm : []}
@@ -74,6 +74,9 @@ module.exports = React.createClass({
         $('.recent-updations').fadeIn();
     },
     componentWillUnmount: function() {
+        this.setState({
+            recentUpdations : []
+        });
         utils.stopWatchingAddEvent();
         utils.stopWatchingUpdateEvent();
     }

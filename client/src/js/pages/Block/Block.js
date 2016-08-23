@@ -22,14 +22,10 @@ module.exports = React.createClass({
             transactionDetails: [<div key={Math.random()} className="loader"></div>]
         }
     },
-    getAmount: function(value) {
-        return utils.getAmount(value);
-    },
     componentWillMount: function() {
         var self = this;
         var transactionDetails = [];
         var block = $.ajax({
-            // async: false,
             url: utils.api+'/blocks/'+self.props.params.id,
             method: 'GET',
             data: {

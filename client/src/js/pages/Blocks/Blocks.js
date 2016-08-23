@@ -17,7 +17,6 @@ module.exports = React.createClass({
         var transactions = [];
         var self = this;
         $.ajax({
-            // async: false,
             url: utils.api+'/blocks',
             method: 'GET',
             data: {

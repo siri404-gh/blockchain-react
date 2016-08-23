@@ -16,6 +16,7 @@ module.exports = React.createClass({
                     <li><Link to="/add"><span className='glyphicon glyphicon-plus'></span> <span className='navbar-link-text'>Add</span></Link></li>
                     <li><Link to="/view"><span className='glyphicon glyphicon-eye-open'></span> <span className='navbar-link-text'>View</span></Link></li>
                     <li><Link to="/update"><span className='glyphicon glyphicon-edit'></span> <span className='navbar-link-text'>Update</span></Link></li>
+                    <li><Link to="/metrics"><span className='glyphicon glyphicon-th-list'></span> <span className='navbar-link-text'>Metrics</span></Link></li>
                     <li><Link to="/logout"><span className='glyphicon glyphicon-off'></span> <span className='navbar-link-text'>Logout</span></Link></li>
                 </ul>);
         }

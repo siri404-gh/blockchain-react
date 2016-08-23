@@ -10,6 +10,7 @@ var View = require('./pages/View/View');
 var Update = require('./pages/Update/Update');
 var Blocks = require('./pages/Blocks/Blocks');
 var Block = require('./pages/Block/Block');
+var Metrics = require('./pages/Metrics/Metrics');
 var Logout = require('./pages/Logout/Logout');
 
 module.exports = (
@@ -25,5 +26,6 @@ module.exports = (
         <Route handler={Logout} name="e" path="/logout"/>
         <Route handler={View} name="f" path="/view/:id"/>
         <Route handler={Block} name="g" path="/block/:id"/>
+        <Route handler={Metrics} name="h" path="/metrics"/>
     </Route>
 );

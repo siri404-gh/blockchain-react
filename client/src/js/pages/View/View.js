@@ -25,31 +25,6 @@ module.exports = React.createClass({
     },
     render: function() {
         var viewForm = forms.viewForm(this);
-        var renderer = [];
-        if(this.state.show) {
-            renderer.push(
-                <div className='col-md-10' key="1">
-                    <Panel message={panelMessage} type="warning"/>
-                    <Searchbar formSubmit={this.formSubmit}/>
-                    <PanelCollapse message="Recently updated customers" target="recent"/>
-                    <div id='recent' className='dataTable collapse in'>
-                        {this.state.recentUpdations}
-                    </div>
-                    {viewForm}
-                </div>
-            );
-        } else {
-            renderer.push(
-                <div className='col-md-10' key="1">
-                    <Panel message={panelMessage} type="warning"/>
-                    <Searchbar formSubmit={this.formSubmit}/>
-                    <PanelCollapse message="Recently updated customers" target="recent"/>
-                    <div id='recent' className='recent-updations dataTable collapse in'>
-                        {this.state.recentUpdations}
-                    </div>
-                </div>
-            );
-        }
         return (
             <div>
                 <div id="override-modal" className="modal fade" role="dialog">
@@ -65,7 +40,15 @@ module.exports = React.createClass({
                 <NavBar logged={sessionStorage.getItem('logged')} bank={sessionStorage.getItem('username')}/>
                 <h3>View Customer Details</h3>
                     <div className='row middle-row'>
-                        {renderer}
+                    <div className='col-md-10' key="1">
+                        <Panel message={panelMessage} type="warning"/>
+                        <Searchbar formSubmit={this.formSubmit}/>
+                        <PanelCollapse message="Recently updated customers" target="recent"/>
+                        <div id='recent' className='recent-updations dataTable collapse in'>
+                            {this.state.recentUpdations}
+                        </div>
+                        {this.state.show? viewForm : []}
+                    </div>
                     </div>
                 <Footer/>
             </div>

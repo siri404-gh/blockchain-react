@@ -65,16 +65,7 @@ module.exports = React.createClass({
         if(this.state.logged) {
             renderer.push(
                 <div className='row middle-row' key="1">
-                    <PanelCollapse message="Collection Efficiency" target="chart1"/>
-                    <div id='chart1' className='dataTable chartDiv collapse in'></div>
-                    <PanelCollapse message="Consortium Efficiency" target="chart2"/>
-                    <div id='chart2' className='dataTable chartDiv collapse'></div>
-                    <PanelCollapse message="Collaboration Efficiency" target="chart3"/>
-                    <div id='chart3' className='dataTable chartDiv collapse'></div>
-                    <PanelCollapse message="Portfolio Ageing" target="chart4"/>
-                    <div id='chart4' className='dataTable chartDiv collapse'></div>
-                    <PanelCollapse message="Portfolio Age tracker" target="chart5"/>
-                    <div id='chart5' className='dataTable chartDiv collapse'></div>
+                    <Panel message="Welcome to the Skip trace Consortium<br/>- Powered by Blockchain" type="success"/>
                 </div>
             );
         } else {
@@ -96,7 +87,7 @@ module.exports = React.createClass({
             <div>
                 <NavBar logged={sessionStorage.getItem('logged')} bank={sessionStorage.getItem('username')}/>
                 <h3>Home</h3>
-                    {renderer}
+                {renderer}
                 <Footer/>
             </div>
         );

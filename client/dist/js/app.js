@@ -62872,7 +62872,7 @@ Router.run(routes, Router.HistoryLocation, function(Root){
     ReactDOM.render(React.createElement(Root, null), document.getElementById('app-container'));
 });
 
-},{"./routes.js":436,"react":343,"react-dom":174,"react-router":199}],418:[function(require,module,exports){
+},{"./routes.js":437,"react":343,"react-dom":174,"react-router":199}],418:[function(require,module,exports){
 var React = require('react');
 module.exports = React.createClass({displayName: "exports",
     render: function() {
@@ -62905,6 +62905,7 @@ module.exports = React.createClass({displayName: "exports",
                     React.createElement("li", null, React.createElement(Link, {to: "/add"}, React.createElement("span", {className: "glyphicon glyphicon-plus"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Add"))), 
                     React.createElement("li", null, React.createElement(Link, {to: "/view"}, React.createElement("span", {className: "glyphicon glyphicon-eye-open"}), " ", React.createElement("span", {className: "navbar-link-text"}, "View"))), 
                     React.createElement("li", null, React.createElement(Link, {to: "/update"}, React.createElement("span", {className: "glyphicon glyphicon-edit"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Update"))), 
+                    React.createElement("li", null, React.createElement(Link, {to: "/metrics"}, React.createElement("span", {className: "glyphicon glyphicon-th-list"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Metrics"))), 
                     React.createElement("li", null, React.createElement(Link, {to: "/logout"}, React.createElement("span", {className: "glyphicon glyphicon-off"}), " ", React.createElement("span", {className: "navbar-link-text"}, "Logout")))
                 ));
         }
@@ -62942,12 +62943,26 @@ module.exports = React.createClass({displayName: "exports",
         if(this.props.type == 'warning') {
             note.push(React.createElement("b", {key: Math.random()}, React.createElement("u", null, "Directions:"), " "));
         }
+        var message = this.props.message;
+        messageArray = message.split('<br/>');
+        var panelMessageRender = [];
+        messageArray.forEach(function(message, i) {
+            if (i==0) {
+                panelMessageRender.push(
+                    React.createElement("span", {key: Math.random()}, message)
+                );
+            } else {
+                panelMessageRender.push(
+                    React.createElement("div", {key: Math.random()}, message)
+                );
+            }
+        });
         return (
             React.createElement("div", {className: "row"}, 
                 React.createElement("div", {className: "panel-group col-md-12"}, 
                     React.createElement("div", {className: "panel panel-"+this.props.type}, 
                         React.createElement("div", {className: "panel-heading"}, 
-                            note, this.props.message
+                            note, panelMessageRender
                         )
                     )
                 )
@@ -63095,7 +63110,7 @@ module.exports = React.createClass({displayName: "exports",
     }
 });
 
-},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../utils/utils":439,"./forms":425,"moment":159,"react":343}],425:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../utils/utils":440,"./forms":425,"moment":159,"react":343}],425:[function(require,module,exports){
 var React = require('react');
 var Panel = require('../../components/Panel/Panel');
 var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
@@ -63406,14 +63421,10 @@ module.exports = React.createClass({displayName: "exports",
             transactionDetails: [React.createElement("div", {key: Math.random(), className: "loader"})]
         }
     },
-    getAmount: function(value) {
-        return utils.getAmount(value);
-    },
     componentWillMount: function() {
         var self = this;
         var transactionDetails = [];
         var block = $.ajax({
-            // async: false,
             url: utils.api+'/blocks/'+self.props.params.id,
             method: 'GET',
             data: {
@@ -63537,7 +63548,7 @@ module.exports = React.createClass({displayName: "exports",
     }
 });
 
-},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/utils":439,"react":343}],427:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/utils":440,"react":343}],427:[function(require,module,exports){
 var React = require('react');
 var NavBar = require('../../components/Navbar/Navbar');
 var Footer = require('../../components/Footer/Footer');
@@ -63557,7 +63568,6 @@ module.exports = React.createClass({displayName: "exports",
         var transactions = [];
         var self = this;
         $.ajax({
-            // async: false,
             url: utils.api+'/blocks',
             method: 'GET',
             data: {
@@ -63643,7 +63653,7 @@ module.exports = React.createClass({displayName: "exports",
     }
 });
 
-},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/utils":439,"moment":159,"react":343,"react-router":199}],428:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/utils":440,"moment":159,"react":343,"react-router":199}],428:[function(require,module,exports){
 var React = require('react');
 var NavBar = require('../../components/Navbar/Navbar');
 var Footer = require('../../components/Footer/Footer');
@@ -63711,16 +63721,7 @@ module.exports = React.createClass({displayName: "exports",
         if(this.state.logged) {
             renderer.push(
                 React.createElement("div", {className: "row middle-row", key: "1"}, 
-                    React.createElement(PanelCollapse, {message: "Collection Efficiency", target: "chart1"}), 
-                    React.createElement("div", {id: "chart1", className: "dataTable chartDiv collapse in"}), 
-                    React.createElement(PanelCollapse, {message: "Consortium Efficiency", target: "chart2"}), 
-                    React.createElement("div", {id: "chart2", className: "dataTable chartDiv collapse"}), 
-                    React.createElement(PanelCollapse, {message: "Collaboration Efficiency", target: "chart3"}), 
-                    React.createElement("div", {id: "chart3", className: "dataTable chartDiv collapse"}), 
-                    React.createElement(PanelCollapse, {message: "Portfolio Ageing", target: "chart4"}), 
-                    React.createElement("div", {id: "chart4", className: "dataTable chartDiv collapse"}), 
-                    React.createElement(PanelCollapse, {message: "Portfolio Age tracker", target: "chart5"}), 
-                    React.createElement("div", {id: "chart5", className: "dataTable chartDiv collapse"})
+                    React.createElement(Panel, {message: "Welcome to the Skip trace Consortium<br/>- Powered by Blockchain", type: "success"})
                 )
             );
         } else {
@@ -63742,7 +63743,7 @@ module.exports = React.createClass({displayName: "exports",
             React.createElement("div", null, 
                 React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "Home"), 
-                    renderer, 
+                renderer, 
                 React.createElement(Footer, null)
             )
         );
@@ -63759,7 +63760,7 @@ module.exports = React.createClass({displayName: "exports",
     }
 });
 
-},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/users":438,"../../utils/utils":439,"./forms":429,"moment":159,"react":343,"react-router":199}],429:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/users":439,"../../utils/utils":440,"./forms":429,"moment":159,"react":343,"react-router":199}],429:[function(require,module,exports){
 var React = require('react');
 var Panel = require('../../components/Panel/Panel');
 var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
@@ -63788,19 +63789,24 @@ module.exports = {
 },{"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Populator/Populator":422,"react":343}],430:[function(require,module,exports){
 var React = require('react');
 var NavBar = require('../../components/Navbar/Navbar');
+var Footer = require('../../components/Footer/Footer');
+var utils = require('../../utils/utils');
 
 var Home = React.createClass({displayName: "Home",
     componentWillMount: function() {
-        sessionStorage.clear();
         utils.stopWatchingAddEvent();
         utils.stopWatchingUpdateEvent();
         utils.stopWatchingUpdateEvent();
+        sessionStorage.clear();
     },
     render: function() {
         return (
             React.createElement("div", null, 
-                React.createElement(NavBar, null), 
-                "Successfully logged out!"
+                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
+                React.createElement("h3", null, "Logged Out!"), 
+                React.createElement("div", {className: "row middle-row", key: "1"}
+                ), 
+                React.createElement(Footer, null)
             )
         );
     }
@@ -63808,7 +63814,7 @@ var Home = React.createClass({displayName: "Home",
 
 module.exports = Home;
 
-},{"../../components/Navbar/Navbar":419,"react":343}],431:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../utils/utils":440,"react":343}],431:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 
@@ -63827,6 +63833,36 @@ var Master = React.createClass({displayName: "Master",
 module.exports = Master;
 
 },{"react":343,"react-router":199}],432:[function(require,module,exports){
+var React = require('react');
+var NavBar = require('../../components/Navbar/Navbar');
+var Footer = require('../../components/Footer/Footer');
+var Panel = require('../../components/Panel/Panel');
+var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
+module.exports = React.createClass({displayName: "exports",
+    render: function() {
+        return  (
+            React.createElement("div", null, 
+                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
+                React.createElement("h3", null, "Metrics"), 
+                React.createElement("div", {className: "row middle-row", key: "1"}, 
+                    React.createElement(PanelCollapse, {message: "Collection Efficiency", target: "chart1"}), 
+                    React.createElement("div", {id: "chart1", className: "dataTable chartDiv collapse in"}), 
+                    React.createElement(PanelCollapse, {message: "Consortium Efficiency", target: "chart2"}), 
+                    React.createElement("div", {id: "chart2", className: "dataTable chartDiv collapse"}), 
+                    React.createElement(PanelCollapse, {message: "Collaboration Efficiency", target: "chart3"}), 
+                    React.createElement("div", {id: "chart3", className: "dataTable chartDiv collapse"}), 
+                    React.createElement(PanelCollapse, {message: "Portfolio Ageing", target: "chart4"}), 
+                    React.createElement("div", {id: "chart4", className: "dataTable chartDiv collapse"}), 
+                    React.createElement(PanelCollapse, {message: "Portfolio Age tracker", target: "chart5"}), 
+                    React.createElement("div", {id: "chart5", className: "dataTable chartDiv collapse"})
+                ), 
+                React.createElement(Footer, null)
+            )
+        );
+    }
+})
+
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"react":343}],433:[function(require,module,exports){
 var React = require('react');
 var NavBar = require('../../components/Navbar/Navbar');
 var Footer = require('../../components/Footer/Footer');
@@ -63882,7 +63918,7 @@ module.exports = React.createClass({displayName: "exports",
                         React.createElement(Panel, {message: panelMessage, type: "warning"}), 
                         React.createElement(Searchbar, {formSubmit: this.formSubmit}), 
                         React.createElement(PanelCollapse, {message: "Recently updated customers", target: "recent"}), 
-                        React.createElement("div", {id: "recent", className: "dataTable collapse in"}, 
+                        React.createElement("div", {id: "recent", className: "recent-updations dataTable collapse in"}, 
                             this.state.recentUpdations
                         ), 
                         (this.state.show)? updateForm : [], 
@@ -63903,12 +63939,15 @@ module.exports = React.createClass({displayName: "exports",
         $('.recent-updations').fadeIn();
     },
     componentWillUnmount: function() {
+        this.setState({
+            recentUpdations : []
+        });
         utils.stopWatchingAddEvent();
         utils.stopWatchingUpdateEvent();
     }
 });
 
-},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Searchbar/Searchbar":423,"../../utils/utils":439,"./forms":433,"moment":159,"react":343}],433:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Searchbar/Searchbar":423,"../../utils/utils":440,"./forms":434,"moment":159,"react":343}],434:[function(require,module,exports){
 var React = require('react');
 var Panel = require('../../components/Panel/Panel');
 var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
@@ -64236,7 +64275,7 @@ module.exports = {
     }
 };
 
-},{"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Populator/Populator":422,"moment":159,"react":343}],434:[function(require,module,exports){
+},{"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Populator/Populator":422,"moment":159,"react":343}],435:[function(require,module,exports){
 var React = require('react');
 var NavBar = require('../../components/Navbar/Navbar');
 var Footer = require('../../components/Footer/Footer');
@@ -64264,31 +64303,6 @@ module.exports = React.createClass({displayName: "exports",
     },
     render: function() {
         var viewForm = forms.viewForm(this);
-        var renderer = [];
-        if(this.state.show) {
-            renderer.push(
-                React.createElement("div", {className: "col-md-10", key: "1"}, 
-                    React.createElement(Panel, {message: panelMessage, type: "warning"}), 
-                    React.createElement(Searchbar, {formSubmit: this.formSubmit}), 
-                    React.createElement(PanelCollapse, {message: "Recently updated customers", target: "recent"}), 
-                    React.createElement("div", {id: "recent", className: "dataTable collapse in"}, 
-                        this.state.recentUpdations
-                    ), 
-                    viewForm
-                )
-            );
-        } else {
-            renderer.push(
-                React.createElement("div", {className: "col-md-10", key: "1"}, 
-                    React.createElement(Panel, {message: panelMessage, type: "warning"}), 
-                    React.createElement(Searchbar, {formSubmit: this.formSubmit}), 
-                    React.createElement(PanelCollapse, {message: "Recently updated customers", target: "recent"}), 
-                    React.createElement("div", {id: "recent", className: "recent-updations dataTable collapse in"}, 
-                        this.state.recentUpdations
-                    )
-                )
-            );
-        }
         return (
             React.createElement("div", null, 
                 React.createElement("div", {id: "override-modal", className: "modal fade", role: "dialog"}, 
@@ -64304,7 +64318,15 @@ module.exports = React.createClass({displayName: "exports",
                 React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "View Customer Details"), 
                     React.createElement("div", {className: "row middle-row"}, 
-                        renderer
+                    React.createElement("div", {className: "col-md-10", key: "1"}, 
+                        React.createElement(Panel, {message: panelMessage, type: "warning"}), 
+                        React.createElement(Searchbar, {formSubmit: this.formSubmit}), 
+                        React.createElement(PanelCollapse, {message: "Recently updated customers", target: "recent"}), 
+                        React.createElement("div", {id: "recent", className: "recent-updations dataTable collapse in"}, 
+                            this.state.recentUpdations
+                        ), 
+                        this.state.show? viewForm : []
+                    )
                     ), 
                 React.createElement(Footer, null)
             )
@@ -64325,7 +64347,7 @@ module.exports = React.createClass({displayName: "exports",
     }
 });
 
-},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Searchbar/Searchbar":423,"../../utils/utils":439,"./forms":435,"moment":159,"react":343}],435:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Searchbar/Searchbar":423,"../../utils/utils":440,"./forms":436,"moment":159,"react":343}],436:[function(require,module,exports){
 var React = require('react');
 var Panel = require('../../components/Panel/Panel');
 var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
@@ -64646,7 +64668,7 @@ module.exports = {
     }
 };
 
-},{"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Populator/Populator":422,"moment":159,"react":343}],436:[function(require,module,exports){
+},{"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Populator/Populator":422,"moment":159,"react":343}],437:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var Route = Router.Route;
@@ -64659,6 +64681,7 @@ var View = require('./pages/View/View');
 var Update = require('./pages/Update/Update');
 var Blocks = require('./pages/Blocks/Blocks');
 var Block = require('./pages/Block/Block');
+var Metrics = require('./pages/Metrics/Metrics');
 var Logout = require('./pages/Logout/Logout');
 
 module.exports = (
@@ -64673,11 +64696,12 @@ module.exports = (
         React.createElement(Route, {handler: Blocks, name: "d", path: "/blocks"}), 
         React.createElement(Route, {handler: Logout, name: "e", path: "/logout"}), 
         React.createElement(Route, {handler: View, name: "f", path: "/view/:id"}), 
-        React.createElement(Route, {handler: Block, name: "g", path: "/block/:id"})
+        React.createElement(Route, {handler: Block, name: "g", path: "/block/:id"}), 
+        React.createElement(Route, {handler: Metrics, name: "h", path: "/metrics"})
     )
 );
 
-},{"./pages/Add/Add":424,"./pages/Block/Block":426,"./pages/Blocks/Blocks":427,"./pages/Home/Home":428,"./pages/Logout/Logout":430,"./pages/Master/Master":431,"./pages/Update/Update":432,"./pages/View/View":434,"react":343,"react-router":199}],437:[function(require,module,exports){
+},{"./pages/Add/Add":424,"./pages/Block/Block":426,"./pages/Blocks/Blocks":427,"./pages/Home/Home":428,"./pages/Logout/Logout":430,"./pages/Master/Master":431,"./pages/Metrics/Metrics":432,"./pages/Update/Update":433,"./pages/View/View":435,"react":343,"react-router":199}],438:[function(require,module,exports){
 module.exports = [{
 	"firstName": "Test1-name2-name3",
 	"middleName": "Stupper",
@@ -64960,7 +64984,7 @@ module.exports = [{
     "timestamp":"1470714859"
 }];
 
-},{}],438:[function(require,module,exports){
+},{}],439:[function(require,module,exports){
 module.exports = [
     {
         username: 'ibank',
@@ -64982,7 +65006,7 @@ module.exports = [
     }
 ];
 
-},{}],439:[function(require,module,exports){
+},{}],440:[function(require,module,exports){
 /**
  * @page lib/faq FAQ
  * @parent lib
@@ -65343,7 +65367,7 @@ module.exports = {
     }
 };
 
-},{"../../../../variables":440,"./customers":437,"moment":159,"react":343,"react-router":199,"web3":368}],440:[function(require,module,exports){
+},{"../../../../variables":441,"./customers":438,"moment":159,"react":343,"react-router":199,"web3":368}],441:[function(require,module,exports){
 module.exports={
     port: '3000',
     api:'http://192.168.1.11',
