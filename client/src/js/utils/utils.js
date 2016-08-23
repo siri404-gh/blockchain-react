@@ -76,44 +76,6 @@ module.exports = {
         transactions: [],
         recentUpdations: [<div key={Math.random()} className="loader"></div>]
     },
-    append: function(self) {
-        self.setState({
-            firstName: $('#firstName').val(),
-            firstName2: $('#firstName2').val(),
-            firstName3: $('#firstName3').val(),
-            lastName: $('#lastName').val(),
-            lastName2: $('#lastName2').val(),
-            lastName3: $('#lastName3').val(),
-            middleName: $('#middleName').val(),
-            aliasName: $('#aliasName').val(),
-            dob: $('#dob').val(),
-            ssn: $('#ssn').val(),
-            ssn2: $('#ssn2').val(),
-            ssn3: $('#ssn3').val(),
-            passportNumber: $('#passportNumber').val(),
-            passportNumber2: $('#passportNumber2').val(),
-            passportNumber3: $('#passportNumber3').val(),
-            employerName1: $('#employerName1').val(),
-            employerName2:$('#employerName2').val(),
-            employerName3: $('#employerName3').val(),
-            productName1: $('#productName1').val(),
-            productName2: $('#productName2').val(),
-            productName3: $('#productName3').val(),
-            remarks: $('#remarks').val(),
-            mobilePhone1: $('#mobilePhone1').val(),
-            mobilePhone2: $('#mobilePhone2').val(),
-            mobilePhone3: $('#mobilePhone3').val(),
-            homePhone1: $('#homePhone1').val(),
-            homePhone2: $('#homePhone2').val(),
-            homePhone3: $('#homePhone3').val(),
-            workPhone1: $('#workPhone1').val(),
-            workPhone2: $('#workPhone2').val(),
-            workPhone3: $('#workPhone3').val(),
-            currentAddress1: $('#currentAddress1').val(),
-            currentAddress2: $('#currentAddress2').val(),
-            currentAddress3: $('#currentAddress3').val()
-        });
-    },
     populate: function(el, i, self, customers) {
         var self2 = this;
         var id = (el)? +(el.target.id) : ((i)? i : 0);
@@ -278,8 +240,19 @@ module.exports = {
     },
     watchTransactionEvent: function(self) {
         console.log('Watching for transactions..');
-        web3.eth.filter('latest').watch(function(){
-            self.displayTransactions();
+        web3.eth.filter('latest').watch(function(error, result){
+            if (!error) {
+                console.log(result);
+                self.displayTransactions();
+            }
+        });
+    },
+    stopWatchTransactionEvent: function() {
+        console.log('Stopping watching for transactions..');
+        web3.eth.filter('latest').stopWatching(function(error, result){
+            if (!error) {
+                console.log('latest='+result);
+            }
         });
     },
     watchAddEvent: function(self) {
@@ -296,9 +269,14 @@ module.exports = {
                 $('.customer-added-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName.split('-')[0] + ' ' + lastName.split('-')[0] + ' ' + ' successfully created.');
                 $('.customer-added-alert').delay(notificationDelay).fadeOut();
             }
-            // addEvent.stopWatching();
             sessionStorage.setItem('blocks', result.blockNumber);
         });
+    },
+    stopWatchingAddEvent: function() {
+        console.log('Stopping watching for user add..');
+        this.web3Init();
+        var addEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceAddEvent();
+        addEvent.stopWatching();
     },
     watchUpdateEvent: function(self) {
         console.log('Watching for user updates..');
@@ -314,9 +292,14 @@ module.exports = {
                 $('.customer-updated-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName.split('-')[0] + ' ' + lastName.split('-')[0] + ' ' + ' successfully overwritten.');
                 $('.customer-updated-alert').delay(notificationDelay).fadeOut();
             }
-            // updateEvent.stopWatching();
             sessionStorage.setItem('updateBlocks', result.blockNumber);
     	});
+    },
+    stopWatchingUpdateEvent: function() {
+        console.log('Stopping watching for user updates..');
+        this.web3Init();
+        var updateEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceUpdateEvent();
+        updateEvent.stopWatching();
     },
     getRecentUpdations: function(self) {
         var self2 = this;
@@ -366,9 +349,9 @@ module.exports = {
                             </div>
                         </div>
                     );
-                    self.setState({
-                        recentUpdations: recentUpdations
-                    });
+                });
+                self.setState({
+                    recentUpdations: recentUpdations
                 });
             }
         });

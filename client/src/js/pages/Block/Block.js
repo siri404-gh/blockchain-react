@@ -142,5 +142,13 @@ module.exports = React.createClass({
                 <Footer/>
             </div>
         );
+    },
+    componentDidMount: function() {
+        utils.watchAddEvent();
+        utils.watchUpdateEvent();
+    },
+    componentWillUnmount: function() {
+        utils.stopWatchingAddEvent();
+        utils.stopWatchingUpdateEvent();
     }
 });

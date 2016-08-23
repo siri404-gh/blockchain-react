@@ -62921,7 +62921,7 @@ module.exports = React.createClass({displayName: "exports",
                             React.createElement("span", {className: "icon-bar"})
                           ), 
                           React.createElement("a", {className: "navbar-brand", href: "/"}, React.createElement("img", {className: "brand-img", src: '/images/'+bankName+'.png'})), 
-                          React.createElement("a", {className: "navbar-brand", href: "#"}, brandName)
+                          React.createElement("a", {className: "navbar-brand", href: "#"}, [brandName.slice(0,1), '-', brandName.slice(1,2).toUpperCase(), brandName.slice(2, brandName.length)].join(''))
                         ), 
                         React.createElement("div", {className: "collapse navbar-collapse", id: "bs-example-navbar-collapse-1"}, 
                             links
@@ -63063,16 +63063,10 @@ module.exports = React.createClass({displayName: "exports",
             )
         )
     },
-    componentDidMount: function() {
-        var customers = utils.dummyCustomers;
-        var rand = Math.floor((Math.random() * 10) + 1);
-        utils.populate(null, rand-1, this, customers);
-        $("form input[type='text']").each(function() {
-            $(this).attr('placeholder', $(this).attr('id'));
-        });
-    },
     append: function() {
-        utils.append(this);
+        var state = this.state;
+        state[el.target.id] = el.target.value;
+        this.setState(state);
     },
     saveToDB: function(ev) {
         ev.preventDefault();
@@ -63085,6 +63079,20 @@ module.exports = React.createClass({displayName: "exports",
             }, 250);
         }
     },
+    componentDidMount: function() {
+        var customers = utils.dummyCustomers;
+        var rand = Math.floor((Math.random() * 10) + 1);
+        utils.populate(null, rand-1, this, customers);
+        $("form input[type='text']").each(function() {
+            $(this).attr('placeholder', $(this).attr('id'));
+        });
+        utils.watchAddEvent();
+        utils.watchUpdateEvent();
+    },
+    componentWillUnmount: function() {
+        utils.stopWatchingAddEvent();
+        utils.stopWatchingUpdateEvent();
+    }
 });
 
 },{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../utils/utils":439,"./forms":425,"moment":159,"react":343}],425:[function(require,module,exports){
@@ -63518,6 +63526,14 @@ module.exports = React.createClass({displayName: "exports",
                 React.createElement(Footer, null)
             )
         );
+    },
+    componentDidMount: function() {
+        utils.watchAddEvent();
+        utils.watchUpdateEvent();
+    },
+    componentWillUnmount: function() {
+        utils.stopWatchingAddEvent();
+        utils.stopWatchingUpdateEvent();
     }
 });
 
@@ -63584,18 +63600,9 @@ module.exports = React.createClass({displayName: "exports",
             }
         });
     },
-    componentDidMount: function() {
-        if(sessionStorage.logged) {
-            this.displayTransactions();
-            utils.watchTransactionEvent(this);
-        }
-    },
-    componentDidUpdate: function() {
-        $('.recent-transactions').hide();
-        $('.recent-transactions').fadeIn();
-    },
     render: function() {
-        return (React.createElement("div", null, 
+        return (
+            React.createElement("div", null, 
                 React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "Ethereum Blocks Browser"), 
                 React.createElement("div", {className: "row middle-row"}, 
@@ -63616,8 +63623,24 @@ module.exports = React.createClass({displayName: "exports",
                     )
                 ), 
                 React.createElement(Footer, null)
-            ));
+            )
+        );
     },
+    componentDidMount: function() {
+        this.displayTransactions();
+        utils.watchTransactionEvent(this);
+        utils.watchAddEvent();
+        utils.watchUpdateEvent();
+    },
+    componentDidUpdate: function() {
+        $('.recent-transactions').hide();
+        $('.recent-transactions').fadeIn();
+    },
+    componentWillUnmount: function() {
+        utils.stopWatchTransactionEvent();
+        utils.stopWatchingAddEvent();
+        utils.stopWatchingUpdateEvent();
+    }
 });
 
 },{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/utils":439,"moment":159,"react":343,"react-router":199}],428:[function(require,module,exports){
@@ -63628,7 +63651,6 @@ var Panel = require('../../components/Panel/Panel');
 var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
 var moment = require('moment');
 var Link = require('react-router').Link;
-
 var forms = require('./forms');
 var utils = require('../../utils/utils');
 var users = require('../../utils/users');
@@ -63648,56 +63670,6 @@ module.exports = React.createClass({displayName: "exports",
                 transactions: []
             };
     },
-    render: function() {
-        var loginForm = forms.loginForm(this);
-        return  (this.state.logged)? (
-            React.createElement("div", null, 
-                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
-                React.createElement("h3", null, "Home"), 
-                React.createElement("div", {className: "row middle-row"}, 
-                    React.createElement(PanelCollapse, {message: "Consortium Efficiency – Reducing Numbers", target: "chart1"}), 
-                    React.createElement("div", {id: "chart1", className: "dataTable collapse in"}, 
-                        React.createElement("img", {className: "chart", src: "/images/chart_1.png"})
-                    ), 
-                    React.createElement(PanelCollapse, {message: "Consortium Efficiency – Increasing Settlements", target: "chart2"}), 
-                    React.createElement("div", {id: "chart2", className: "dataTable collapse"}, 
-                        React.createElement("img", {className: "chart", src: "/images/chart_2.png"})
-                    ), 
-                    React.createElement(PanelCollapse, {message: "Data sharing efficiency", target: "chart4"}), 
-                    React.createElement("div", {id: "chart4", className: "dataTable collapse"}, 
-                        React.createElement("img", {className: "chart", src: "/images/chart_2.png"})
-                    ), 
-                    React.createElement(PanelCollapse, {message: "Portfolio Ageing", target: "chart5"}), 
-                    React.createElement("div", {id: "chart5", className: "dataTable collapse"}, 
-                        React.createElement("img", {className: "chart", src: "/images/chart_3.png"})
-                    ), 
-                    React.createElement(PanelCollapse, {message: "Untraced Accounts Ageing", target: "chart3"}), 
-                    React.createElement("div", {id: "chart3", className: "dataTable collapse"}, 
-                        React.createElement("b", null, "Percentage of Customers"), 
-                        React.createElement("div", {id: "pie"})
-                    )
-                ), 
-                React.createElement(Footer, null)
-            )
-        ) : (
-            React.createElement("div", null, 
-                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
-                React.createElement("h3", null, "Home"), 
-                React.createElement("div", {className: "row middle-row"}, 
-                    React.createElement(Panel, {message: this.state.panelMessage, type: this.state.panelClass}), 
-                    React.createElement("div", {className: "row"}, 
-                        React.createElement("div", {className: "col-md-5"}, 
-                            React.createElement(PanelCollapse, {target: "login", message: "Login"}), 
-                            React.createElement("div", {id: "login"}, 
-                                loginForm
-                            )
-                        )
-                    )
-                ), 
-                React.createElement(Footer, null)
-            )
-        );
-    },
     login: function() {
         var username = this.refs.un.value;
         var password = this.refs.pw.value;
@@ -63713,7 +63685,6 @@ module.exports = React.createClass({displayName: "exports",
                 sessionStorage.setItem('port', userInfo.port);
                 sessionStorage.setItem('blocks', 0);
                 sessionStorage.setItem('updateBlocks', 0);
-                utils.watchTransactionEvent(this);
                 utils.watchAddEvent();
                 utils.watchUpdateEvent();
                 this.setState({
@@ -63734,25 +63705,57 @@ module.exports = React.createClass({displayName: "exports",
             });
         }
     },
+    render: function() {
+        var loginForm = forms.loginForm(this);
+        var renderer = [];
+        if(this.state.logged) {
+            renderer.push(
+                React.createElement("div", {className: "row middle-row", key: "1"}, 
+                    React.createElement(PanelCollapse, {message: "Collection Efficiency", target: "chart1"}), 
+                    React.createElement("div", {id: "chart1", className: "dataTable chartDiv collapse in"}), 
+                    React.createElement(PanelCollapse, {message: "Consortium Efficiency", target: "chart2"}), 
+                    React.createElement("div", {id: "chart2", className: "dataTable chartDiv collapse"}), 
+                    React.createElement(PanelCollapse, {message: "Collaboration Efficiency", target: "chart3"}), 
+                    React.createElement("div", {id: "chart3", className: "dataTable chartDiv collapse"}), 
+                    React.createElement(PanelCollapse, {message: "Portfolio Ageing", target: "chart4"}), 
+                    React.createElement("div", {id: "chart4", className: "dataTable chartDiv collapse"}), 
+                    React.createElement(PanelCollapse, {message: "Portfolio Age tracker", target: "chart5"}), 
+                    React.createElement("div", {id: "chart5", className: "dataTable chartDiv collapse"})
+                )
+            );
+        } else {
+            renderer.push(
+                React.createElement("div", {className: "row middle-row", key: "1"}, 
+                    React.createElement(Panel, {message: this.state.panelMessage, type: this.state.panelClass}), 
+                    React.createElement("div", {className: "row"}, 
+                        React.createElement("div", {className: "col-md-5"}, 
+                            React.createElement(PanelCollapse, {target: "login", message: "Login"}), 
+                            React.createElement("div", {id: "login"}, 
+                                loginForm
+                            )
+                        )
+                    )
+                )
+            );
+        }
+        return  (
+            React.createElement("div", null, 
+                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
+                React.createElement("h3", null, "Home"), 
+                    renderer, 
+                React.createElement(Footer, null)
+            )
+        );
+    },
     componentDidMount: function() {
-        var chartData=[
-        	{label:"Plus", color:"#DC3912", value: 6},
-        	{label:"Lite", color:"#FF9900", value: 2},
-        	{label:"Elite", color:"#109618", value: 2},
-        ];
-        var chartFunc = function(data){
-            return data.map(function(d){
-                return {label:d.label, value:d.value, color:d.color};
-            });
-        };
-        var svg = d3.select("#pie").append("svg").attr("width", 300).attr("height",300);
-        svg.append("g").attr("id","chartPie");
-        Donut3D.draw("chartPie", chartFunc(chartData), 150, 150, 130, 100, 30, 0.4);
-        if(sessionStorage.getItem('logged')) {
-            utils.watchTransactionEvent(this);
+        if(this.state.logged) {
             utils.watchAddEvent();
             utils.watchUpdateEvent();
         }
+    },
+    componentWillUnmount() {
+        utils.stopWatchingAddEvent();
+        utils.stopWatchingUpdateEvent();
     }
 });
 
@@ -63789,15 +63792,18 @@ var NavBar = require('../../components/Navbar/Navbar');
 var Home = React.createClass({displayName: "Home",
     componentWillMount: function() {
         sessionStorage.clear();
+        utils.stopWatchingAddEvent();
+        utils.stopWatchingUpdateEvent();
+        utils.stopWatchingUpdateEvent();
     },
-  render: function() {
-    return (
-        React.createElement("div", null, 
-            React.createElement(NavBar, null), 
-            "Successfully logged out!"
-        )
-    );
-  }
+    render: function() {
+        return (
+            React.createElement("div", null, 
+                React.createElement(NavBar, null), 
+                "Successfully logged out!"
+            )
+        );
+    }
 });
 
 module.exports = Home;
@@ -63846,19 +63852,19 @@ module.exports = React.createClass({displayName: "exports",
     formSubmit: function(val) {
         this.populate(null, val);
     },
-    append: function() {
-        utils.append(this);
+    append: function(el) {
+        var state = this.state;
+        state[el.target.id] = el.target.value;
+        this.setState(state);
     },
     saveToDB: function(ev) {
         ev.preventDefault();
         var transHash = utils.updateSkipTraceRecordOnChain(this.state.customerID, this.state.firstName+'-'+this.state.firstName2+'-'+this.state.firstName3, this.state.middleName, this.state.lastName+'-'+this.state.lastName2+'-'+this.state.lastName3, this.state.aliasName, moment(this.state.dob, 'YYYY-MM-DD').format('D-MMM-YY'), this.state.ssn+this.state.ssn2+this.state.ssn3, this.state.passportNumber+this.state.passportNumber2+this.state.passportNumber3, this.state.homePhone1, this.state.homePhone2, this.state.homePhone3, this.state.workPhone1, this.state.workPhone2, this.state.workPhone3, this.state.mobilePhone1, this.state.mobilePhone2, this.state.mobilePhone3, this.state.currentAddress1, this.state.currentAddress2, this.state.currentAddress3, this.state.employerName1, this.state.employerName2, this.state.employerName3, this.state.productName1, this.state.productName2, this.state.productName3, this.state.remarks);
         if(transHash) {
-            var initialState = utils.getInitialState;
-            initialState.recentUpdations = this.state.recentUpdations;
-            this.setState(initialState);
-            this.setState({
-                show: true
-            });
+            var newState = utils.getInitialState;
+            newState.recentUpdations = this.state.recentUpdations;
+            newState.show = true;
+            this.setState(newState);
             $('#transaction-alert').show().html("<div class='alert alert-success'><strong>Transaction submitted to the block chain with the following id : </strong> "+transHash+"</div>");
             $('body').animate({
                 scrollTop : $("#transaction-alert").offset().top
@@ -63867,7 +63873,7 @@ module.exports = React.createClass({displayName: "exports",
     },
     render: function() {
         var updateForm = forms.updateForm(this);
-        return (this.state.show)? (
+        return (
             React.createElement("div", null, 
                 React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "Update Customer Details"), 
@@ -63879,37 +63885,26 @@ module.exports = React.createClass({displayName: "exports",
                         React.createElement("div", {id: "recent", className: "dataTable collapse in"}, 
                             this.state.recentUpdations
                         ), 
-                        updateForm, 
+                        (this.state.show)? updateForm : [], 
                         React.createElement("div", {id: "transaction-alert"})
                     )
                 ), 
                 React.createElement(Footer, null)
             )
-        ) :
-        (
-            React.createElement("div", null, 
-                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
-                React.createElement("h3", null, "Update Customer Details"), 
-                React.createElement("div", {className: "row middle-row"}, 
-                    React.createElement("div", {className: "col-md-10"}, 
-                        React.createElement(Panel, {message: panelMessage, type: "warning"}), 
-                        React.createElement(Searchbar, {formSubmit: this.formSubmit}), 
-                        React.createElement(PanelCollapse, {message: "Recently updated customers", target: "recent"}), 
-                        React.createElement("div", {id: "recent", className: "recent-updations dataTable collapse in"}, 
-                            this.state.recentUpdations
-                        )
-                    )
-                ), 
-                React.createElement(Footer, null)
-            )
-        )
+        );
     },
-    componentWillMount: function() {
+    componentDidMount: function() {
         utils.getRecentUpdations(this);
+        utils.watchAddEvent();
+        utils.watchUpdateEvent();
     },
     componentDidUpdate: function() {
         $('.recent-updations').hide();
         $('.recent-updations').fadeIn();
+    },
+    componentWillUnmount: function() {
+        utils.stopWatchingAddEvent();
+        utils.stopWatchingUpdateEvent();
     }
 });
 
@@ -64269,7 +64264,32 @@ module.exports = React.createClass({displayName: "exports",
     },
     render: function() {
         var viewForm = forms.viewForm(this);
-        return (this.state.show) ? (
+        var renderer = [];
+        if(this.state.show) {
+            renderer.push(
+                React.createElement("div", {className: "col-md-10", key: "1"}, 
+                    React.createElement(Panel, {message: panelMessage, type: "warning"}), 
+                    React.createElement(Searchbar, {formSubmit: this.formSubmit}), 
+                    React.createElement(PanelCollapse, {message: "Recently updated customers", target: "recent"}), 
+                    React.createElement("div", {id: "recent", className: "dataTable collapse in"}, 
+                        this.state.recentUpdations
+                    ), 
+                    viewForm
+                )
+            );
+        } else {
+            renderer.push(
+                React.createElement("div", {className: "col-md-10", key: "1"}, 
+                    React.createElement(Panel, {message: panelMessage, type: "warning"}), 
+                    React.createElement(Searchbar, {formSubmit: this.formSubmit}), 
+                    React.createElement(PanelCollapse, {message: "Recently updated customers", target: "recent"}), 
+                    React.createElement("div", {id: "recent", className: "recent-updations dataTable collapse in"}, 
+                        this.state.recentUpdations
+                    )
+                )
+            );
+        }
+        return (
             React.createElement("div", null, 
                 React.createElement("div", {id: "override-modal", className: "modal fade", role: "dialog"}, 
                     React.createElement("div", {className: "modal-dialog"}, 
@@ -64283,44 +64303,25 @@ module.exports = React.createClass({displayName: "exports",
                 ), 
                 React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
                 React.createElement("h3", null, "View Customer Details"), 
-                React.createElement("div", {className: "row middle-row"}, 
-                    React.createElement("div", {className: "col-md-10"}, 
-                        React.createElement(Panel, {message: panelMessage, type: "warning"}), 
-                        React.createElement(Searchbar, {formSubmit: this.formSubmit}), 
-                        React.createElement(PanelCollapse, {message: "Recently updated customers", target: "recent"}), 
-                        React.createElement("div", {id: "recent", className: "dataTable collapse in"}, 
-                            this.state.recentUpdations
-                        ), 
-                        viewForm
-                    )
-                ), 
-                React.createElement(Footer, null)
-            )
-        ) :
-        (
-            React.createElement("div", null, 
-                React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
-                React.createElement("h3", null, "View Customer Details"), 
-                React.createElement("div", {className: "row middle-row"}, 
-                    React.createElement("div", {className: "col-md-10"}, 
-                        React.createElement(Panel, {message: panelMessage, type: "warning"}), 
-                        React.createElement(Searchbar, {formSubmit: this.formSubmit}), 
-                        React.createElement(PanelCollapse, {message: "Recently updated customers", target: "recent"}), 
-                        React.createElement("div", {id: "recent", className: "recent-updations dataTable collapse in"}, 
-                            this.state.recentUpdations
-                        )
-                    )
-                ), 
+                    React.createElement("div", {className: "row middle-row"}, 
+                        renderer
+                    ), 
                 React.createElement(Footer, null)
             )
         );
     },
-    componentWillMount: function() {
+    componentDidMount: function() {
         utils.getRecentUpdations(this);
+        utils.watchAddEvent();
+        utils.watchUpdateEvent();
     },
     componentDidUpdate: function() {
         $('.recent-updations').hide();
         $('.recent-updations').fadeIn();
+    },
+    componentWillUnmount: function() {
+        utils.stopWatchingAddEvent();
+        utils.stopWatchingUpdateEvent();
     }
 });
 
@@ -65060,44 +65061,6 @@ module.exports = {
         transactions: [],
         recentUpdations: [React.createElement("div", {key: Math.random(), className: "loader"})]
     },
-    append: function(self) {
-        self.setState({
-            firstName: $('#firstName').val(),
-            firstName2: $('#firstName2').val(),
-            firstName3: $('#firstName3').val(),
-            lastName: $('#lastName').val(),
-            lastName2: $('#lastName2').val(),
-            lastName3: $('#lastName3').val(),
-            middleName: $('#middleName').val(),
-            aliasName: $('#aliasName').val(),
-            dob: $('#dob').val(),
-            ssn: $('#ssn').val(),
-            ssn2: $('#ssn2').val(),
-            ssn3: $('#ssn3').val(),
-            passportNumber: $('#passportNumber').val(),
-            passportNumber2: $('#passportNumber2').val(),
-            passportNumber3: $('#passportNumber3').val(),
-            employerName1: $('#employerName1').val(),
-            employerName2:$('#employerName2').val(),
-            employerName3: $('#employerName3').val(),
-            productName1: $('#productName1').val(),
-            productName2: $('#productName2').val(),
-            productName3: $('#productName3').val(),
-            remarks: $('#remarks').val(),
-            mobilePhone1: $('#mobilePhone1').val(),
-            mobilePhone2: $('#mobilePhone2').val(),
-            mobilePhone3: $('#mobilePhone3').val(),
-            homePhone1: $('#homePhone1').val(),
-            homePhone2: $('#homePhone2').val(),
-            homePhone3: $('#homePhone3').val(),
-            workPhone1: $('#workPhone1').val(),
-            workPhone2: $('#workPhone2').val(),
-            workPhone3: $('#workPhone3').val(),
-            currentAddress1: $('#currentAddress1').val(),
-            currentAddress2: $('#currentAddress2').val(),
-            currentAddress3: $('#currentAddress3').val()
-        });
-    },
     populate: function(el, i, self, customers) {
         var self2 = this;
         var id = (el)? +(el.target.id) : ((i)? i : 0);
@@ -65262,8 +65225,19 @@ module.exports = {
     },
     watchTransactionEvent: function(self) {
         console.log('Watching for transactions..');
-        web3.eth.filter('latest').watch(function(){
-            self.displayTransactions();
+        web3.eth.filter('latest').watch(function(error, result){
+            if (!error) {
+                console.log(result);
+                self.displayTransactions();
+            }
+        });
+    },
+    stopWatchTransactionEvent: function() {
+        console.log('Stopping watching for transactions..');
+        web3.eth.filter('latest').stopWatching(function(error, result){
+            if (!error) {
+                console.log('latest='+result);
+            }
         });
     },
     watchAddEvent: function(self) {
@@ -65280,9 +65254,14 @@ module.exports = {
                 $('.customer-added-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName.split('-')[0] + ' ' + lastName.split('-')[0] + ' ' + ' successfully created.');
                 $('.customer-added-alert').delay(notificationDelay).fadeOut();
             }
-            // addEvent.stopWatching();
             sessionStorage.setItem('blocks', result.blockNumber);
         });
+    },
+    stopWatchingAddEvent: function() {
+        console.log('Stopping watching for user add..');
+        this.web3Init();
+        var addEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceAddEvent();
+        addEvent.stopWatching();
     },
     watchUpdateEvent: function(self) {
         console.log('Watching for user updates..');
@@ -65298,9 +65277,14 @@ module.exports = {
                 $('.customer-updated-alert').html('Customer record ' + result.args.customerID.c[0] + ' ' + firstName.split('-')[0] + ' ' + lastName.split('-')[0] + ' ' + ' successfully overwritten.');
                 $('.customer-updated-alert').delay(notificationDelay).fadeOut();
             }
-            // updateEvent.stopWatching();
             sessionStorage.setItem('updateBlocks', result.blockNumber);
     	});
+    },
+    stopWatchingUpdateEvent: function() {
+        console.log('Stopping watching for user updates..');
+        this.web3Init();
+        var updateEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceUpdateEvent();
+        updateEvent.stopWatching();
     },
     getRecentUpdations: function(self) {
         var self2 = this;
@@ -65350,9 +65334,9 @@ module.exports = {
                             )
                         )
                     );
-                    self.setState({
-                        recentUpdations: recentUpdations
-                    });
+                });
+                self.setState({
+                    recentUpdations: recentUpdations
                 });
             }
         });
@@ -65362,9 +65346,9 @@ module.exports = {
 },{"../../../../variables":440,"./customers":437,"moment":159,"react":343,"react-router":199,"web3":368}],440:[function(require,module,exports){
 module.exports={
     port: '3000',
-    api:'http://192.168.101.200',
-    client: 'http://192.168.101.200',
-    provider: 'http://192.168.101.201',
+    api:'http://192.168.1.11',
+    client: 'http://192.168.1.11',
+    provider: 'http://192.168.1.10',
     totalRecentCustomers: 10,
     totalRecentTransactions: 15,
     SkipTraceContractAddress: "0x5af0669b0d83b52664847f41539b0b7954bea365",

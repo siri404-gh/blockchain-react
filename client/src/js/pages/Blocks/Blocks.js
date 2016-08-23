@@ -60,18 +60,9 @@ module.exports = React.createClass({
             }
         });
     },
-    componentDidMount: function() {
-        if(sessionStorage.logged) {
-            this.displayTransactions();
-            utils.watchTransactionEvent(this);
-        }
-    },
-    componentDidUpdate: function() {
-        $('.recent-transactions').hide();
-        $('.recent-transactions').fadeIn();
-    },
     render: function() {
-        return (<div>
+        return (
+            <div>
                 <NavBar logged={sessionStorage.getItem('logged')} bank={sessionStorage.getItem('username')}/>
                 <h3>Ethereum Blocks Browser</h3>
                 <div className='row middle-row'>
@@ -92,6 +83,22 @@ module.exports = React.createClass({
                     </div>
                 </div>
                 <Footer/>
-            </div>);
+            </div>
+        );
     },
+    componentDidMount: function() {
+        this.displayTransactions();
+        utils.watchTransactionEvent(this);
+        utils.watchAddEvent();
+        utils.watchUpdateEvent();
+    },
+    componentDidUpdate: function() {
+        $('.recent-transactions').hide();
+        $('.recent-transactions').fadeIn();
+    },
+    componentWillUnmount: function() {
+        utils.stopWatchTransactionEvent();
+        utils.stopWatchingAddEvent();
+        utils.stopWatchingUpdateEvent();
+    }
 });

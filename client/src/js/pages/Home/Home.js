@@ -5,7 +5,6 @@ var Panel = require('../../components/Panel/Panel');
 var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
 var moment = require('moment');
 var Link = require('react-router').Link;
-
 var forms = require('./forms');
 var utils = require('../../utils/utils');
 var users = require('../../utils/users');
@@ -25,56 +24,6 @@ module.exports = React.createClass({
                 transactions: []
             };
     },
-    render: function() {
-        var loginForm = forms.loginForm(this);
-        return  (this.state.logged)? (
-            <div>
-                <NavBar logged={sessionStorage.getItem('logged')} bank={sessionStorage.getItem('username')}/>
-                <h3>Home</h3>
-                <div className='row middle-row'>
-                    <PanelCollapse message="Consortium Efficiency – Reducing Numbers" target="chart1"/>
-                    <div id='chart1' className='dataTable collapse in'>
-                        <img className='chart' src='/images/chart_1.png'/>
-                    </div>
-                    <PanelCollapse message="Consortium Efficiency – Increasing Settlements" target="chart2"/>
-                    <div id='chart2' className='dataTable collapse'>
-                        <img className='chart' src='/images/chart_2.png'/>
-                    </div>
-                    <PanelCollapse message="Data sharing efficiency" target="chart4"/>
-                    <div id='chart4' className='dataTable collapse'>
-                        <img className='chart' src='/images/chart_2.png'/>
-                    </div>
-                    <PanelCollapse message="Portfolio Ageing" target="chart5"/>
-                    <div id='chart5' className='dataTable collapse'>
-                        <img className='chart' src='/images/chart_3.png'/>
-                    </div>
-                    <PanelCollapse message="Untraced Accounts Ageing" target="chart3"/>
-                    <div id='chart3' className='dataTable collapse'>
-                        <b>Percentage of Customers</b>
-                        <div id='pie'></div>
-                    </div>
-                </div>
-                <Footer/>
-            </div>
-        ) : (
-            <div>
-                <NavBar logged={sessionStorage.getItem('logged')} bank={sessionStorage.getItem('username')}/>
-                <h3>Home</h3>
-                <div className='row middle-row'>
-                    <Panel message={this.state.panelMessage} type={this.state.panelClass}/>
-                    <div className='row'>
-                        <div className='col-md-5'>
-                            <PanelCollapse target="login" message="Login"/>
-                            <div id='login'>
-                                {loginForm}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <Footer/>
-            </div>
-        );
-    },
     login: function() {
         var username = this.refs.un.value;
         var password = this.refs.pw.value;
@@ -90,7 +39,6 @@ module.exports = React.createClass({
                 sessionStorage.setItem('port', userInfo.port);
                 sessionStorage.setItem('blocks', 0);
                 sessionStorage.setItem('updateBlocks', 0);
-                utils.watchTransactionEvent(this);
                 utils.watchAddEvent();
                 utils.watchUpdateEvent();
                 this.setState({
@@ -111,24 +59,56 @@ module.exports = React.createClass({
             });
         }
     },
+    render: function() {
+        var loginForm = forms.loginForm(this);
+        var renderer = [];
+        if(this.state.logged) {
+            renderer.push(
+                <div className='row middle-row' key="1">
+                    <PanelCollapse message="Collection Efficiency" target="chart1"/>
+                    <div id='chart1' className='dataTable chartDiv collapse in'></div>
+                    <PanelCollapse message="Consortium Efficiency" target="chart2"/>
+                    <div id='chart2' className='dataTable chartDiv collapse'></div>
+                    <PanelCollapse message="Collaboration Efficiency" target="chart3"/>
+                    <div id='chart3' className='dataTable chartDiv collapse'></div>
+                    <PanelCollapse message="Portfolio Ageing" target="chart4"/>
+                    <div id='chart4' className='dataTable chartDiv collapse'></div>
+                    <PanelCollapse message="Portfolio Age tracker" target="chart5"/>
+                    <div id='chart5' className='dataTable chartDiv collapse'></div>
+                </div>
+            );
+        } else {
+            renderer.push(
+                <div className='row middle-row' key="1">
+                    <Panel message={this.state.panelMessage} type={this.state.panelClass}/>
+                    <div className='row'>
+                        <div className='col-md-5'>
+                            <PanelCollapse target="login" message="Login"/>
+                            <div id='login'>
+                                {loginForm}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        return  (
+            <div>
+                <NavBar logged={sessionStorage.getItem('logged')} bank={sessionStorage.getItem('username')}/>
+                <h3>Home</h3>
+                    {renderer}
+                <Footer/>
+            </div>
+        );
+    },
     componentDidMount: function() {
-        var chartData=[
-        	{label:"Plus", color:"#DC3912", value: 6},
-        	{label:"Lite", color:"#FF9900", value: 2},
-        	{label:"Elite", color:"#109618", value: 2},
-        ];
-        var chartFunc = function(data){
-            return data.map(function(d){
-                return {label:d.label, value:d.value, color:d.color};
-            });
-        };
-        var svg = d3.select("#pie").append("svg").attr("width", 300).attr("height",300);
-        svg.append("g").attr("id","chartPie");
-        Donut3D.draw("chartPie", chartFunc(chartData), 150, 150, 130, 100, 30, 0.4);
-        if(sessionStorage.getItem('logged')) {
-            utils.watchTransactionEvent(this);
+        if(this.state.logged) {
             utils.watchAddEvent();
             utils.watchUpdateEvent();
         }
+    },
+    componentWillUnmount() {
+        utils.stopWatchingAddEvent();
+        utils.stopWatchingUpdateEvent();
     }
 });

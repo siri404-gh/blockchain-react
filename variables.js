@@ -1,8 +1,8 @@
 module.exports={
     port: '3000',
-    api:'http://192.168.101.200',
-    client: 'http://192.168.101.200',
-    provider: 'http://192.168.101.201',
+    api:'http://192.168.1.11',
+    client: 'http://192.168.1.11',
+    provider: 'http://192.168.1.10',
     totalRecentCustomers: 10,
     totalRecentTransactions: 15,
     SkipTraceContractAddress: "0x5af0669b0d83b52664847f41539b0b7954bea365",

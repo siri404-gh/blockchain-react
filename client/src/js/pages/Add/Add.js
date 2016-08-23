@@ -26,16 +26,10 @@ module.exports = React.createClass({
             </div>
         )
     },
-    componentDidMount: function() {
-        var customers = utils.dummyCustomers;
-        var rand = Math.floor((Math.random() * 10) + 1);
-        utils.populate(null, rand-1, this, customers);
-        $("form input[type='text']").each(function() {
-            $(this).attr('placeholder', $(this).attr('id'));
-        });
-    },
     append: function() {
-        utils.append(this);
+        var state = this.state;
+        state[el.target.id] = el.target.value;
+        this.setState(state);
     },
     saveToDB: function(ev) {
         ev.preventDefault();
@@ -48,4 +42,18 @@ module.exports = React.createClass({
             }, 250);
         }
     },
+    componentDidMount: function() {
+        var customers = utils.dummyCustomers;
+        var rand = Math.floor((Math.random() * 10) + 1);
+        utils.populate(null, rand-1, this, customers);
+        $("form input[type='text']").each(function() {
+            $(this).attr('placeholder', $(this).attr('id'));
+        });
+        utils.watchAddEvent();
+        utils.watchUpdateEvent();
+    },
+    componentWillUnmount: function() {
+        utils.stopWatchingAddEvent();
+        utils.stopWatchingUpdateEvent();
+    }
 });
