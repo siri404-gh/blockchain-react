@@ -3,6 +3,7 @@ var NavBar = require('../../components/Navbar/Navbar');
 var Footer = require('../../components/Footer/Footer');
 var Panel = require('../../components/Panel/Panel');
 var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
+var Searchbar = require('../../components/Searchbar/Searchbar');
 var moment = require('moment');
 var utils = require('../../utils/utils');
 var forms = require('./forms');
@@ -19,9 +20,8 @@ module.exports = React.createClass({
             }, 250);
         }
     },
-    formSubmit: function(ev) {
-        ev.preventDefault();
-        utils.search(this);
+    formSubmit: function(val) {
+        this.populate(null, val);
     },
     append: function() {
         utils.append(this);
@@ -44,7 +44,6 @@ module.exports = React.createClass({
     },
     render: function() {
         var updateForm = forms.updateForm(this);
-        var searchForm = forms.searchForm(this);
         return (this.state.show)? (
             <div>
                 <NavBar logged={sessionStorage.getItem('logged')} bank={sessionStorage.getItem('username')}/>
@@ -52,7 +51,7 @@ module.exports = React.createClass({
                 <div className='row middle-row'>
                     <div className='col-md-10'>
                         <Panel message={panelMessage} type="warning"/>
-                        {searchForm}
+                        <Searchbar formSubmit={this.formSubmit}/>
                         <PanelCollapse message="Recently updated customers" target="recent"/>
                         <div id='recent' className='dataTable collapse in'>
                             {this.state.recentUpdations}
@@ -71,7 +70,7 @@ module.exports = React.createClass({
                 <div className='row middle-row'>
                     <div className='col-md-10'>
                         <Panel message={panelMessage} type="warning"/>
-                        {searchForm}
+                        <Searchbar formSubmit={this.formSubmit}/>
                         <PanelCollapse message="Recently updated customers" target="recent"/>
                         <div id='recent' className='recent-updations dataTable collapse in'>
                             {this.state.recentUpdations}

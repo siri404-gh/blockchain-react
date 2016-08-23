@@ -62872,7 +62872,7 @@ Router.run(routes, Router.HistoryLocation, function(Root){
     ReactDOM.render(React.createElement(Root, null), document.getElementById('app-container'));
 });
 
-},{"./routes.js":435,"react":343,"react-dom":174,"react-router":199}],418:[function(require,module,exports){
+},{"./routes.js":436,"react":343,"react-dom":174,"react-router":199}],418:[function(require,module,exports){
 var React = require('react');
 module.exports = React.createClass({displayName: "exports",
     render: function() {
@@ -63005,6 +63005,37 @@ module.exports = React.createClass({displayName: "exports",
 
 },{"react":343}],423:[function(require,module,exports){
 var React = require('react');
+var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
+module.exports = React.createClass({displayName: "exports",
+    formSubmit: function(ev) {
+        ev.preventDefault();
+        var value = this.refs.search.value;
+        this.refs.search.value = '';
+        this.props.formSubmit(value);
+    },
+    render: function() {
+        return (
+            React.createElement("form", {role: "form", onSubmit: this.formSubmit, key: Math.random()}, 
+                React.createElement(PanelCollapse, {message: "Search", target: "search"}), 
+                React.createElement("div", {id: "search", className: "collapse in"}, 
+                    React.createElement("div", {className: "row"}, 
+                        React.createElement("div", {className: "form-group col-md-6"}, 
+                            React.createElement("div", {className: "input-group"}, 
+                                React.createElement("input", {type: "text", className: "form-control", placeholder: "Search by Customer Id", ref: "search"}), 
+                                React.createElement("span", {className: "input-group-btn"}, 
+                                    React.createElement("button", {className: "btn btn-default", type: "button", onClick: this.formSubmit}, React.createElement("span", {className: "glyphicon glyphicon-search"}))
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    }
+});
+
+},{"../../components/PanelCollapse/PanelCollapse":421,"react":343}],424:[function(require,module,exports){
+var React = require('react');
 var NavBar = require('../../components/Navbar/Navbar');
 var Footer = require('../../components/Footer/Footer');
 var Panel = require('../../components/Panel/Panel');
@@ -63056,7 +63087,7 @@ module.exports = React.createClass({displayName: "exports",
     },
 });
 
-},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../utils/utils":438,"./forms":424,"moment":159,"react":343}],424:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../utils/utils":439,"./forms":425,"moment":159,"react":343}],425:[function(require,module,exports){
 var React = require('react');
 var Panel = require('../../components/Panel/Panel');
 var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
@@ -63342,7 +63373,7 @@ module.exports = {
     }
 }
 
-},{"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Populator/Populator":422,"react":343}],425:[function(require,module,exports){
+},{"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Populator/Populator":422,"react":343}],426:[function(require,module,exports){
 var React = require('react');
 var NavBar = require('../../components/Navbar/Navbar');
 var Footer = require('../../components/Footer/Footer');
@@ -63490,7 +63521,7 @@ module.exports = React.createClass({displayName: "exports",
     }
 });
 
-},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/utils":438,"react":343}],426:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/utils":439,"react":343}],427:[function(require,module,exports){
 var React = require('react');
 var NavBar = require('../../components/Navbar/Navbar');
 var Footer = require('../../components/Footer/Footer');
@@ -63589,7 +63620,7 @@ module.exports = React.createClass({displayName: "exports",
     },
 });
 
-},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/utils":438,"moment":159,"react":343,"react-router":199}],427:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/utils":439,"moment":159,"react":343,"react-router":199}],428:[function(require,module,exports){
 var React = require('react');
 var NavBar = require('../../components/Navbar/Navbar');
 var Footer = require('../../components/Footer/Footer');
@@ -63725,7 +63756,7 @@ module.exports = React.createClass({displayName: "exports",
     }
 });
 
-},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/users":437,"../../utils/utils":438,"./forms":428,"moment":159,"react":343,"react-router":199}],428:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/users":438,"../../utils/utils":439,"./forms":429,"moment":159,"react":343,"react-router":199}],429:[function(require,module,exports){
 var React = require('react');
 var Panel = require('../../components/Panel/Panel');
 var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
@@ -63751,7 +63782,7 @@ module.exports = {
     }
 }
 
-},{"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Populator/Populator":422,"react":343}],429:[function(require,module,exports){
+},{"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Populator/Populator":422,"react":343}],430:[function(require,module,exports){
 var React = require('react');
 var NavBar = require('../../components/Navbar/Navbar');
 
@@ -63771,7 +63802,7 @@ var Home = React.createClass({displayName: "Home",
 
 module.exports = Home;
 
-},{"../../components/Navbar/Navbar":419,"react":343}],430:[function(require,module,exports){
+},{"../../components/Navbar/Navbar":419,"react":343}],431:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 
@@ -63789,12 +63820,13 @@ var Master = React.createClass({displayName: "Master",
 
 module.exports = Master;
 
-},{"react":343,"react-router":199}],431:[function(require,module,exports){
+},{"react":343,"react-router":199}],432:[function(require,module,exports){
 var React = require('react');
 var NavBar = require('../../components/Navbar/Navbar');
 var Footer = require('../../components/Footer/Footer');
 var Panel = require('../../components/Panel/Panel');
 var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
+var Searchbar = require('../../components/Searchbar/Searchbar');
 var moment = require('moment');
 var utils = require('../../utils/utils');
 var forms = require('./forms');
@@ -63811,9 +63843,8 @@ module.exports = React.createClass({displayName: "exports",
             }, 250);
         }
     },
-    formSubmit: function(ev) {
-        ev.preventDefault();
-        utils.search(this);
+    formSubmit: function(val) {
+        this.populate(null, val);
     },
     append: function() {
         utils.append(this);
@@ -63836,7 +63867,6 @@ module.exports = React.createClass({displayName: "exports",
     },
     render: function() {
         var updateForm = forms.updateForm(this);
-        var searchForm = forms.searchForm(this);
         return (this.state.show)? (
             React.createElement("div", null, 
                 React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
@@ -63844,7 +63874,7 @@ module.exports = React.createClass({displayName: "exports",
                 React.createElement("div", {className: "row middle-row"}, 
                     React.createElement("div", {className: "col-md-10"}, 
                         React.createElement(Panel, {message: panelMessage, type: "warning"}), 
-                        searchForm, 
+                        React.createElement(Searchbar, {formSubmit: this.formSubmit}), 
                         React.createElement(PanelCollapse, {message: "Recently updated customers", target: "recent"}), 
                         React.createElement("div", {id: "recent", className: "dataTable collapse in"}, 
                             this.state.recentUpdations
@@ -63863,7 +63893,7 @@ module.exports = React.createClass({displayName: "exports",
                 React.createElement("div", {className: "row middle-row"}, 
                     React.createElement("div", {className: "col-md-10"}, 
                         React.createElement(Panel, {message: panelMessage, type: "warning"}), 
-                        searchForm, 
+                        React.createElement(Searchbar, {formSubmit: this.formSubmit}), 
                         React.createElement(PanelCollapse, {message: "Recently updated customers", target: "recent"}), 
                         React.createElement("div", {id: "recent", className: "recent-updations dataTable collapse in"}, 
                             this.state.recentUpdations
@@ -63883,7 +63913,7 @@ module.exports = React.createClass({displayName: "exports",
     }
 });
 
-},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/utils":438,"./forms":432,"moment":159,"react":343}],432:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Searchbar/Searchbar":423,"../../utils/utils":439,"./forms":433,"moment":159,"react":343}],433:[function(require,module,exports){
 var React = require('react');
 var Panel = require('../../components/Panel/Panel');
 var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
@@ -64211,12 +64241,13 @@ module.exports = {
     }
 };
 
-},{"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Populator/Populator":422,"moment":159,"react":343}],433:[function(require,module,exports){
+},{"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Populator/Populator":422,"moment":159,"react":343}],434:[function(require,module,exports){
 var React = require('react');
 var NavBar = require('../../components/Navbar/Navbar');
 var Footer = require('../../components/Footer/Footer');
 var Panel = require('../../components/Panel/Panel');
 var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
+var Searchbar = require('../../components/Searchbar/Searchbar');
 var utils = require('../../utils/utils');
 var forms = require('./forms');
 var moment = require('moment');
@@ -64233,13 +64264,11 @@ module.exports = React.createClass({displayName: "exports",
             }, 250);
         }
     },
-    formSubmit: function(ev) {
-        ev.preventDefault();
-        utils.search(this);
+    formSubmit: function(val) {
+        this.populate(null, val);
     },
     render: function() {
         var viewForm = forms.viewForm(this);
-        var searchForm = forms.searchForm(this);
         return (this.state.show) ? (
             React.createElement("div", null, 
                 React.createElement("div", {id: "override-modal", className: "modal fade", role: "dialog"}, 
@@ -64257,7 +64286,7 @@ module.exports = React.createClass({displayName: "exports",
                 React.createElement("div", {className: "row middle-row"}, 
                     React.createElement("div", {className: "col-md-10"}, 
                         React.createElement(Panel, {message: panelMessage, type: "warning"}), 
-                        searchForm, 
+                        React.createElement(Searchbar, {formSubmit: this.formSubmit}), 
                         React.createElement(PanelCollapse, {message: "Recently updated customers", target: "recent"}), 
                         React.createElement("div", {id: "recent", className: "dataTable collapse in"}, 
                             this.state.recentUpdations
@@ -64275,7 +64304,7 @@ module.exports = React.createClass({displayName: "exports",
                 React.createElement("div", {className: "row middle-row"}, 
                     React.createElement("div", {className: "col-md-10"}, 
                         React.createElement(Panel, {message: panelMessage, type: "warning"}), 
-                        searchForm, 
+                        React.createElement(Searchbar, {formSubmit: this.formSubmit}), 
                         React.createElement(PanelCollapse, {message: "Recently updated customers", target: "recent"}), 
                         React.createElement("div", {id: "recent", className: "recent-updations dataTable collapse in"}, 
                             this.state.recentUpdations
@@ -64295,7 +64324,7 @@ module.exports = React.createClass({displayName: "exports",
     }
 });
 
-},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../utils/utils":438,"./forms":434,"moment":159,"react":343}],434:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Searchbar/Searchbar":423,"../../utils/utils":439,"./forms":435,"moment":159,"react":343}],435:[function(require,module,exports){
 var React = require('react');
 var Panel = require('../../components/Panel/Panel');
 var PanelCollapse = require('../../components/PanelCollapse/PanelCollapse');
@@ -64616,7 +64645,7 @@ module.exports = {
     }
 };
 
-},{"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Populator/Populator":422,"moment":159,"react":343}],435:[function(require,module,exports){
+},{"../../components/Panel/Panel":420,"../../components/PanelCollapse/PanelCollapse":421,"../../components/Populator/Populator":422,"moment":159,"react":343}],436:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var Route = Router.Route;
@@ -64647,7 +64676,7 @@ module.exports = (
     )
 );
 
-},{"./pages/Add/Add":423,"./pages/Block/Block":425,"./pages/Blocks/Blocks":426,"./pages/Home/Home":427,"./pages/Logout/Logout":429,"./pages/Master/Master":430,"./pages/Update/Update":431,"./pages/View/View":433,"react":343,"react-router":199}],436:[function(require,module,exports){
+},{"./pages/Add/Add":424,"./pages/Block/Block":426,"./pages/Blocks/Blocks":427,"./pages/Home/Home":428,"./pages/Logout/Logout":430,"./pages/Master/Master":431,"./pages/Update/Update":432,"./pages/View/View":434,"react":343,"react-router":199}],437:[function(require,module,exports){
 module.exports = [{
 	"firstName": "Test1-name2-name3",
 	"middleName": "Stupper",
@@ -64930,7 +64959,7 @@ module.exports = [{
     "timestamp":"1470714859"
 }];
 
-},{}],437:[function(require,module,exports){
+},{}],438:[function(require,module,exports){
 module.exports = [
     {
         username: 'ibank',
@@ -64952,7 +64981,7 @@ module.exports = [
     }
 ];
 
-},{}],438:[function(require,module,exports){
+},{}],439:[function(require,module,exports){
 /**
  * @page lib/faq FAQ
  * @parent lib
@@ -65137,11 +65166,6 @@ module.exports = {
             });
         }
             return true;
-    },
-    search: function(self) {
-        var searchTerm = self.refs.search.value.toLowerCase();
-        self.refs.search.value = '';
-        self.populate(null, searchTerm);
     },
     addSkipTraceRecordOnChain: function (firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks) {
         var transHash;
@@ -65335,7 +65359,7 @@ module.exports = {
     }
 };
 
-},{"../../../../variables":439,"./customers":436,"moment":159,"react":343,"react-router":199,"web3":368}],439:[function(require,module,exports){
+},{"../../../../variables":440,"./customers":437,"moment":159,"react":343,"react-router":199,"web3":368}],440:[function(require,module,exports){
 module.exports={
     port: '3000',
     api:'http://192.168.101.200',

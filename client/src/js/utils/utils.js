@@ -183,11 +183,6 @@ module.exports = {
         }
             return true;
     },
-    search: function(self) {
-        var searchTerm = self.refs.search.value.toLowerCase();
-        self.refs.search.value = '';
-        self.populate(null, searchTerm);
-    },
     addSkipTraceRecordOnChain: function (firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks) {
         var transHash;
         var self = this;
