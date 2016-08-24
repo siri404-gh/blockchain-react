@@ -16,11 +16,11 @@ module.exports = {
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">First Name 2</label>
-                            <input type="text" className="form-control"  id="firstName2" value={self.state.firstName2} onChange={self.append} required/>
+                            <input type="text" className="form-control"  id="firstName2" value={self.state.firstName2} onChange={self.append} />
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">First Name 3</label>
-                            <input type="text" className="form-control"  id="firstName3" value={self.state.firstName3} onChange={self.append} required/>
+                            <input type="text" className="form-control"  id="firstName3" value={self.state.firstName3} onChange={self.append} />
                         </div>
                     </div>
                     <div className='row'>
@@ -30,11 +30,11 @@ module.exports = {
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">Last Name 2</label>
-                            <input type="text" className="form-control"  id="lastName2" value={self.state.lastName2} onChange={self.append} required/>
+                            <input type="text" className="form-control"  id="lastName2" value={self.state.lastName2} onChange={self.append} />
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">Last Name 3</label>
-                            <input type="text" className="form-control"  id="lastName3" value={self.state.lastName3} onChange={self.append} required/>
+                            <input type="text" className="form-control"  id="lastName3" value={self.state.lastName3} onChange={self.append} />
                         </div>
                     </div>
                     <div className='row'>
@@ -60,11 +60,11 @@ module.exports = {
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">SSN Number 2</label>
-                            <input type="text" className="form-control"  id="ssn2" value={self.state.ssn2} onChange={self.append} required/>
+                            <input type="text" className="form-control"  id="ssn2" value={self.state.ssn2} onChange={self.append} />
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">SSN Number 3</label>
-                            <input type="text" className="form-control"  id="ssn3" value={self.state.ssn3} onChange={self.append} required/>
+                            <input type="text" className="form-control"  id="ssn3" value={self.state.ssn3} onChange={self.append} />
                         </div>
                     </div>
                     <div className='row'>

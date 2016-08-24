@@ -63149,11 +63149,11 @@ module.exports = {
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "First Name 2"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "firstName2", value: self.state.firstName2, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "firstName2", value: self.state.firstName2, onChange: self.append})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "First Name 3"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "firstName3", value: self.state.firstName3, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "firstName3", value: self.state.firstName3, onChange: self.append})
                         )
                     ), 
                     React.createElement("div", {className: "row"}, 
@@ -63163,11 +63163,11 @@ module.exports = {
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "Last Name 2"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "lastName2", value: self.state.lastName2, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "lastName2", value: self.state.lastName2, onChange: self.append})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "Last Name 3"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "lastName3", value: self.state.lastName3, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "lastName3", value: self.state.lastName3, onChange: self.append})
                         )
                     ), 
                     React.createElement("div", {className: "row"}, 
@@ -63193,11 +63193,11 @@ module.exports = {
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "SSN Number 2"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "ssn2", value: self.state.ssn2, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "ssn2", value: self.state.ssn2, onChange: self.append})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "SSN Number 3"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "ssn3", value: self.state.ssn3, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "ssn3", value: self.state.ssn3, onChange: self.append})
                         )
                     ), 
                     React.createElement("div", {className: "row"}, 
@@ -63995,11 +63995,11 @@ module.exports = {
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "First Name 2"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "firstName2", value: self.state.firstName2, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "firstName2", value: self.state.firstName2, onChange: self.append})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "First Name 3"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "firstName3", value: self.state.firstName3, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "firstName3", value: self.state.firstName3, onChange: self.append})
                         )
                     ), 
                     React.createElement("div", {className: "row"}, 
@@ -64009,11 +64009,11 @@ module.exports = {
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "Last Name 2"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "lastName2", value: self.state.lastName2, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "lastName2", value: self.state.lastName2, onChange: self.append})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "Last Name 3"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "lastName3", value: self.state.lastName3, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "lastName3", value: self.state.lastName3, onChange: self.append})
                         )
                     ), 
                     React.createElement("div", {className: "row"}, 
@@ -64039,11 +64039,11 @@ module.exports = {
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "SSN Number 2"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "ssn2", value: self.state.ssn2, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "ssn2", value: self.state.ssn2, onChange: self.append})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "SSN Number"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "ssn3", value: self.state.ssn3, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "ssn3", value: self.state.ssn3, onChange: self.append})
                         )
                     ), 
                     React.createElement("div", {className: "row"}, 
@@ -64209,7 +64209,7 @@ module.exports = {
                     React.createElement(Panel, {message: "Address 2", type: "info"}), 
                     React.createElement("div", {className: "row"}, 
                         React.createElement("div", {className: "form-group col-md-12"}, 
-                            React.createElement("input", {type: "text", className: "form-control", id: "currentAddress2", value: self.state.currentAddress2, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "currentAddress2", value: self.state.currentAddress2, onChange: self.append})
                         )
                         /*<div className="form-group col-md-4">
                             <label htmlFor="">Line 2 </label>
@@ -64223,7 +64223,7 @@ module.exports = {
                     React.createElement(Panel, {message: "Address 3", type: "info"}), 
                     React.createElement("div", {className: "row"}, 
                         React.createElement("div", {className: "form-group col-md-12"}, 
-                            React.createElement("input", {type: "text", className: "form-control", id: "currentAddress3", value: self.state.currentAddress3, onChange: self.append, required: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "currentAddress3", value: self.state.currentAddress3, onChange: self.append})
                         )
                         /*<div className="form-group col-md-4">
                             <label htmlFor="">Line 2 </label>
@@ -65399,14 +65399,14 @@ module.exports = {
 },{"../../../../variables":441,"./customers":438,"moment":159,"react":343,"react-router":199,"web3":368}],441:[function(require,module,exports){
 module.exports={
     port: '3000',
-    api:'http://sree-ubuntu',
-    client: 'http://sree-ubuntu',
-    provider: 'http://192.168.1.10',
+    api:'http://sree-ubuntu',               // ip address (or hostname) of the api (is usually the same as the client)
+    client: 'http://sree-ubuntu',           // ip address (or hostname) of the client
+    provider: 'http://192.168.1.10',    // ip address (or hostname) of the blockchain server
     totalRecentCustomers: 10,
     totalRecentTransactions: 15,
+    notificationDelay: 7000,
     SkipTraceContractAddress: "0x5af0669b0d83b52664847f41539b0b7954bea365",
     SkipTraceContractSequence: "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() { SkipTraceRecordCountEvent(sequenceNo); } }",
-    notificationDelay: 7000,
     updatePanelMessage: "Search for the user to update using the searchbar. You may search by Customer Id. You could also select a user to update from the recently updated list shown below.",
     viewPanelMessage: "Search for users using the searchbar. You may search by Customer Id. You could also select a user from the recently updated list shown below.",
     homePanelMessage: "",
