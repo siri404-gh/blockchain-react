@@ -26,7 +26,7 @@ module.exports = React.createClass({
             </div>
         )
     },
-    append: function() {
+    append: function(el) {
         var state = this.state;
         state[el.target.id] = el.target.value;
         this.setState(state);

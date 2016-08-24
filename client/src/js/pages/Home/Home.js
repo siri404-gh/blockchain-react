@@ -65,7 +65,11 @@ module.exports = React.createClass({
         if(this.state.logged) {
             renderer.push(
                 <div className='row middle-row' key="1">
-                    <Panel message="Welcome to the Skip trace Consortium<br/>- Powered by Blockchain" type="success"/>
+                    {/*<Panel message="Welcome to the Skip trace Consortium<br/>- Powered by Blockchain" type="info" size="big"/>*/}
+                    <div className="jumbotron">
+                        <h1>Welcome to the Skip trace Consortium</h1><br/><br/><br/>
+                        <p className='pull-right'>- Powered by Blockchain</p>
+                    </div>
                 </div>
             );
         } else {

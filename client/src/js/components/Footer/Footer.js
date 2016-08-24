@@ -3,9 +3,7 @@ module.exports = React.createClass({
     render: function() {
         return (
             <footer className="footer">
-              <div className="container">
-                <p className="text-muted"></p>
-              </div>
+                <p>&copy; 2016 | All Rights Reserved | Skiptrace Consortium</p>
             </footer>
         );
     }

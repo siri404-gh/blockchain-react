@@ -6,7 +6,7 @@
   "scripts": {
     "docs": "./node_modules/.bin/documentjs",
     "start": "nodemon api",
-    "test": "mocha"
+    "test": "mocha __tests__"
   },
   "author": "Sreeram Padmanabhan",
   "license": "ISC",

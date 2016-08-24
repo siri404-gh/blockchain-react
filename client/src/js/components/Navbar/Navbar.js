@@ -33,7 +33,7 @@ module.exports = React.createClass({
                             <span className="icon-bar"></span>
                           </button>
                           <a className="navbar-brand" href="/"><img className='brand-img' src={'/images/'+bankName+'.png'}/></a>
-                          <a className="navbar-brand" href="#">{[brandName.slice(0,1), '-', brandName.slice(1,2).toUpperCase(), brandName.slice(2, brandName.length)].join('')}</a>
+                          <a className="navbar-brand" href="#">{(brandName !== 'Skiptrace') ? [brandName.slice(0,1), '-', brandName.slice(1,2).toUpperCase(), brandName.slice(2, brandName.length)].join('') : brandName}</a>
                         </div>
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             {links}

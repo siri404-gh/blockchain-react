@@ -109,7 +109,7 @@ module.exports = {
                     </div>
                     <div className='row'>
                         <div className="form-group col-md-4">
-                            <label htmlFor="">Collection Status</label>
+                            <label htmlFor="">Collection Successful</label>
                             {/*<input type="text" className="form-control"  id="" value={self.state.productName3} disabled/>*/}
                             <select className='form-control' value={self.state.productName3} disabled>
                                 <option value='1'>Yes</option>

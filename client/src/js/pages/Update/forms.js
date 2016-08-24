@@ -107,7 +107,7 @@ module.exports = {
                             <input type="text" className="form-control"  id="productName2" value={self.state.productName2} onChange={self.append}/>
                         </div>
                         <div className="form-group col-md-4">
-                        <label htmlFor="">Collection Status</label>
+                        <label htmlFor="">Collection Successful</label>
                             <select className='form-control'  id="productName3" value={self.state.productName3} onChange={self.append}>
                                 <option value='1'>Yes</option>
                                 <option value='0'>No</option>

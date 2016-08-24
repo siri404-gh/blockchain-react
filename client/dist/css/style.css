@@ -150,10 +150,11 @@ svg text.percent {
 }
 .footer {
   bottom: 0;
-  width: 100%;
-  height: 60px;
-  margin-top: 20px;
-  display: none;
+  margin: auto;
+  border-top: solid 1px #e4e4e4;
+  padding: 10px;
+  text-align: right;
+  font-size: 12px;
 }
 .chartDiv {
   width: 100%;
@@ -177,6 +178,16 @@ svg text.percent {
 #chart5 {
   background-image: url('/images/chart_5.png');
 }
-.panel-success {
+@media screen and (min-width: 768px) {
+  .jumbotron .h1,
+  .jumbotron h1 {
+    font-size: 45px;
+  }
+}
+.jumbotron {
+  margin-bottom: 0px;
+}
+.jumbotron .h1,
+.jumbotron h1 {
   text-align: center;
 }

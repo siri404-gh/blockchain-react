@@ -62,8 +62,8 @@ module.exports = React.createClass({
         utils.watchUpdateEvent();
     },
     componentDidUpdate: function() {
-        $('.recent-updations').hide();
-        $('.recent-updations').fadeIn();
+        // $('.recent-updations').hide();
+        // $('.recent-updations').fadeIn();
     },
     componentWillUnmount: function() {
         utils.stopWatchingAddEvent();

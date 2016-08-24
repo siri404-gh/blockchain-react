@@ -65,7 +65,7 @@ describe("Testing API response for getting a single user's details", function(er
                     throw err;
                 }
                 var response = JSON.parse(res.text);
-                response.firstName.should.be.equal('Allen-A-B');
+                response.firstName.should.be.equal('Allen-Alen-Alan');
                 done();
             });
     });

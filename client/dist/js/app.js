@@ -62878,9 +62878,7 @@ module.exports = React.createClass({displayName: "exports",
     render: function() {
         return (
             React.createElement("footer", {className: "footer"}, 
-              React.createElement("div", {className: "container"}, 
-                React.createElement("p", {className: "text-muted"})
-              )
+                React.createElement("p", null, "© 2016 | All Rights Reserved | Skiptrace Consortium")
             )
         );
     }
@@ -62922,7 +62920,7 @@ module.exports = React.createClass({displayName: "exports",
                             React.createElement("span", {className: "icon-bar"})
                           ), 
                           React.createElement("a", {className: "navbar-brand", href: "/"}, React.createElement("img", {className: "brand-img", src: '/images/'+bankName+'.png'})), 
-                          React.createElement("a", {className: "navbar-brand", href: "#"}, [brandName.slice(0,1), '-', brandName.slice(1,2).toUpperCase(), brandName.slice(2, brandName.length)].join(''))
+                          React.createElement("a", {className: "navbar-brand", href: "#"}, (brandName !== 'Skiptrace') ? [brandName.slice(0,1), '-', brandName.slice(1,2).toUpperCase(), brandName.slice(2, brandName.length)].join('') : brandName)
                         ), 
                         React.createElement("div", {className: "collapse navbar-collapse", id: "bs-example-navbar-collapse-1"}, 
                             links
@@ -62948,14 +62946,34 @@ module.exports = React.createClass({displayName: "exports",
             var message = this.props.message;
             var messageArray = message.split('<br/>');
             messageArray.forEach(function(message, i) {
-                if (i==0) {
-                    panelMessageRender.push(
-                        React.createElement("span", {key: Math.random()}, message)
-                    );
-                } else {
-                    panelMessageRender.push(
-                        React.createElement("div", {key: Math.random()}, message)
-                    );
+                if(message) {
+                    if (i==0) {
+                        panelMessageRender.push(
+                            React.createElement("span", {key: Math.random()}, message)
+                        );
+                    } else {
+                        panelMessageRender.push(
+                            React.createElement("div", {key: Math.random()}, message)
+                        );
+                    }
+                }
+            });
+        }
+        if (this.props.size == "big") {
+            panelMessageRender = [];
+            message = this.props.message;
+            messageArray = message.split('<br/>');
+            messageArray.forEach(function(message, i) {
+                if(message) {
+                    if (i==0) {
+                        panelMessageRender.push(
+                            React.createElement("span", {key: Math.random()}, React.createElement("h2", null, message))
+                        );
+                    } else {
+                        panelMessageRender.push(
+                            React.createElement("div", {className: "align-right", key: Math.random()}, React.createElement("h2", null, message))
+                        );
+                    }
                 }
             });
         }
@@ -63080,7 +63098,7 @@ module.exports = React.createClass({displayName: "exports",
             )
         )
     },
-    append: function() {
+    append: function(el) {
         var state = this.state;
         state[el.target.id] = el.target.value;
         this.setState(state);
@@ -63223,7 +63241,7 @@ module.exports = {
                     ), 
                     React.createElement("div", {className: "row"}, 
                         React.createElement("div", {className: "form-group col-md-4"}, 
-                            React.createElement("label", {htmlFor: ""}, "Collection Status"), 
+                            React.createElement("label", {htmlFor: ""}, "Collection Successful"), 
                             React.createElement("select", {className: "form-control", id: "productName3", value: self.state.productName3, onChange: self.append}, 
                                 React.createElement("option", {value: "1"}, "Yes"), 
                                 React.createElement("option", {value: "0"}, "No")
@@ -63723,7 +63741,11 @@ module.exports = React.createClass({displayName: "exports",
         if(this.state.logged) {
             renderer.push(
                 React.createElement("div", {className: "row middle-row", key: "1"}, 
-                    React.createElement(Panel, {message: "Welcome to the Skip trace Consortium<br/>- Powered by Blockchain", type: "success"})
+                    /*<Panel message="Welcome to the Skip trace Consortium<br/>- Powered by Blockchain" type="info" size="big"/>*/
+                    React.createElement("div", {className: "jumbotron"}, 
+                        React.createElement("h1", null, "Welcome to the Skip trace Consortium"), React.createElement("br", null), React.createElement("br", null), React.createElement("br", null), 
+                        React.createElement("p", {className: "pull-right"}, "- Powered by Blockchain")
+                    )
                 )
             );
         } else {
@@ -63941,8 +63963,8 @@ module.exports = React.createClass({displayName: "exports",
         utils.watchUpdateEvent();
     },
     componentDidUpdate: function() {
-        $('.recent-updations').hide();
-        $('.recent-updations').fadeIn();
+        // $('.recent-updations').hide();
+        // $('.recent-updations').fadeIn();
     },
     componentWillUnmount: function() {
         this.setState({
@@ -64063,7 +64085,7 @@ module.exports = {
                             React.createElement("input", {type: "text", className: "form-control", id: "productName2", value: self.state.productName2, onChange: self.append})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
-                        React.createElement("label", {htmlFor: ""}, "Collection Status"), 
+                        React.createElement("label", {htmlFor: ""}, "Collection Successful"), 
                             React.createElement("select", {className: "form-control", id: "productName3", value: self.state.productName3, onChange: self.append}, 
                                 React.createElement("option", {value: "1"}, "Yes"), 
                                 React.createElement("option", {value: "0"}, "No")
@@ -64346,8 +64368,8 @@ module.exports = React.createClass({displayName: "exports",
         utils.watchUpdateEvent();
     },
     componentDidUpdate: function() {
-        $('.recent-updations').hide();
-        $('.recent-updations').fadeIn();
+        // $('.recent-updations').hide();
+        // $('.recent-updations').fadeIn();
     },
     componentWillUnmount: function() {
         utils.stopWatchingAddEvent();
@@ -64467,7 +64489,7 @@ module.exports = {
                     ), 
                     React.createElement("div", {className: "row"}, 
                         React.createElement("div", {className: "form-group col-md-4"}, 
-                            React.createElement("label", {htmlFor: ""}, "Collection Status"), 
+                            React.createElement("label", {htmlFor: ""}, "Collection Successful"), 
                             /*<input type="text" className="form-control"  id="" value={self.state.productName3} disabled/>*/
                             React.createElement("select", {className: "form-control", value: self.state.productName3, disabled: true}, 
                                 React.createElement("option", {value: "1"}, "Yes"), 
@@ -65377,8 +65399,8 @@ module.exports = {
 },{"../../../../variables":441,"./customers":438,"moment":159,"react":343,"react-router":199,"web3":368}],441:[function(require,module,exports){
 module.exports={
     port: '3000',
-    api:'http://192.168.1.11',
-    client: 'http://192.168.1.11',
+    api:'http://sree-ubuntu',
+    client: 'http://sree-ubuntu',
     provider: 'http://192.168.1.10',
     totalRecentCustomers: 10,
     totalRecentTransactions: 15,

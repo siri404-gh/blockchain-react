@@ -19,6 +19,8 @@
 *
 * Setup Instructions
 *
+*   Install NodeJS from https://nodejs.org/en/download/
+*   Make sure the blockchain is up and running.
 *   Configure all the ports in variables.js
 *   Configure user credentials, node port, coinbaseaddress in client/src/utils/users.js
 *   For initial installation, go to ./server and run "npm install"; Also go to ./client/ and run "npm install". This is a one time process.
