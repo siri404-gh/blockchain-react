@@ -11,7 +11,9 @@ var panelMessage = utils.updatePanelMessage;
 
 module.exports = React.createClass({
     getInitialState: function() {
-        return utils.getInitialState;
+        var state = utils.getInitialState;
+        state.recentUpdations = [<div key={Math.random()} className="loader"></div>];
+        return state;
     },
     populate: function(el, i) {
         if(utils.populate(el, i, this, null)) {

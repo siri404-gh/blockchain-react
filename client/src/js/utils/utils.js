@@ -74,7 +74,7 @@ module.exports = {
         show: false,
         bankID: '',
         transactions: [],
-        recentUpdations: [<div key={Math.random()} className="loader"></div>]
+        recentUpdations: []
     },
     populate: function(el, i, self, customers) {
         var self2 = this;
@@ -320,7 +320,6 @@ module.exports = {
             </div>
         ];
         $.ajax({
-            // async: false,
             url: self2.api+'/customers',
             method: 'GET',
             data: {

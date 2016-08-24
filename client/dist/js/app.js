@@ -62940,23 +62940,25 @@ var React = require('react');
 module.exports = React.createClass({displayName: "exports",
     render: function() {
         var note = [];
+        var panelMessageRender = [];
         if(this.props.type == 'warning') {
             note.push(React.createElement("b", {key: Math.random()}, React.createElement("u", null, "Directions:"), " "));
         }
-        var message = this.props.message;
-        messageArray = message.split('<br/>');
-        var panelMessageRender = [];
-        messageArray.forEach(function(message, i) {
-            if (i==0) {
-                panelMessageRender.push(
-                    React.createElement("span", {key: Math.random()}, message)
-                );
-            } else {
-                panelMessageRender.push(
-                    React.createElement("div", {key: Math.random()}, message)
-                );
-            }
-        });
+        if(this.props.message) {
+            var message = this.props.message;
+            var messageArray = message.split('<br/>');
+            messageArray.forEach(function(message, i) {
+                if (i==0) {
+                    panelMessageRender.push(
+                        React.createElement("span", {key: Math.random()}, message)
+                    );
+                } else {
+                    panelMessageRender.push(
+                        React.createElement("div", {key: Math.random()}, message)
+                    );
+                }
+            });
+        }
         return (
             React.createElement("div", {className: "row"}, 
                 React.createElement("div", {className: "panel-group col-md-12"}, 
@@ -63790,6 +63792,7 @@ module.exports = {
 var React = require('react');
 var NavBar = require('../../components/Navbar/Navbar');
 var Footer = require('../../components/Footer/Footer');
+var Panel = require('../../components/Panel/Panel');
 var utils = require('../../utils/utils');
 
 var Home = React.createClass({displayName: "Home",
@@ -63803,8 +63806,9 @@ var Home = React.createClass({displayName: "Home",
         return (
             React.createElement("div", null, 
                 React.createElement(NavBar, {logged: sessionStorage.getItem('logged'), bank: sessionStorage.getItem('username')}), 
-                React.createElement("h3", null, "Logged Out!"), 
-                React.createElement("div", {className: "row middle-row", key: "1"}
+                React.createElement("h3", null, "Home"), 
+                React.createElement("div", {className: "row middle-row", key: "1"}, 
+                    React.createElement(Panel, {message: "Successfully logged out!", type: "success"})
                 ), 
                 React.createElement(Footer, null)
             )
@@ -63814,7 +63818,7 @@ var Home = React.createClass({displayName: "Home",
 
 module.exports = Home;
 
-},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../utils/utils":440,"react":343}],431:[function(require,module,exports){
+},{"../../components/Footer/Footer":418,"../../components/Navbar/Navbar":419,"../../components/Panel/Panel":420,"../../utils/utils":440,"react":343}],431:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 
@@ -63876,7 +63880,9 @@ var panelMessage = utils.updatePanelMessage;
 
 module.exports = React.createClass({displayName: "exports",
     getInitialState: function() {
-        return utils.getInitialState;
+        var state = utils.getInitialState;
+        state.recentUpdations = [React.createElement("div", {key: Math.random(), className: "loader"})];
+        return state;
     },
     populate: function(el, i) {
         if(utils.populate(el, i, this, null)) {
@@ -64289,7 +64295,9 @@ var panelMessage = utils.viewPanelMessage;
 
 module.exports = React.createClass({displayName: "exports",
     getInitialState: function() {
-        return utils.getInitialState;
+        var state = utils.getInitialState;
+        state.recentUpdations = [React.createElement("div", {key: Math.random(), className: "loader"})];
+        return state;
     },
     populate: function(el, i) {
         if(utils.populate(el, i, this, null)) {
@@ -65083,7 +65091,7 @@ module.exports = {
         show: false,
         bankID: '',
         transactions: [],
-        recentUpdations: [React.createElement("div", {key: Math.random(), className: "loader"})]
+        recentUpdations: []
     },
     populate: function(el, i, self, customers) {
         var self2 = this;
@@ -65329,7 +65337,6 @@ module.exports = {
             )
         ];
         $.ajax({
-            // async: false,
             url: self2.api+'/customers',
             method: 'GET',
             data: {
