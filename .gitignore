@@ -3,3 +3,6 @@
 client/coverage/
 client/dist/
 client/docs/
+server/dist/
+final/
+final/

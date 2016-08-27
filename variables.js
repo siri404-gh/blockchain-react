@@ -1,8 +1,8 @@
 module.exports={
     port: '3000',
-    api:'http://sree-ubuntu',               // ip address (or hostname) of the api (is usually the same as the client)
-    client: 'http://sree-ubuntu',           // ip address (or hostname) of the client
-    provider: 'http://192.168.1.10',    // ip address (or hostname) of the blockchain server
+    api:'http://192.168.1.8',               // ip address (or hostname) of the api (is usually the same as the client)
+    client: 'http://192.168.1.8',           // ip address (or hostname) of the client
+    provider: 'http://192.168.1.5',    // ip address (or hostname) of the blockchain server
     totalRecentCustomers: 10,
     totalRecentTransactions: 15,
     notificationDelay: 7000,

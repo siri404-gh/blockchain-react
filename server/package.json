@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "browserify --node api.js -o ../final/api.js",
     "docs": "./node_modules/.bin/documentjs",
     "start": "nodemon api",
     "test": "mocha __tests__"
@@ -12,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "browserify": "^13.1.0",
     "chai": "^3.5.0",
     "documentjs": "^0.4.4",
     "express": "^4.14.0",

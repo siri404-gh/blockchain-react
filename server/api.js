@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(express.static( '../client/dist'));
+app.use(express.static( '.'));
 
 app.get('/blocks', function(req, res) {
     var blocks = utils.getRecentBlocks(req.query.port, req.query.coinBaseAddress);
