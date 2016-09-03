@@ -87,18 +87,18 @@ module.exports = {
     },
     getCustomerDetailsFromDB: function (customerID, port, coinBaseAddress) {
         if(port && coinBaseAddress) {
-            this.init(port, coinBaseAddress);
+            // this.init(port, coinBaseAddress);
         }
         var position = null;
         obj = JSON.parse(web3.db.getString("UpdateLog", "logString"));
-        for (var i = 0; i < obj.length; i++) {
+        for (var i = obj.length - 1; i > 0; i--) {
             if (obj[i].customerID == customerID) {
                 obj[i].bankID = this.getBankName(obj[i].bankID);
                 return obj[i];
             }
         }
         obj = JSON.parse(web3.db.getString("CreateLog", "logString"));
-        for (var i = 0; i < obj.length; i++) {
+        for (var i = obj.length - 1; i > 0; i--) {
             if (obj[i].customerID == customerID) {
                 obj[i].bankID = this.getBankName(obj[i].bankID);
                 return obj[i];
@@ -152,17 +152,17 @@ module.exports = {
     },
     querySkipTraceRecordOnChain: function (customerID) {
         var transHash = SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(customerID, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
-        console.log("Trans hash generated from Blockchain ->  " + transHash+"\n");
+        // console.log("Trans hash generated from Blockchain ->  " + transHash+"\n");
         return transHash;
     },
     getRecordCountOnChain: function () {
         var transHash = SkipTraceContract.at(SkipTraceContractAddress).getRecordCount.sendTransaction({from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
-        console.log("Trans hash generated from Blockchain ->  " + transHash+"\n");
+        // console.log("Trans hash generated from Blockchain ->  " + transHash+"\n");
         return transHash;
     },
     resetOnChain: function () {
         var transHash = SkipTraceContract.at(SkipTraceContractAddress).reset.sendTransaction({from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
-        console.log("Trans hash generated from Blockchain ->  " + transHash+"\n");
+        // console.log("Trans hash generated from Blockchain ->  " + transHash+"\n");
         return transHash;
     },
     resetOnDB: function () {
