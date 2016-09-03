@@ -63834,7 +63834,7 @@ module.exports = React.createClass({displayName: "exports",
     getInitialState: function() {
         return {
             transactions: [React.createElement("div", {key: Math.random(), className: "loader"})]
-        }
+        };
     },
     displayTransactions: function() {
         var transactions = [];
@@ -63850,31 +63850,31 @@ module.exports = React.createClass({displayName: "exports",
                 res.forEach(function(block, i) {
                     transactions.push(
                         React.createElement("div", {className: "row row-underline", key: i}, 
-                            React.createElement("div", {className: "col-xs-1"}, 
+                            React.createElement("div", {className: "col-xs-1 blocks-col"}, 
                                 React.createElement(Link, {to: '/block/'+block.id}, block.id)
                             ), 
-                            React.createElement("div", {className: "col-xs-2"}, 
+                            React.createElement("div", {className: "col-xs-2 blocks-col"}, 
                                 block.hash.substring(0,12) + '...'
                             ), 
-                            React.createElement("div", {className: "col-xs-1 difficulty-col"}, 
+                            React.createElement("div", {className: "col-xs-2 blocks-col"}, 
                                 block.difficulty
                             ), 
-                            React.createElement("div", {className: "col-xs-2 miner-col"}, 
+                            React.createElement("div", {className: "col-xs-2 blocks-col"}, 
                                 block.miner.substring(0,12) + '...'
                             ), 
-                            React.createElement("div", {className: "col-xs-2 gas-col"}, 
+                            React.createElement("div", {className: "col-xs-2 blocks-col"}, 
                                 block.gasUsed
                             ), 
-                            React.createElement("div", {className: "col-xs-3 time-col"}, 
+                            React.createElement("div", {className: "col-xs-2 blocks-col"}, 
                                 moment.unix(block.timestamp).format('DD-MM-YYYY hh:mm:ss')
                             ), 
-                            React.createElement("div", {className: "col-xs-1"}, 
+                            React.createElement("div", {className: "col-xs-1 blocks-col"}, 
                                 block.transactions
                             )
                         )
                     );
                 });
-                 if (self.isMounted()) {
+                if (self.isMounted()) {
                     self.setState({
                         transactions: transactions
                     });
@@ -63892,13 +63892,13 @@ module.exports = React.createClass({displayName: "exports",
                         React.createElement(PanelCollapse, {message: "Recent transactions", target: "recent"}), 
                         React.createElement("div", {id: "recent", className: "recent-transactions dataTable collapse in"}, 
                             React.createElement("div", {className: "row row-underline"}, 
-                                React.createElement("div", {className: "col-xs-1"}, React.createElement("b", null)), 
-                                React.createElement("div", {className: "col-xs-2"}, React.createElement("b", null, "Hash")), 
-                                React.createElement("div", {className: "col-xs-1 difficulty-col"}, React.createElement("b", null, "Difficulty")), 
-                                React.createElement("div", {className: "col-xs-2 miner-col"}, React.createElement("b", null, "Miner")), 
-                                React.createElement("div", {className: "col-xs-2 gas-col"}, React.createElement("b", null, "Gas Used")), 
-                                React.createElement("div", {className: "col-xs-3 time-col"}, React.createElement("b", null, "Time")), 
-                                React.createElement("div", {className: "col-xs-1"}, React.createElement("b", null, "#Tx"))
+                                React.createElement("div", {className: "col-xs-1 blocks-col"}, React.createElement("b", null)), 
+                                React.createElement("div", {className: "col-xs-2 blocks-col"}, React.createElement("b", null, "Hash")), 
+                                React.createElement("div", {className: "col-xs-2 blocks-col"}, React.createElement("b", null, "Difficulty")), 
+                                React.createElement("div", {className: "col-xs-2 blocks-col"}, React.createElement("b", null, "Miner")), 
+                                React.createElement("div", {className: "col-xs-2 blocks-col"}, React.createElement("b", null, "Gas Used")), 
+                                React.createElement("div", {className: "col-xs-2 blocks-col"}, React.createElement("b", null, "Time")), 
+                                React.createElement("div", {className: "col-xs-1 blocks-col"}, React.createElement("b", null, "#Tx"))
                             ), 
                             this.state.transactions
                         )
@@ -64689,29 +64689,29 @@ module.exports = {
                     React.createElement("div", {className: "row"}, 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "SSN Number 1"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: 'XXX-XXX-'+self.state.ssn.slice(self.state.ssn.length-4), disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: (self.state.ssn)?'XXX-XXX-'+self.state.ssn.slice(self.state.ssn.length-4) : '', disabled: true})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "SSN Number 2"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: 'XXX-XXX-'+self.state.ssn2.slice(self.state.ssn2.length-4), disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: (self.state.ssn2)? 'XXX-XXX-'+self.state.ssn2.slice(self.state.ssn2.length-4) : '', disabled: true})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "SSN Number 3"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: 'XXX-XXX-'+self.state.ssn3.slice(self.state.ssn3.length-4), disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: (self.state.ssn3)? 'XXX-XXX-'+self.state.ssn3.slice(self.state.ssn3.length-4) : '', disabled: true})
                         )
                     ), 
                     React.createElement("div", {className: "row"}, 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "Passport 1"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: 'XXXXXX-'+self.state.passportNumber.slice(self.state.passportNumber.length-2), disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: (self.state.passportNumber)? 'XXXXXX-'+self.state.passportNumber.slice(self.state.passportNumber.length-2) : '', disabled: true})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "Passport 2"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: 'XXXXXX-'+self.state.passportNumber2.slice(self.state.passportNumber2.length-2), disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: (self.state.passportNumber2)? 'XXXXXX-'+self.state.passportNumber2.slice(self.state.passportNumber2.length-2) : '', disabled: true})
                         ), 
                         React.createElement("div", {className: "form-group col-md-4"}, 
                             React.createElement("label", {htmlFor: ""}, "Passport 3"), 
-                            React.createElement("input", {type: "text", className: "form-control", id: "", value: 'XXXXXX-'+self.state.passportNumber3.slice(self.state.passportNumber3.length-2), disabled: true})
+                            React.createElement("input", {type: "text", className: "form-control", id: "", value: (self.state.passportNumber3)? 'XXXXXX-'+self.state.passportNumber3.slice(self.state.passportNumber3.length-2) : '', disabled: true})
                         )
                     ), 
                     React.createElement(Panel, {message: "Additional Details", type: "info"}), 
@@ -65401,12 +65401,12 @@ module.exports = {
                 middleName: singleCustomer.middleName,
                 aliasName: singleCustomer.aliasName,
                 dob: moment(singleCustomer.DOB, 'D-MMM-YY').format('YYYY-MM-DD'),
-                ssn: singleCustomer.SSN.substr(0,12),
-                ssn2: singleCustomer.SSN.substr(12,12),
-                ssn3: singleCustomer.SSN.substr(24,12),
-                passportNumber: singleCustomer.passportNumber.substr(0,8),
-                passportNumber2: singleCustomer.passportNumber.substr(9,8),
-                passportNumber3: singleCustomer.passportNumber.substr(17,8),
+                ssn: singleCustomer.SSN.substr(0, 12),
+                ssn2: singleCustomer.SSN.substr(12, 12),
+                ssn3: singleCustomer.SSN.substr(24, 12),
+                passportNumber: singleCustomer.passportNumber.substr(0, 9),
+                passportNumber2: singleCustomer.passportNumber.substr(9, 9),
+                passportNumber3: singleCustomer.passportNumber.substr(18, 9),
                 employerName1: singleCustomer.employer1,
                 employerName2: singleCustomer.employer2,
                 employerName3: singleCustomer.employer3,
@@ -65434,7 +65434,7 @@ module.exports = {
                 overrideButtonClass: overrideButtonClass
             });
         }
-            return true;
+        return true;
     },
     addSkipTraceRecordOnChain: function (firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks) {
         var transHash;
@@ -65530,7 +65530,7 @@ module.exports = {
         SkipTraceContract = web3.eth.contract(SkipTraceCompiled.CustomerSkipTrace.info.abiDefinition);
     },
     watchTransactionEvent: function(self) {
-        console.log('Watching for transactions..');
+        // console.log('Watching for transactions..');
         web3.eth.filter('latest').watch(function(error, result){
             if (!error) {
                 console.log(result);
@@ -65539,7 +65539,7 @@ module.exports = {
         });
     },
     stopWatchTransactionEvent: function() {
-        console.log('Stopping watching for transactions..');
+        // console.log('Stopping watching for transactions..');
         web3.eth.filter('latest').stopWatching(function(error, result){
             if (!error) {
                 console.log('latest='+result);
@@ -65547,7 +65547,7 @@ module.exports = {
         });
     },
     watchAddEvent: function(self) {
-        console.log('Watching for user add..');
+        // console.log('Watching for user add..');
         this.web3Init();
         var addEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceAddEvent();
         addEvent.watch(function(error, result){
@@ -65564,13 +65564,13 @@ module.exports = {
         });
     },
     stopWatchingAddEvent: function() {
-        console.log('Stopping watching for user add..');
+        // console.log('Stopping watching for user add..');
         this.web3Init();
         var addEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceAddEvent();
         addEvent.stopWatching();
     },
     watchUpdateEvent: function(self) {
-        console.log('Watching for user updates..');
+        // console.log('Watching for user updates..');
         this.web3Init();
         var updateEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceUpdateEvent();
         updateEvent.watch(function(error, result){
@@ -65584,10 +65584,10 @@ module.exports = {
                 $('.customer-updated-alert').delay(notificationDelay).fadeOut();
             }
             sessionStorage.setItem('updateBlocks', result.blockNumber);
-    	});
+        });
     },
     stopWatchingUpdateEvent: function() {
-        console.log('Stopping watching for user updates..');
+        // console.log('Stopping watching for user updates..');
         this.web3Init();
         var updateEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceUpdateEvent();
         updateEvent.stopWatching();
@@ -65596,16 +65596,16 @@ module.exports = {
         var self2 = this;
         var recentUpdations = [
             React.createElement("div", {className: "row row-underline", key: Math.random()}, 
-                React.createElement("div", {className: "col-xs-1"}, 
+                React.createElement("div", {className: "col-xs-1 blocks-col"}, 
                     React.createElement("b", null, "Id")
                 ), 
-                React.createElement("div", {className: "col-xs-4"}, 
+                React.createElement("div", {className: "col-xs-3 blocks-col"}, 
                     React.createElement("b", null, "Name")
                 ), 
-                React.createElement("div", {className: "col-xs-3"}, 
+                React.createElement("div", {className: "col-xs-3 blocks-col"}, 
                     React.createElement("b", null, "Last Updated By")
                 ), 
-                React.createElement("div", {className: "col-xs-4"}, 
+                React.createElement("div", {className: "col-xs-4 blocks-col"}, 
                     React.createElement("b", null, "Last Updated at")
                 )
             )
@@ -65624,17 +65624,17 @@ module.exports = {
                 res.forEach(function(c) {
                     recentUpdations.push(
                         React.createElement("div", {key: Math.random(), className: "row row-underline"}, 
-                            React.createElement("div", {className: "col-xs-1"}, 
+                            React.createElement("div", {className: "col-xs-1 blocks-col"}, 
                                 c.customerID
                             ), 
-                            React.createElement("div", {className: "col-xs-4"}, 
+                            React.createElement("div", {className: "col-xs-3 blocks-col"}, 
                                 React.createElement("a", {href: "#", id: c.customerID, onClick: self.populate}, c.firstName.split('-')[0]+' '+c.lastName.split('-')[0])
                             ), 
-                            React.createElement("div", {className: "col-xs-3"}, 
+                            React.createElement("div", {className: "col-xs-3 blocks-col"}, 
                             React.createElement("span", {className: "bank-name"}, c.bankID), 
                             React.createElement("img", {className: "logo-small", src: '/images/'+c.bankID.toLowerCase().replace('_','')+'.png'})
                             ), 
-                            React.createElement("div", {className: "col-xs-4"}, 
+                            React.createElement("div", {className: "col-xs-4 blocks-col"}, 
                             moment.unix(c.timestamp).format("MM/DD/YYYY hh:mm:ss")
                             )
                         )

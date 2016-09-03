@@ -76,12 +76,6 @@ a.navbar-brand::first-letter {
 .row-underline {
   border-bottom: solid 1px #e4e4e4;
 }
-@media (max-width: 768px) {
-  .bank-name,
-  .difficulty-col {
-    display: none;
-  }
-}
 .alert {
   margin-top: 20px;
 }
@@ -182,6 +176,11 @@ svg text.percent {
   .jumbotron .h1,
   .jumbotron h1 {
     font-size: 45px;
+  }
+}
+@media (max-width: 768px) {
+  .blocks-col {
+    word-wrap: break-word;
   }
 }
 .jumbotron {

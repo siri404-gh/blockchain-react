@@ -11,7 +11,7 @@ module.exports = React.createClass({
     getInitialState: function() {
         return {
             transactions: [<div key={Math.random()} className="loader"></div>]
-        }
+        };
     },
     displayTransactions: function() {
         var transactions = [];
@@ -27,31 +27,31 @@ module.exports = React.createClass({
                 res.forEach(function(block, i) {
                     transactions.push(
                         <div className='row row-underline' key={i}>
-                            <div className='col-xs-1'>
+                            <div className='col-xs-1 blocks-col'>
                                 <Link to={'/block/'+block.id}>{block.id}</Link>
                             </div>
-                            <div className='col-xs-2'>
+                            <div className='col-xs-2 blocks-col'>
                                 {block.hash.substring(0,12) + '...'}
                             </div>
-                            <div className='col-xs-1 difficulty-col'>
+                            <div className='col-xs-2 blocks-col'>
                                 {block.difficulty}
                             </div>
-                            <div className='col-xs-2 miner-col'>
+                            <div className='col-xs-2 blocks-col'>
                                 {block.miner.substring(0,12) + '...'}
                             </div>
-                            <div className='col-xs-2 gas-col'>
+                            <div className='col-xs-2 blocks-col'>
                                 {block.gasUsed}
                             </div>
-                            <div className='col-xs-3 time-col'>
+                            <div className='col-xs-2 blocks-col'>
                                 {moment.unix(block.timestamp).format('DD-MM-YYYY hh:mm:ss')}
                             </div>
-                            <div className='col-xs-1'>
+                            <div className='col-xs-1 blocks-col'>
                                 {block.transactions}
                             </div>
                         </div>
                     );
                 });
-                 if (self.isMounted()) {
+                if (self.isMounted()) {
                     self.setState({
                         transactions: transactions
                     });
@@ -69,13 +69,13 @@ module.exports = React.createClass({
                         <PanelCollapse message="Recent transactions" target="recent"/>
                         <div id='recent' className='recent-transactions dataTable collapse in'>
                             <div className="row row-underline">
-                                <div className='col-xs-1'><b></b></div>
-                                <div className='col-xs-2'><b>Hash</b></div>
-                                <div className='col-xs-1 difficulty-col'><b>Difficulty</b></div>
-                                <div className='col-xs-2 miner-col'><b>Miner</b></div>
-                                <div className='col-xs-2 gas-col'><b>Gas Used</b></div>
-                                <div className='col-xs-3 time-col'><b>Time</b></div>
-                                <div className='col-xs-1'><b>#Tx</b></div>
+                                <div className='col-xs-1 blocks-col'><b></b></div>
+                                <div className='col-xs-2 blocks-col'><b>Hash</b></div>
+                                <div className='col-xs-2 blocks-col'><b>Difficulty</b></div>
+                                <div className='col-xs-2 blocks-col'><b>Miner</b></div>
+                                <div className='col-xs-2 blocks-col'><b>Gas Used</b></div>
+                                <div className='col-xs-2 blocks-col'><b>Time</b></div>
+                                <div className='col-xs-1 blocks-col'><b>#Tx</b></div>
                             </div>
                             {this.state.transactions}
                         </div>

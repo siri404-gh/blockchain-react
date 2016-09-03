@@ -110,12 +110,12 @@ module.exports = {
                 middleName: singleCustomer.middleName,
                 aliasName: singleCustomer.aliasName,
                 dob: moment(singleCustomer.DOB, 'D-MMM-YY').format('YYYY-MM-DD'),
-                ssn: singleCustomer.SSN.substr(0,12),
-                ssn2: singleCustomer.SSN.substr(12,12),
-                ssn3: singleCustomer.SSN.substr(24,12),
-                passportNumber: singleCustomer.passportNumber.substr(0,8),
-                passportNumber2: singleCustomer.passportNumber.substr(9,8),
-                passportNumber3: singleCustomer.passportNumber.substr(17,8),
+                ssn: singleCustomer.SSN.substr(0, 12),
+                ssn2: singleCustomer.SSN.substr(12, 12),
+                ssn3: singleCustomer.SSN.substr(24, 12),
+                passportNumber: singleCustomer.passportNumber.substr(0, 9),
+                passportNumber2: singleCustomer.passportNumber.substr(9, 9),
+                passportNumber3: singleCustomer.passportNumber.substr(18, 9),
                 employerName1: singleCustomer.employer1,
                 employerName2: singleCustomer.employer2,
                 employerName3: singleCustomer.employer3,
@@ -143,7 +143,7 @@ module.exports = {
                 overrideButtonClass: overrideButtonClass
             });
         }
-            return true;
+        return true;
     },
     addSkipTraceRecordOnChain: function (firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks) {
         var transHash;
@@ -239,7 +239,7 @@ module.exports = {
         SkipTraceContract = web3.eth.contract(SkipTraceCompiled.CustomerSkipTrace.info.abiDefinition);
     },
     watchTransactionEvent: function(self) {
-        console.log('Watching for transactions..');
+        // console.log('Watching for transactions..');
         web3.eth.filter('latest').watch(function(error, result){
             if (!error) {
                 console.log(result);
@@ -248,7 +248,7 @@ module.exports = {
         });
     },
     stopWatchTransactionEvent: function() {
-        console.log('Stopping watching for transactions..');
+        // console.log('Stopping watching for transactions..');
         web3.eth.filter('latest').stopWatching(function(error, result){
             if (!error) {
                 console.log('latest='+result);
@@ -256,7 +256,7 @@ module.exports = {
         });
     },
     watchAddEvent: function(self) {
-        console.log('Watching for user add..');
+        // console.log('Watching for user add..');
         this.web3Init();
         var addEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceAddEvent();
         addEvent.watch(function(error, result){
@@ -273,13 +273,13 @@ module.exports = {
         });
     },
     stopWatchingAddEvent: function() {
-        console.log('Stopping watching for user add..');
+        // console.log('Stopping watching for user add..');
         this.web3Init();
         var addEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceAddEvent();
         addEvent.stopWatching();
     },
     watchUpdateEvent: function(self) {
-        console.log('Watching for user updates..');
+        // console.log('Watching for user updates..');
         this.web3Init();
         var updateEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceUpdateEvent();
         updateEvent.watch(function(error, result){
@@ -293,10 +293,10 @@ module.exports = {
                 $('.customer-updated-alert').delay(notificationDelay).fadeOut();
             }
             sessionStorage.setItem('updateBlocks', result.blockNumber);
-    	});
+        });
     },
     stopWatchingUpdateEvent: function() {
-        console.log('Stopping watching for user updates..');
+        // console.log('Stopping watching for user updates..');
         this.web3Init();
         var updateEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceUpdateEvent();
         updateEvent.stopWatching();
@@ -305,16 +305,16 @@ module.exports = {
         var self2 = this;
         var recentUpdations = [
             <div className='row row-underline' key={Math.random()}>
-                <div className='col-xs-1'>
+                <div className='col-xs-1 blocks-col'>
                     <b>Id</b>
                 </div>
-                <div className='col-xs-4'>
+                <div className='col-xs-3 blocks-col'>
                     <b>Name</b>
                 </div>
-                <div className='col-xs-3'>
+                <div className='col-xs-3 blocks-col'>
                     <b>Last Updated By</b>
                 </div>
-                <div className='col-xs-4'>
+                <div className='col-xs-4 blocks-col'>
                     <b>Last Updated at</b>
                 </div>
             </div>
@@ -333,17 +333,17 @@ module.exports = {
                 res.forEach(function(c) {
                     recentUpdations.push(
                         <div key={Math.random()} className='row row-underline'>
-                            <div className='col-xs-1'>
+                            <div className='col-xs-1 blocks-col'>
                                 {c.customerID}
                             </div>
-                            <div className='col-xs-4'>
+                            <div className='col-xs-3 blocks-col'>
                                 <a href='#' id={c.customerID} onClick={self.populate}>{c.firstName.split('-')[0]+' '+c.lastName.split('-')[0]}</a>
                             </div>
-                            <div className='col-xs-3'>
+                            <div className='col-xs-3 blocks-col'>
                             <span className='bank-name'>{c.bankID}</span>
                             <img className='logo-small' src={'/images/'+c.bankID.toLowerCase().replace('_','')+'.png'}/>
                             </div>
-                            <div className='col-xs-4'>
+                            <div className='col-xs-4 blocks-col'>
                             {moment.unix(c.timestamp).format("MM/DD/YYYY hh:mm:ss")}
                             </div>
                         </div>

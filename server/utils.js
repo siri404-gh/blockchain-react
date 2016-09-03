@@ -61,7 +61,7 @@ module.exports = {
             gasUsed: block.gasUsed,
             timestamp: block.timestamp,
             transactions: consolidatedTransactions
-        }
+        };
     },
     getRecentCustomers: function(port, coinBaseAddress) {
         this.init(port, coinBaseAddress);

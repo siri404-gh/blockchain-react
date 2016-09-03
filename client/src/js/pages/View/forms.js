@@ -57,29 +57,29 @@ module.exports = {
                     <div className='row'>
                         <div className="form-group col-md-4">
                             <label htmlFor="">SSN Number 1</label>
-                            <input type="text" className="form-control"  id="" value={'XXX-XXX-'+self.state.ssn.slice(self.state.ssn.length-4)} disabled/>
+                            <input type="text" className="form-control"  id="" value={(self.state.ssn)?'XXX-XXX-'+self.state.ssn.slice(self.state.ssn.length-4) : ''} disabled/>
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">SSN Number 2</label>
-                            <input type="text" className="form-control"  id="" value={'XXX-XXX-'+self.state.ssn2.slice(self.state.ssn2.length-4)} disabled/>
+                            <input type="text" className="form-control"  id="" value={(self.state.ssn2)? 'XXX-XXX-'+self.state.ssn2.slice(self.state.ssn2.length-4) : ''} disabled/>
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">SSN Number 3</label>
-                            <input type="text" className="form-control"  id="" value={'XXX-XXX-'+self.state.ssn3.slice(self.state.ssn3.length-4)} disabled/>
+                            <input type="text" className="form-control"  id="" value={(self.state.ssn3)? 'XXX-XXX-'+self.state.ssn3.slice(self.state.ssn3.length-4) : ''} disabled/>
                         </div>
                     </div>
                     <div className='row'>
                         <div className="form-group col-md-4">
                             <label htmlFor="">Passport 1</label>
-                            <input type="text" className="form-control"  id="" value={'XXXXXX-'+self.state.passportNumber.slice(self.state.passportNumber.length-2)} disabled/>
+                            <input type="text" className="form-control"  id="" value={(self.state.passportNumber)? 'XXXXXX-'+self.state.passportNumber.slice(self.state.passportNumber.length-2) : ''} disabled/>
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">Passport 2</label>
-                            <input type="text" className="form-control"  id="" value={'XXXXXX-'+self.state.passportNumber2.slice(self.state.passportNumber2.length-2)} disabled/>
+                            <input type="text" className="form-control"  id="" value={(self.state.passportNumber2)? 'XXXXXX-'+self.state.passportNumber2.slice(self.state.passportNumber2.length-2) : ''} disabled/>
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="">Passport 3</label>
-                            <input type="text" className="form-control"  id="" value={'XXXXXX-'+self.state.passportNumber3.slice(self.state.passportNumber3.length-2)} disabled/>
+                            <input type="text" className="form-control"  id="" value={(self.state.passportNumber3)? 'XXXXXX-'+self.state.passportNumber3.slice(self.state.passportNumber3.length-2) : ''} disabled/>
                         </div>
                     </div>
                     <Panel message="Additional Details" type="info"/>
