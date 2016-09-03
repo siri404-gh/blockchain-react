@@ -1,8 +1,8 @@
-module.exports={
+module.exports = {
     port: '3000',
-    api:'http://192.168.1.8',               // ip address (or hostname) of the api (is usually the same as the client)
-    client: 'http://192.168.1.8',           // ip address (or hostname) of the client
-    provider: 'http://192.168.1.5',    // ip address (or hostname) of the blockchain server
+    api:'http://192.168.96.245',               // ip address (or hostname) of the api (is usually the same as the client)
+    client: 'http://192.168.96.245',           // ip address (or hostname) of the client
+    provider: 'http://192.168.99.40',    // ip address (or hostname) of the blockchain server
     totalRecentCustomers: 10,
     totalRecentTransactions: 15,
     notificationDelay: 7000,
@@ -11,5 +11,6 @@ module.exports={
     updatePanelMessage: "Search for the user to update using the searchbar. You may search by Customer Id. You could also select a user to update from the recently updated list shown below.",
     viewPanelMessage: "Search for users using the searchbar. You may search by Customer Id. You could also select a user from the recently updated list shown below.",
     homePanelMessage: "",
-    addPanelMessage: ""
+    addPanelMessage: "",
+    dest: '../final'
 };
