@@ -98,7 +98,7 @@ module.exports = {
             }
         }
         obj = JSON.parse(web3.db.getString("CreateLog", "logString"));
-        for (var i = obj.length - 1; i > 0; i--) {
+        for (var i = 0; i < obj.length; i++) {
             if (obj[i].customerID == customerID) {
                 obj[i].bankID = this.getBankName(obj[i].bankID);
                 return obj[i];

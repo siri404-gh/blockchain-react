@@ -17,13 +17,13 @@ var browser = os.platform() === 'linux' ? 'google-chrome' : (
 var dest = variables.dest;
 
 gulp.task('browserify', function(){
-    browserify('./src/js/app.js')
+    browserify('./src/client.js')
     .transform('reactify')
     .bundle()
-    .pipe(source('app.js'))
+    .pipe(source('client.js'))
     // .pipe(buffer())
     // .pipe(uglify())
-    .pipe(gulp.dest(dest+'/js'))
+    .pipe(gulp.dest(dest))
     .pipe(liveReload());
 });
 
