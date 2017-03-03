@@ -1,0 +1,63 @@
+-- Node 3
+geth --genesis ./genesis.json --datadir ./datadir --networkid 123 --ipcdisable --port 30303 console
+
+-- Start Miner
+loadScript("./mining.js")
+
+-- Initialize positions in chain and db + other paratemeters
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+
+-- Input - Example for Skip Trace Records
+
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+
+updateSkipTraceRecordOnChain(1, "John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "1881 Mitchell Ave UNIT, 5000 Watkins Way, CA 92780", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "Updated - Catch me if you can!!");  
+
+resetOnChain();
+
+-- Check Output
+
+querySkipTraceRecordOnChain(1);
+
+getRecordCountOnChain();
+
+getRecordCountFromDB();
+
+printCreateLogFromDB();
+
+printUpdateLogFromDB();
+
+printQueryLogFromDB();
+
+isCustRecordPending("0x9d49c9d05dbabb94e49a60db55d305f41f3a38cfa0988f0fd6316769e5fb43a6");
+
+getCusotmerDetailsFromDB(1);
+
+presetValues()
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+personal.newAccount("pass3");
+
+acc = eth.accounts[0];
+
+"alloc": {
+	"0xdf910987728247a8bbe10bd422a8083012e424ef": {
+		"balance": "10000000000000000000000000"
+	}
+}
+
+balance = web3.fromWei(eth.getBalance(eth.accounts[0]), "ether");
+
+admin.nodeInfo.NodeUrl
+
+-- add this to static-nodes.json of datadir of Node 3
+
+[
+"enode://c9e12bcdfb47441ae20c061bb01c281a438a14361d4ea468b8980c7d88c7560027fbc5817e0e8e63908499a23dbc1107a1f226ee9cbfaccb51c7a641b07726e8@172.16.206.194:30302?discport=0"
+]
+

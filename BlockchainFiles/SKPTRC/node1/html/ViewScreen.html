@@ -1,0 +1,157 @@
+<html>
+<head>
+
+<title>Skip Trace Consortium using Blockchain</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+<script type="text/javascript" src="js/web3.min.js"></script>
+<script type="text/javascript" src="js/initialize.js"></script>
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript" src="js/presetValues.js"></script>
+
+<script type="text/javascript">
+
+function reset(){
+	resetOnDB();
+	resetOnChain();
+}
+
+function getRecordCountDB() {
+	var recordCount = getRecordCountFromDB();
+	alert(recordCount);
+}
+
+function addSkipTraceRecord(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks)
+{
+	var transHash = addSkipTraceRecordOnChain(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks);
+	// alert(transHash);
+}
+
+function updateSkipTraceRecord(customerID, firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks)
+{
+	var transHash = updateSkipTraceRecordOnChain(customerID, firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks);
+	// alert(transHash);
+}
+
+function querySkipTraceRecord(customerID)
+{
+	var transHash = querySkipTraceRecordOnChain(customerID);
+	// alert(transHash);
+}
+
+function getCreateLog()
+{
+	alert(getCreateLogFromDB());
+}
+
+function getUpdateLog()
+{
+	alert(getUpdateLogFromDB());
+}
+
+function getQueryLog()
+{
+	alert(getQueryLogFromDB());
+}
+
+function presetVal(){
+	presetValues();
+}
+
+function isRecordPending(transHash){
+	alert(isCustRecordPending(transHash));
+}
+
+function getCustDetailsFromDB(customerID){
+	alert(getCusotmerDetailsFromDB(customerID));
+}
+
+function getNameBank(address){
+	alert(getBankName(address));
+}
+
+function getAddressBank(name){
+	alert(getBankAddress(name));
+}
+
+web3.eth.filter('latest').watch(function(){
+	display();
+});
+
+
+function display() {
+
+	var queryEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceQueryEvent();
+	var addEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceAddEvent();
+	var updateEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceUpdateEvent();
+
+	queryEvent.watch(function(error, result){
+		alert("Event Message from Blockchain Contract for Customer Query ->  " + deSerialize(JSON.stringify(result.args)));
+		queryEvent.stopWatching();
+		addEvent.stopWatching();
+		updateEvent.stopWatching();
+	});
+
+	// Start Event Listener for SkipTraceAddEvent
+
+	addEvent.watch(function(error, result){
+		alert("Event Message from Blockchain Contract for Customer Add ->  " + deSerialize(JSON.stringify(result.args)));
+		queryEvent.stopWatching();
+		addEvent.stopWatching();
+		updateEvent.stopWatching();
+	});
+
+
+	// Start Event Listener for SkipTraceUpdateEvent
+
+	updateEvent.watch(function(error, result){
+		alert("Event Message from Blockchain Contract for Customer Update ->  " + deSerialize(JSON.stringify(result.args)));
+		queryEvent.stopWatching();
+		addEvent.stopWatching();
+		updateEvent.stopWatching();
+	});
+
+}
+
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <h2>Striped Rows</h2>
+    <p>The .table-striped class adds zebra-stripes to a table:</p>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John</td>
+          <td>Doe</td>
+          <td>john@example.com</td>
+        </tr>
+        <tr>
+          <td>Mary</td>
+          <td>Moe</td>
+          <td>mary@example.com</td>
+        </tr>
+        <tr>
+          <td>July</td>
+          <td>Dooley</td>
+          <td>july@example.com</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+=============== Aug 5, 2016 (IST) ===============
+16:00:34.423758 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:00:34.432775 db@open opening
+16:00:34.433774 journal@recovery F·1
+16:00:34.433774 journal@recovery recovering @188
+16:00:34.653819 mem@flush created L0@191 N·13763 S·137KiB "n:\x00..ail,v539091":"n:\xff..ing,v530527"
+16:00:34.658822 db@janitor F·4 G·0
+16:00:34.658822 db@open done T·226.0464ms
+16:02:10.309996 table@compaction L0·1 -> L1·1 S·508KiB Q·540525
+16:02:10.416733 table@build created L1@194 N·5796 S·370KiB "n:\x00..ver,v510790":"version,v1"
+16:02:10.429555 table@compaction committed F-1 S-137KiB Ke·0 D·13763 T·119.5593ms
+16:17:07.078528 table@remove removed @191
+16:17:07.079528 table@remove removed @190

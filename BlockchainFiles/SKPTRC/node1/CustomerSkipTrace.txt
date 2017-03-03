@@ -1,0 +1,169 @@
+
+// Create the contract source code
+var SkipTraceSource = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() { SkipTraceRecordCountEvent(sequenceNo); } }"
+
+// Compile the source with solc - Solidity Compiler
+var SkipTraceCompiled = eth.compile.solidity(SkipTraceSource)
+
+// Extracts info from contract, print json serialisation on console
+SkipTraceCompiled.CustomerSkipTrace.info
+
+// Create contract object
+var SkipTraceContract = web3.eth.contract(SkipTraceCompiled.CustomerSkipTrace.info.abiDefinition);
+
+// Submit contract for inclusion in the Blockchain
+var SkipTrace = SkipTraceContract.new({ from:web3.eth.accounts[0], data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000}, function(e, contract){ if(!e) { if(!contract.address) { console.log("Contract transaction send: TransactionHash: " + contract.transactionHash + " waiting to be mined..."); } else { console.log("Contract mined! Address: " + contract.address); console.log(contract); } } })
+
+
+>>>>>>>>>>>>>>>>>>>>>>>
+
+contract Sequence {
+    
+    uint sequenceNo;
+    
+    function Sequence() { 
+		sequenceNo = 0;
+	} 
+	
+	function nextVal() returns (uint number) { 
+		return ++sequenceNo;
+	} 
+	
+}
+
+
+contract CustomerDetails {
+    
+	struct CustomerData {
+	    uint customerID;
+	    address bankID;
+	    string profile;
+	    string phone;
+	    string addresses;
+        string employer;
+        string products;
+	    string remarks;
+	    uint timestamp;
+	}
+	
+    mapping (uint => CustomerData) public custDataOf;
+    
+}
+
+
+ contract CustomerSkipTrace is Sequence, CustomerDetails {  
+     
+     event SkipTraceAddEvent(uint customerID, 
+        address bankID, 
+        string profile, 
+        string phone, 
+        string addresses, 
+        string employer,
+        string products,
+	    string remarks, 
+	    uint timestamp); 
+	    
+	  event SkipTraceQueryEvent(uint customerID, 
+        address bankID, 
+        string profile, 
+        string phone, 
+        string addresses, 
+        string employer,
+        string products,
+	    string remarks,
+	    uint timestamp); 
+	    
+	   event SkipTraceUpdateEvent(uint customerID, 
+        address bankID, 
+        string profile, 
+        string phone, 
+        string addresses, 
+        string employer,
+        string products,
+	    string remarks,
+	    uint timestamp); 
+	    
+	   event SkipTraceRecordCountEvent(uint recordCount);
+
+       function addSkipTraceRecord(string profile,
+	    string phone,
+	    string addresses,
+        string employer,
+        string products,
+	    string remarks)
+	    { 
+    	    uint customerID = nextVal();
+            address bankID = msg.sender;
+            uint timestamp = now;
+            
+            custDataOf[customerID].customerID = customerID;
+            custDataOf[customerID].bankID = bankID;
+            custDataOf[customerID].profile = profile;
+            custDataOf[customerID].phone = phone;
+    	    custDataOf[customerID].addresses = addresses;
+    	    custDataOf[customerID].employer = employer;
+    	    custDataOf[customerID].products = products;
+    	    custDataOf[customerID].remarks = remarks;
+    	    custDataOf[customerID].timestamp = timestamp;
+    	    
+    	    SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp);
+	    }
+	    
+	   function querySkipTraceRecord(uint customerID)
+
+	    { 
+	        if (customerID>0 && customerID<=sequenceNo)
+        	    SkipTraceQueryEvent(custDataOf[customerID].customerID, 
+        	    custDataOf[customerID].bankID, 
+        	    custDataOf[customerID].profile, 
+        	    custDataOf[customerID].phone, 
+        	    custDataOf[customerID].addresses, 
+        	    custDataOf[customerID].employer, 
+        	    custDataOf[customerID].products, 
+        	    custDataOf[customerID].remarks,
+        	    custDataOf[customerID].timestamp);
+    	    
+	    }
+	    
+	   function updateSkipTraceRecord(uint customerID,
+	    string profile,
+	    string phone,
+	    string addresses,
+        string employer,
+        string products,
+	    string remarks)
+	    { 
+	        if (customerID>0 && customerID<=sequenceNo) {
+                address bankID = msg.sender;
+                uint timestamp = now;
+                            
+                custDataOf[customerID].customerID = customerID;
+                custDataOf[customerID].bankID = bankID;
+                custDataOf[customerID].profile = profile;
+                custDataOf[customerID].phone = phone;
+        	    custDataOf[customerID].addresses = addresses;
+        	    custDataOf[customerID].employer = employer;
+        	    custDataOf[customerID].products = products;
+        	    custDataOf[customerID].remarks = remarks;
+        	    custDataOf[customerID].timestamp = timestamp;
+        	    
+        	    SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp);
+	        }
+	    }
+	    
+	   function reset()
+	    { 
+	        for (uint i = 1; i<=sequenceNo; i++){
+                delete custDataOf[i];
+            }
+		    sequenceNo = 0;
+	    }
+	    
+	   function getRecordCount()
+	    { 
+		    SkipTraceRecordCountEvent(sequenceNo);
+	    }
+
+ }
+ 
+ 

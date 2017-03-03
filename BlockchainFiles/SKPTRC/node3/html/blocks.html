@@ -1,0 +1,49 @@
+<html>
+<head>
+  <title>Ethereum Blocks Browser</title>
+ 
+<script type="text/javascript" src="js/web3.min.js"></script>
+<script type="text/javascript" src="js/initialize.js"></script>
+
+<script type="text/javascript">
+
+    web3.eth.filter('latest').watch(function(){
+	display();
+    });
+
+
+function display() {
+  var coinbase = web3.eth.coinbase;
+  var table_src = '<table class="table table-condensed"> <thead><tr><th>Number</th><th>Hash</th><th>Difficulty</th><th>Miner</th><th>Gas Used</th><th>Time</th><th># Tx</th><th># Uncles</th></tr></thead>'
+  for(var i=web3.eth.blockNumber; i>=0; i--)
+  {
+	table_src += '<tr>';
+	var block = web3.eth.getBlock(i);
+	table_src += '<td> <a href="block.html?id=' + i + '">' + i + '</a></td>';
+	table_src += '<td title="' + block.hash + '">' + block.hash.substring(0,12) + '...</td>';
+	table_src += '<td>' + block.difficulty + '</td>';
+	table_src += '<td title="' + block.miner + '">' + block.miner.substring(0,12) + '...</td>';
+	table_src += '<td>' + block.gasUsed + '</td>';
+	table_src += '<td>' + block.timestamp + '</td>';
+	table_src += '<td>' + block.transactions.length + '</td>';
+	table_src += '<td>' + block.uncles.length + '</td>';
+	table_src += '</tr>';
+  } 
+  	table_src += '</table>';
+  	document.getElementById('table').innerHTML = table_src;
+}
+</script>
+
+</head>
+
+<body onLoad="display();">
+
+  <div>
+    <h3>Ethereum Blocks Browser</h3>
+  </div>
+
+  <div id="table">
+  </div>
+  
+</body>
+</html>

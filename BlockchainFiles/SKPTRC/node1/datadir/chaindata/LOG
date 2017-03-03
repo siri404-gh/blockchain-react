@@ -1,0 +1,19 @@
+=============== Aug 5, 2016 (IST) ===============
+15:59:50.312124 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+15:59:50.313125 db@open opening
+15:59:50.313125 journal@recovery F·1
+15:59:50.315135 journal@recovery recovering @542
+15:59:50.341782 mem@flush created L0@549 N·4 S·209B "blo..um-,v557067":"\xc5\xd2F..\x85\xa4p,v557064"
+15:59:50.345783 db@janitor F·8 G·0
+15:59:50.345783 db@open done T·32.6575ms
+16:01:49.933865 table@compaction L0·1 -> L1·4 S·7MiB Q·557072
+16:01:50.149721 table@build created L1@552 N·6388 S·2MiB "Q?\xf3..\xb70n,v453502":"mip..\x00\x03\xe8,v28"
+16:01:50.389552 table@build created L1@553 N·4021 S·2MiB "mip..\x00\xc3P,v27":"rec..hdI,v130187"
+16:01:50.606233 table@build created L1@554 N·9254 S·2MiB "rec..̛\x87,v473547":"\xb9\x04I..\xfa\x83k,v199311"
+16:01:50.773019 table@build created L1@555 N·7930 S·1MiB "\xb9\x04\xb4..O\f\xc1,v50278":"\xff\xfd5..\xefoj,v459363"
+16:01:50.836178 table@compaction committed F-1 S-209B Ke·0 D·4 T·902.3131ms
+16:01:50.837190 table@remove removed @549
+16:01:50.838190 table@remove removed @545
+16:01:50.839185 table@remove removed @546
+16:01:50.841188 table@remove removed @547
+16:01:50.842192 table@remove removed @548

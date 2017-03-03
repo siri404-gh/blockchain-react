@@ -1,0 +1,1000 @@
+getCashPositionFromChain(DVPcontractAddress, address2, coinBaseAddress);
+getCashPositionFromChain(DVPcontractAddress, address3, coinBaseAddress);
+getAssetPosition(name1);
+getAssetPosition(name2);
+getAssetPosition(name3);
+doDVPsettlement("1000", name2, name1, "IBM", 100, 10)
+doDVPsettlement("2000", name3, name1, "WIT", 20, 15)
+doDVPsettlement("3000", name2, name3, "GOOG", 30, 10)
+web3.net.peerCount
+getCashPositionFromChain(DVPcontractAddress, address1, coinBaseAddress);
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+getCashPositionFromChain(DVPcontractAddress, address1, coinBaseAddress);
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+loadScript("./events.js")
+loadScript("./DVPresetValues.js")
+getCashPositionFromChain(DVPcontractAddress, address1, coinBaseAddress);
+getAssetPosition(name1);
+doDVPsettlement("1000", name2, name1, "IBM", 100, 10)
+web3.net.peerCount
+web3.admin.peers
+getCashPositionFromChain(DVPcontractAddress, address1, coinBaseAddress);
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+getCashPositionFromChain(DVPcontractAddress, address1, coinBaseAddress);
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+loadScript("./events.js")
+loadScript("./DVPresetValues.js")
+getCashPositionFromChain(DVPcontractAddress, address1, coinBaseAddress);
+getAssetPosition(name1);
+getAssetPosition(name2);
+doDVPsettlement("1000", name2, name1, "IBM", 100, 10)
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+getCashTransferPendingDetails("1000");
+getCashTransferCompletedDetails("1000");
+getCashPositionFromChain(DVPcontractAddress, address1, coinBaseAddress);
+web3.net.peerCount
+web3.admin.peers
+admin.setSolc("F:/SKPTRC/node1/solc");
+// Create the contract source code
+loadScript("./mining.js")
+admin.setSolc("F:/SKPTRC/node1/solc");
+// Create the contract source code
+var SkipTraceSource = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks); } function querySkipTraceRecord(uint customerID) { SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { address bankID = msg.sender; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks); } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } } }"
+// Compile the source with solc - Solidity Compiler
+var SkipTraceCompiled = eth.compile.solidity(SkipTraceSource)
+// Extracts info from contract, print json serialisation on console
+SkipTraceCompiled.CustomerSkipTrace.info
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+var coinBaseAddress = "0x16a385071c49074f2f86a2af6d8746813ecbc27f";
+var SkipTraceContractAddress = "0x209fa79fc9d859ba74f8d30cdda7ee0303694782";
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+// Create contract object
+var SkipTraceContract = web3.eth.contract(SkipTraceCompiled.CustomerSkipTrace.info.abiDefinition);
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+// Create the contract source code
+var SkipTraceSource = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } }"
+// Compile the source with solc - Solidity Compiler
+var SkipTraceCompiled = eth.compile.solidity(SkipTraceSource)
+// Extracts info from contract, print json serialisation on console
+SkipTraceCompiled.CustomerSkipTrace.info
+// Create contract object
+var SkipTraceContract = web3.eth.contract(SkipTraceCompiled.CustomerSkipTrace.info.abiDefinition);
+// Submit contract for inclusion in the Blockchain
+var SkipTrace = SkipTraceContract.new({ from:web3.eth.accounts[0], data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000}, function(e, contract){ if(!e) { if(!contract.address) { console.log("Contract transaction send: TransactionHash: " + contract.transactionHash + " waiting to be mined..."); } else { console.log("Contract mined! Address: " + contract.address); console.log(contract); } } })
+var SkipTraceContractAddress = "0x552b8ea433d06d4e686fcadfb19297e7426e7d5e";
+loadScript("events.js")
+SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction("profile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).reset.sendTransaction({from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+// Create the contract source code
+var SkipTraceSource = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } }"
+// Compile the source with solc - Solidity Compiler
+var SkipTraceCompiled = eth.compile.solidity(SkipTraceSource)
+// Extracts info from contract, print json serialisation on console
+SkipTraceCompiled.CustomerSkipTrace.info
+// Create contract object
+var SkipTraceContract = web3.eth.contract(SkipTraceCompiled.CustomerSkipTrace.info.abiDefinition);
+// Submit contract for inclusion in the Blockchain
+var SkipTrace = SkipTraceContract.new({ from:web3.eth.accounts[0], data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000}, function(e, contract){ if(!e) { if(!contract.address) { console.log("Contract transaction send: TransactionHash: " + contract.transactionHash + " waiting to be mined..."); } else { console.log("Contract mined! Address: " + contract.address); console.log(contract); } } })
+var SkipTraceContractAddress = "0x7bde5262e15fccf4bda9f2227c0083be68d74013";
+loadScript("./events.js")
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(0, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction("profile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(2, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).reset.sendTransaction({from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction("profile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(2, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction("profile02", "phone02", "addresses02", "employer02", "products02", "remarks02", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(2, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).reset.sendTransaction({from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction("profile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(2, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).updateSkipTraceRecord.sendTransaction(1, "updatedProfile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).updateSkipTraceRecord.sendTransaction(2, "updatedProfile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).updateSkipTraceRecord.sendTransaction(3, "updatedProfile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+// Create the contract source code
+var SkipTraceSource = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } }"
+// Compile the source with solc - Solidity Compiler
+var SkipTraceCompiled = eth.compile.solidity(SkipTraceSource)
+// Extracts info from contract, print json serialisation on console
+SkipTraceCompiled.CustomerSkipTrace.info
+// Create contract object
+var SkipTraceContract = web3.eth.contract(SkipTraceCompiled.CustomerSkipTrace.info.abiDefinition);
+// Submit contract for inclusion in the Blockchain
+var SkipTrace = SkipTraceContract.new({ from:web3.eth.accounts[0], data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000}, function(e, contract){ if(!e) { if(!contract.address) { console.log("Contract transaction send: TransactionHash: " + contract.transactionHash + " waiting to be mined..."); } else { console.log("Contract mined! Address: " + contract.address); console.log(contract); } } })
+var SkipTraceContractAddress = "0xde1a6f3fd9f195eeb556cf909281cf2b6232d5f7";
+loadScript("events.js");
+SkipTraceContract.at(SkipTraceContractAddress).updateSkipTraceRecord.sendTransaction(1, "updatedProfile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction("profile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).updateSkipTraceRecord.sendTransaction(1, "updatedProfile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).updateSkipTraceRecord.sendTransaction(2, "updatedProfile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+// Create the contract source code
+var SkipTraceSource = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getNoOfRecords() returns (uint sequenceNo) { return sequenceNo; } }"
+// Compile the source with solc - Solidity Compiler
+var SkipTraceCompiled = eth.compile.solidity(SkipTraceSource)
+// Extracts info from contract, print json serialisation on console
+SkipTraceCompiled.CustomerSkipTrace.info
+// Create contract object
+var SkipTraceContract = web3.eth.contract(SkipTraceCompiled.CustomerSkipTrace.info.abiDefinition);
+// Submit contract for inclusion in the Blockchain
+var SkipTrace = SkipTraceContract.new({ from:web3.eth.accounts[0], data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000}, function(e, contract){ if(!e) { if(!contract.address) { console.log("Contract transaction send: TransactionHash: " + contract.transactionHash + " waiting to be mined..."); } else { console.log("Contract mined! Address: " + contract.address); console.log(contract); } } })
+// Create the contract source code
+var SkipTraceSource = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() returns (uint sequenceNo) { SkipTraceRecordCountEvent(sequenceNo); } }"
+// Compile the source with solc - Solidity Compiler
+var SkipTraceCompiled = eth.compile.solidity(SkipTraceSource)
+// Extracts info from contract, print json serialisation on console
+SkipTraceCompiled.CustomerSkipTrace.info
+// Create contract object
+var SkipTraceContract = web3.eth.contract(SkipTraceCompiled.CustomerSkipTrace.info.abiDefinition);
+// Submit contract for inclusion in the Blockchain
+var SkipTrace = SkipTraceContract.new({ from:web3.eth.accounts[0], data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000}, function(e, contract){ if(!e) { if(!contract.address) { console.log("Contract transaction send: TransactionHash: " + contract.transactionHash + " waiting to be mined..."); } else { console.log("Contract mined! Address: " + contract.address); console.log(contract); } } })
+var SkipTraceContractAddress = "0xa79ba39a1da65a19a39bbffc9b22e4fbc4b2717d";
+loadScript("events.js")
+SkipTraceContract.at(SkipTraceContractAddress).getRecordCount.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction("profile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).getRecordCount.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).getRecordCount.sendTransaction({from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction("profile02", "phone02", "addresses02", "employer02", "products02", "remarks02", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).getRecordCount.sendTransaction({from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(2, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).getRecordCount.sendTransaction({from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+// Create the contract source code
+var SkipTraceSource = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceQueryEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceUpdateEvent(uint customerID, address bankID, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID, custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() { SkipTraceRecordCountEvent(sequenceNo); } }"
+// Compile the source with solc - Solidity Compiler
+var SkipTraceCompiled = eth.compile.solidity(SkipTraceSource)
+// Extracts info from contract, print json serialisation on console
+SkipTraceCompiled.CustomerSkipTrace.info
+// Create contract object
+var SkipTraceContract = web3.eth.contract(SkipTraceCompiled.CustomerSkipTrace.info.abiDefinition);
+// Submit contract for inclusion in the Blockchain
+var SkipTrace = SkipTraceContract.new({ from:web3.eth.accounts[0], data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000}, function(e, contract){ if(!e) { if(!contract.address) { console.log("Contract transaction send: TransactionHash: " + contract.transactionHash + " waiting to be mined..."); } else { console.log("Contract mined! Address: " + contract.address); console.log(contract); } } })
+var SkipTraceContractAddress = "0x5af0669b0d83b52664847f41539b0b7954bea365";
+loadScript("events.js")
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction("profile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).getRecordCount.sendTransaction({from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction("profile02", "phone02", "addresses02", "employer02", "products02", "remarks02", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).updateSkipTraceRecord.sendTransaction(1, "updatedProfile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).getRecordCount.sendTransaction({from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).reset.sendTransaction({from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).getRecordCount.sendTransaction({from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction("profile01", "phone01", "addresses01", "employer01", "products01", "remarks01", {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).getRecordCount.sendTransaction({from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+var str = "\"\'|";
+str
+var res = (str.replace("\"", "~")).replace("\'", "~")).replace("|", "~");
+var res = ((str.replace("\"", "~")).replace("\'", "~"))).replace("|", "~");
+var str = "\"\'|";
+var res = ((str.replace("\"", "~")).replace("\'", "~"))).replace("|", "~");
+var res = ((str.replace("\"", "~")).replace("\'", "~"))
+res
+var res = ((str.replace("\"", "~")).replace("\'", "~")).replace("|", "~")
+res
+function cleanUp(string str){
+ return((str.replace("\"", "~")).replace("\'", "~")).replace("|", "~");
+}
+function cleanUp(str){
+ return((str.replace("\"", "~")).replace("\'", "~")).replace("|", "~");
+}
+cleanUp(str)
+var str = "\"\'|:";
+function cleanUp(str){
+ return(((str.replace("\"", "~")).replace("\'", "~")).replace("|", "~")).replace(":", "~");
+}
+cleanUp(str)
+str
+function addSkipTraceRecord(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks)
+){
+var profile = "firstName:" + cleanUp(firstName) + "|" + "middleName:" + cleanUp(middleName) + "|" + "lastName:" + cleanUp(lastName) + "|" + "aliasName:" + cleanUp(aliasName) + "|" + "DOB:" + cleanUp(DOB) + "|" + "SSN:" + cleanUp(SSN) + "|" + "passportNumber:" + cleanUp(passportNumber);
+var phone = "homePhone1:" + cleanUp(homePhone1) + "|" + "homePhone2:" + cleanUp(homePhone2) + "|" + "homePhone3:" + cleanUp(homePhone3) + "|" + "workPhone1:" + cleanUp(workPhone1) + "|" + "workPhone2:" + cleanUp(workPhone2) + "|" + "workPhone3:" + cleanUp(workPhone3) + "|" + "workPhone2:" + cleanUp(workPhone2) + "|" + "workPhone3:" + cleanUp(workPhone3) + "|" + "mobilePhone1:" + cleanUp(mobilePhone1) + "|" + "mobilePhone2:" + cleanUp(mobilePhone2) + "|" + "mobilePhone3:" + cleanUp(mobilePhone3);
+var address = "currentAddress1:" + cleanUp(currentAddress1) + "|" + "currentAddress2:" + cleanUp(currentAddress2) + "|" + "currentAddress3:" + cleanUp(currentAddress3);
+var employer = "employerName1:" + cleanUp(currentAddress1) + "|" + "employerName2:" + cleanUp(employerName2) + "|" + "employerName3:" + cleanUp(employerName3);
+var product = "productName1:" + cleanUp(productName1) + "|" + "productName2:" + cleanUp(productName2) + "|" + "productName3:" + cleanUp(productName3);
+var remark = cleanUp(remarks);
+console.log(profile);
+console.log(phone);
+console.log(address);
+console.log(employer);
+console.log(remark);
+// var transHash = SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction(profile, phone, address, employer, product, remark, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+// console.log("Trans hash generated from Blockchain ->  " + transHash);
+// console.log(" ");
+}
+function cleanUp(str){
+ return(((str.replace("\"", "~")).replace("\'", "~")).replace("|", "~")).replace(":", "~");
+}
+firstName = "Allen"; 
+middleName = "Stupper";  
+lastName = "Brook"
+aliasName = "Ridhi";  
+DOB = "4-Aug-69";  
+SSN = "034-594-7778";  
+passportNumber = "CN674598B";  
+homePhone1 = "+1-456-786-3106";  
+homePhone2 = "+1-724-247-3088";  
+homePhone3 = "+1-603-214-3670";  
+workPhone1 = " +1-456-752-0942";  
+workPhone2 = " +1-456-956-0349 X702";  
+workPhone3 = " +1-456-359-9377";  
+mobilePhone1 = "+1-513-675-4138";  
+mobilePhone2 = "+1-513-795-9996";  
+mobilePhone3 = "+1-579-996-5999";  
+currentAddress1 = "862, Wilto Drive, Nuker Lane, Albany, NY-12305";  
+currentAddress2 = "481, New Park Street, Birlank Lace Road, Kingston, NY 17842";  
+currentAddress3 = "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545";  
+employerName1 = "KERNRUB Specialiaty";  
+employerName2 = "Gencom Ltd";  
+employerName3 = "Sardine Finneche";  
+productName1 = "Mastercard Gold";  
+productName2 = "Personal Loan";  
+productName3 = "Visacard Gold";  
+remarks  = "A long time defaulter and could not be traced for months"; 
+addSkipTraceRecord(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks)
+var profile = "firstName:" + cleanUp(firstName) + "|" + "middleName:" + cleanUp(middleName) + "|" + "lastName:" + cleanUp(lastName) + "|" + "aliasName:" + cleanUp(aliasName) + "|" + "DOB:" + cleanUp(DOB) + "|" + "SSN:" + cleanUp(SSN) + "|" + "passportNumber:" + cleanUp(passportNumber);
+var phone = "homePhone1:" + cleanUp(homePhone1) + "|" + "homePhone2:" + cleanUp(homePhone2) + "|" + "homePhone3:" + cleanUp(homePhone3) + "|" + "workPhone1:" + cleanUp(workPhone1) + "|" + "workPhone2:" + cleanUp(workPhone2) + "|" + "workPhone3:" + cleanUp(workPhone3) + "|" + "workPhone2:" + cleanUp(workPhone2) + "|" + "workPhone3:" + cleanUp(workPhone3) + "|" + "mobilePhone1:" + cleanUp(mobilePhone1) + "|" + "mobilePhone2:" + cleanUp(mobilePhone2) + "|" + "mobilePhone3:" + cleanUp(mobilePhone3);
+var address = "currentAddress1:" + cleanUp(currentAddress1) + "|" + "currentAddress2:" + cleanUp(currentAddress2) + "|" + "currentAddress3:" + cleanUp(currentAddress3);
+var employer = "employerName1:" + cleanUp(currentAddress1) + "|" + "employerName2:" + cleanUp(employerName2) + "|" + "employerName3:" + cleanUp(employerName3);
+var product = "productName1:" + cleanUp(productName1) + "|" + "productName2:" + cleanUp(productName2) + "|" + "productName3:" + cleanUp(productName3);
+var remark = cleanUp(remarks);
+function addSkipTraceRecord(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks)
+){
+var profile = "firstName:" + cleanUp(firstName) + "|" + "middleName:" + cleanUp(middleName) + "|" + "lastName:" + cleanUp(lastName) + "|" + "aliasName:" + cleanUp(aliasName) + "|" + "DOB:" + cleanUp(DOB) + "|" + "SSN:" + cleanUp(SSN) + "|" + "passportNumber:" + cleanUp(passportNumber);
+var phone = "homePhone1:" + cleanUp(homePhone1) + "|" + "homePhone2:" + cleanUp(homePhone2) + "|" + "homePhone3:" + cleanUp(homePhone3) + "|" + "workPhone1:" + cleanUp(workPhone1) + "|" + "workPhone2:" + cleanUp(workPhone2) + "|" + "workPhone3:" + cleanUp(workPhone3) + "|" + "workPhone2:" + cleanUp(workPhone2) + "|" + "workPhone3:" + cleanUp(workPhone3) + "|" + "mobilePhone1:" + cleanUp(mobilePhone1) + "|" + "mobilePhone2:" + cleanUp(mobilePhone2) + "|" + "mobilePhone3:" + cleanUp(mobilePhone3);
+var address = "currentAddress1:" + cleanUp(currentAddress1) + "|" + "currentAddress2:" + cleanUp(currentAddress2) + "|" + "currentAddress3:" + cleanUp(currentAddress3);
+var employer = "employerName1:" + cleanUp(currentAddress1) + "|" + "employerName2:" + cleanUp(employerName2) + "|" + "employerName3:" + cleanUp(employerName3);
+var product = "productName1:" + cleanUp(productName1) + "|" + "productName2:" + cleanUp(productName2) + "|" + "productName3:" + cleanUp(productName3);
+var remark = cleanUp(remarks);
+console.log(profile);
+console.log(phone);
+console.log(address);
+console.log(employer);
+console.log(remark);
+// var transHash = SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction(profile, phone, address, employer, product, remark, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+// console.log("Trans hash generated from Blockchain ->  " + transHash);
+// console.log(" ");
+}
+function addSkipTraceRecord(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks)
+{
+var profile = "firstName:" + cleanUp(firstName) + "|" + "middleName:" + cleanUp(middleName) + "|" + "lastName:" + cleanUp(lastName) + "|" + "aliasName:" + cleanUp(aliasName) + "|" + "DOB:" + cleanUp(DOB) + "|" + "SSN:" + cleanUp(SSN) + "|" + "passportNumber:" + cleanUp(passportNumber);
+var phone = "homePhone1:" + cleanUp(homePhone1) + "|" + "homePhone2:" + cleanUp(homePhone2) + "|" + "homePhone3:" + cleanUp(homePhone3) + "|" + "workPhone1:" + cleanUp(workPhone1) + "|" + "workPhone2:" + cleanUp(workPhone2) + "|" + "workPhone3:" + cleanUp(workPhone3) + "|" + "workPhone2:" + cleanUp(workPhone2) + "|" + "workPhone3:" + cleanUp(workPhone3) + "|" + "mobilePhone1:" + cleanUp(mobilePhone1) + "|" + "mobilePhone2:" + cleanUp(mobilePhone2) + "|" + "mobilePhone3:" + cleanUp(mobilePhone3);
+var address = "currentAddress1:" + cleanUp(currentAddress1) + "|" + "currentAddress2:" + cleanUp(currentAddress2) + "|" + "currentAddress3:" + cleanUp(currentAddress3);
+var employer = "employerName1:" + cleanUp(currentAddress1) + "|" + "employerName2:" + cleanUp(employerName2) + "|" + "employerName3:" + cleanUp(employerName3);
+var product = "productName1:" + cleanUp(productName1) + "|" + "productName2:" + cleanUp(productName2) + "|" + "productName3:" + cleanUp(productName3);
+var remark = cleanUp(remarks);
+console.log(profile);
+console.log(phone);
+console.log(address);
+console.log(employer);
+console.log(remark);
+// var transHash = SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction(profile, phone, address, employer, product, remark, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+// console.log("Trans hash generated from Blockchain ->  " + transHash);
+// console.log(" ");
+}
+function addSkipTraceRecord(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks)
+{
+var profile = "firstName:" + cleanUp(firstName) + "|" + "middleName:" + cleanUp(middleName) + "|" + "lastName:" + cleanUp(lastName) + "|" + "aliasName:" + cleanUp(aliasName) + "|" + "DOB:" + cleanUp(DOB) + "|" + "SSN:" + cleanUp(SSN) + "|" + "passportNumber:" + cleanUp(passportNumber);
+var phone = "homePhone1:" + cleanUp(homePhone1) + "|" + "homePhone2:" + cleanUp(homePhone2) + "|" + "homePhone3:" + cleanUp(homePhone3) + "|" + "workPhone1:" + cleanUp(workPhone1) + "|" + "workPhone2:" + cleanUp(workPhone2) + "|" + "workPhone3:" + cleanUp(workPhone3) + "|" + "mobilePhone1:" + cleanUp(mobilePhone1) + "|" + "mobilePhone2:" + cleanUp(mobilePhone2) + "|" + "mobilePhone3:" + cleanUp(mobilePhone3);
+var address = "currentAddress1:" + cleanUp(currentAddress1) + "|" + "currentAddress2:" + cleanUp(currentAddress2) + "|" + "currentAddress3:" + cleanUp(currentAddress3);
+var employer = "employerName1:" + cleanUp(employerName1) + "|" + "employerName2:" + cleanUp(employerName2) + "|" + "employerName3:" + cleanUp(employerName3);
+var product = "productName1:" + cleanUp(productName1) + "|" + "productName2:" + cleanUp(productName2) + "|" + "productName3:" + cleanUp(productName3);
+var remark = cleanUp(remarks);
+console.log(profile);
+console.log(phone);
+console.log(address);
+console.log(employer);
+console.log(remark);
+// var transHash = SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction(profile, phone, address, employer, product, remark, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+// console.log("Trans hash generated from Blockchain ->  " + transHash);
+// console.log(" ");
+}
+SkipTraceContract.at(SkipTraceContractAddress).reset.sendTransaction({from: coinBaseAddress, 
+data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, 
+data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).getRecordCount.sendTransaction({from: coinBaseAddress, 
+data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+function addSkipTraceRecord(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks)
+{
+var profile = "firstName:" + cleanUp(firstName) + "|" + "middleName:" + cleanUp(middleName) + "|" + "lastName:" + cleanUp(lastName) + "|" + "aliasName:" + cleanUp(aliasName) + "|" + "DOB:" + cleanUp(DOB) + "|" + "SSN:" + cleanUp(SSN) + "|" + "passportNumber:" + cleanUp(passportNumber);
+var phone = "homePhone1:" + cleanUp(homePhone1) + "|" + "homePhone2:" + cleanUp(homePhone2) + "|" + "homePhone3:" + cleanUp(homePhone3) + "|" + "workPhone1:" + cleanUp(workPhone1) + "|" + "workPhone2:" + cleanUp(workPhone2) + "|" + "workPhone3:" + cleanUp(workPhone3) + "|" + "mobilePhone1:" + cleanUp(mobilePhone1) + "|" + "mobilePhone2:" + cleanUp(mobilePhone2) + "|" + "mobilePhone3:" + cleanUp(mobilePhone3);
+var address = "currentAddress1:" + cleanUp(currentAddress1) + "|" + "currentAddress2:" + cleanUp(currentAddress2) + "|" + "currentAddress3:" + cleanUp(currentAddress3);
+var employer = "employerName1:" + cleanUp(employerName1) + "|" + "employerName2:" + cleanUp(employerName2) + "|" + "employerName3:" + cleanUp(employerName3);
+var product = "productName1:" + cleanUp(productName1) + "|" + "productName2:" + cleanUp(productName2) + "|" + "productName3:" + cleanUp(productName3);
+var remark = cleanUp(remarks);
+var transHash = SkipTraceContract.at(SkipTraceContractAddress).addSkipTraceRecord.sendTransaction(profile, phone, address, employer, product, remark, {from: coinBaseAddress, data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+console.log("Trans hash generated from Blockchain ->  " + transHash);
+console.log(" ");
+}
+addSkipTraceRecord(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks);
+loadScript("new 1.js");
+addSkipTraceRecord(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks);
+SkipTraceContract.at(SkipTraceContractAddress).reset.sendTransaction({from: coinBaseAddress, 
+data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+addSkipTraceRecord(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks);
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, 
+data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+var SkipTraceSource = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address[2] bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankIDcreate, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp, address bankIDlastModified); event SkipTraceQueryEvent(uint customerID, address bankIDcreate, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp, address bankIDlastModified); event SkipTraceUpdateEvent(uint customerID, address bankIDcreate, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp, address bankIDlastModified); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID[0] = bankID; custDataOf[customerID].bankID[1] = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp, bankID); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID[0], custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp, custDataOf[customerID].bankID[1]); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID[1] = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, custDataOf[customerID].bankID[0], profile, phone, addresses, employer, products, remarks, timestamp, bankID); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() { SkipTraceRecordCountEvent(sequenceNo); } }"
+// Compile the source with solc - Solidity Compiler
+var SkipTraceCompiled = eth.compile.solidity(SkipTraceSource)
+var SkipTraceSource = "contract Sequence { uint sequenceNo; function Sequence() { sequenceNo = 0; } function nextVal() returns (uint number) { return ++sequenceNo; } } contract CustomerDetails { struct CustomerData { uint customerID; address[2] bankID; string profile; string phone; string addresses; string employer; string products; string remarks; uint timestamp; } mapping (uint => CustomerData) public custDataOf; } contract CustomerSkipTrace is Sequence, CustomerDetails { event SkipTraceAddEvent(uint customerID, address bankIDcreate, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp, address bankIDlastModified); event SkipTraceQueryEvent(uint customerID, address bankIDcreate, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp, address bankIDlastModified); event SkipTraceUpdateEvent(uint customerID, address bankIDcreate, string profile, string phone, string addresses, string employer, string products, string remarks, uint timestamp, address bankIDlastModified); event SkipTraceRecordCountEvent(uint recordCount); function addSkipTraceRecord(string profile, string phone, string addresses, string employer, string products, string remarks) { uint customerID = nextVal(); address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID[0] = bankID; custDataOf[customerID].bankID[1] = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceAddEvent(customerID, bankID, profile, phone, addresses, employer, products, remarks, timestamp, bankID); } function querySkipTraceRecord(uint customerID) { if (customerID>0 && customerID<=sequenceNo) SkipTraceQueryEvent(custDataOf[customerID].customerID, custDataOf[customerID].bankID[0], custDataOf[customerID].profile, custDataOf[customerID].phone, custDataOf[customerID].addresses, custDataOf[customerID].employer, custDataOf[customerID].products, custDataOf[customerID].remarks, custDataOf[customerID].timestamp, custDataOf[customerID].bankID[1]); } function updateSkipTraceRecord(uint customerID, string profile, string phone, string addresses, string employer, string products, string remarks) { if (customerID>0 && customerID<=sequenceNo) { address bankID = msg.sender; uint timestamp = now; custDataOf[customerID].customerID = customerID; custDataOf[customerID].bankID[1] = bankID; custDataOf[customerID].profile = profile; custDataOf[customerID].phone = phone; custDataOf[customerID].addresses = addresses; custDataOf[customerID].employer = employer; custDataOf[customerID].products = products; custDataOf[customerID].remarks = remarks; custDataOf[customerID].timestamp = timestamp; SkipTraceUpdateEvent(customerID, custDataOf[customerID].bankID[0], profile, phone, addresses, employer, products, remarks, timestamp, bankID); } } function reset() { for (uint i = 1; i<=sequenceNo; i++){ delete custDataOf[i]; } sequenceNo = 0; } function getRecordCount() { SkipTraceRecordCountEvent(sequenceNo); } }"
+SkipTraceSource
+var SkipTraceCompiled = eth.compile.solidity(SkipTraceSource)
+loadScript("new 1.js")
+updateSkipTraceRecord(1, firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, 
+homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, 
+currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, "Updated Record");
+loadScript("new 1.js")
+addSkipTraceRecord(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, 
+workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, 
+currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks);
+SkipTraceContract.at(SkipTraceContractAddress).reset.sendTransaction({from: coinBaseAddress, 
+data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+addSkipTraceRecord(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, 
+workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, 
+currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks);
+updateSkipTraceRecord(1, firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, 
+homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, 
+currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, "Updated Record");
+SkipTraceContract.at(SkipTraceContractAddress).querySkipTraceRecord.sendTransaction(1, {from: coinBaseAddress, 
+data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+SkipTraceContract.at(SkipTraceContractAddress).getRecordCount.sendTransaction({from: coinBaseAddress, 
+data:SkipTraceCompiled.CustomerSkipTrace.code, gas: 10000000});
+loadScript("new 1.js");
+getRecordCount();
+querySkipTraceRecord(1);
+querySkipTraceRecord(2);
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+getRecordCount();
+querySkipTraceRecord(1);
+loadScript("utils.js")
+getRecordCountOnChain();
+addSkipTraceRecordOnChain(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, 
+homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, 
+currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks);
+updateSkipTraceRecordOnChain(1, firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, 
+homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, 
+currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, "Updated Record");
+querySkipTraceRecordOnChain(1);
+querySkipTraceRecordOnChain(2);
+getRecordCountOnChain();
+resetOnChain();
+getRecordCountOnChain();
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+getRecordCountOnChain();
+resetOnChain();
+addSkipTraceRecordOnChain(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, 
+homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, 
+currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks);
+updateSkipTraceRecordOnChain(1, firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, 
+homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, 
+currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, "Updated Record");
+querySkipTraceRecordOnChain(1);
+getRecordCountOnChain();
+resetOnChain();
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-
+724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513-
+795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, 
+Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine 
+Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1- 
+724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 
+795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, 
+Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine 
+Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months"); 
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-
+724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 
+795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, 
+Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine 
+Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months"); 
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+updateSkipTraceRecordOnChain(1, "John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+updateSkipTraceRecordOnChain(1, "John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "1881 Mitchell Ave UNIT, 5000 Watkins Way, CA 92780", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "Updated - Changed Address 1");  
+resetOnChain();
+getRecordCountOnChain();
+loadScript("presetValues.js")
+getRecordCountOnChain();
+querySkipTraceRecordOnChain(1);
+loadScript("./presetValues.js")
+resetOnChain();
+loadScript("./presetValues.js")
+resetOnChain();
+getRecordCountOnChain();
+geth --genesis ./genesis.json --datadir ./datadir --networkid 123 --ipcdisable --port 30303 console
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+updateSkipTraceRecordOnChain(11, "John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "1881 Mitchell Ave UNIT, 5000 Watkins Way, CA 92780", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "Updated - Changed Address 1");  
+querySkipTraceRecordOnChain(1);
+querySkipTraceRecordOnChain(11);
+resetOnChain();
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+loadScript("./events.js")
+function resetOnDB()
+{
+web3.db.putString("CreateLog", logString, "[]");
+web3.db.putString("UpdateLog", logString, "[]");
+}
+function resetOnDB()
+{
+web3.db.putString("CreateLog", "logString", "[]");
+web3.db.putString("UpdateLog", "logString", "[]");
+}
+loadScript("./events.js")
+resetOnChain();
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+resetOnChain();
+resetOnDB()
+function resetOnDB()
+{
+web3.db.putString("CreateLog", "logString", "[]");
+web3.db.putString("UpdateLog", "logString", "[]");
+}
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+web3.db.getString("CreateLog", "logString")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+loadScript("events.js");
+resetOnChain();
+resetOnDB()
+web3.db.getString("CreateLog", "logString")
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+web3.db.getString("CreateLog", "logString")
+loadScript("events.js");
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+web3.db.getString("CreateLog", "logString")
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+var objResult = JSON.parse(web3.db.getString("CreateLog", "logString"));
+objResult[objResult.length] = JSON.parse(deSerialize(JSON.stringify(result.args)));
+web3.db.getString("CreateLog", "logString")
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+web3.db.getString("CreateLog", "logString")
+loadScript("events.js");
+web3.db.getString("CreateLog", "logString")
+function getCreateLogFromDB()
+{
+return web3.db.putString("CreateLog", "logString");
+}
+function getCreateLogFromDB()
+{
+return web3.db.getString("CreateLog", "logString");
+}
+function getCreateLogFromDB()
+{
+return web3.db.getString("CreateLog", "logString");
+}
+function getCreateLogFromDB()
+{
+return web3.db.getString("CreateLog", "logString")
+}
+web3.db.getString("CreateLog", "logString")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+ printCreateLogStringFromDB()
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+ printCreateLogStringFromDB()
+updateSkipTraceRecordOnChain(11, "John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "1881 Mitchell Ave UNIT, 5000 Watkins Way, CA 92780", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "Updated - Changed Address 1");  
+ printCreateLogStringFromDB()
+updateSkipTraceRecordOnChain(11, "John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "1881 Mitchell Ave UNIT, 5000 Watkins Way, CA 92780", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "Updated - Changed Address 1");  
+ printCreateLogStringFromDB()
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+printCreateLogStringFromDB()
+printUpdateLogStringFromDB()
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+printCreateLogStringFromDB()
+updateSkipTraceRecordOnChain(11, "John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "1881 Mitchell Ave UNIT, 5000 Watkins Way, CA 92780", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "Updated - Changed Address 1");  
+printUpdateLogStringFromDB()
+updateSkipTraceRecordOnChain(11, "John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "1881 Mitchell Ave UNIT, 5000 Watkins Way, CA 92780", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "Updated - Changed Address 1");  
+printUpdateLogStringFromDB()
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+getRecordCountOnChain();
+printCreateLogStringFromDB()
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+getRecordCountOnChain();
+updateSkipTraceRecordOnChain(11, "John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "1881 Mitchell Ave UNIT, 5000 Watkins Way, CA 92780", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "Updated - Catch me if you can!!");  
+printUpdateLogStringFromDB()
+getRecordCountOnChain();
+resetOnChain();
+getRecordCountOnChain();
+printUpdateLogStringFromDB()
+printCreateLogStringFromDB()
+resetOnDB();
+printCreateLogStringFromDB()
+printUpdateLogStringFromDB()
+curl
+web3
+loadScript("./initialize.js")
+loadScript("./utils.js")
+SkipTraceCompiled
+loadScript("./utils.js")
+codecompiled
+loadScript("./utils.js")
+-- Initialize positions in chain and db + other paratemeters
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+getRecordCountOnChain();
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+SkipTraceCompiled
+loadScript("./utils.js")
+SkipTraceCompiled1
+loadScript("./utils.js")
+SkipTraceCompiled
+SkipTraceCompiled.SkipTrace
+// Create contract object
+var SkipTraceContract = web3.eth.contract(SkipTraceCompiled.CustomerSkipTrace.info.abiDefinition);
+SkipTraceCompiled.SkipTrace.info
+SkipTraceCompiled.CustomerSkipTrace.info
+geth --genesis ./genesis.json --datadir ./datadir --networkid 123 --ipcdisable --port 30301 console
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+getRecordCountOnChain();
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+getRecordCountOnChain();
+web3.net.peerCount
+web3.admin.peers
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+getRecordCountOnChain();
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+updateSkipTraceRecordOnChain(11, "John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "1881 Mitchell Ave UNIT, 5000 Watkins Way, CA 92780", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "Updated - Catch me if you can!!");  
+printCreateLogStringFromDB()
+admin
+loadScript("./initialize.js")
+admin.startRPC("127.0.0.1", 8545, "*", "web3,db,net,etc") 
+admin
+admin.stopRPC()
+admin.startRPC("127.0.0.1", 8545, "*", "web3,db,net,etc")
+admin.stopRPC()
+admin.startRPC("127.0.0.1", 8001, "*", "web3,db,net,eth")
+admin.startRPC("127.0.0.1", 8545, "*", "web3,db,net,eth")
+admin.stopRPC()
+admin.startRPC("127.0.0.1", 8545, "*", "web3,db,net,eth")
+admin.stopRPC()
+admin.startRPC("127.0.0.1", 8545, "*", "web3,db,net,eth")
+admin.startRPC("127.0.0.1", 8545, "*", "web3,db,net,eth,admin");
+admin.startRPC("127.0.0.1", 8545, "*", "web3,db,net,eth");
+admin
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_mining","params":[],"id":71}'
+web3.eth.contract
+SkipTraceCompiled
+loadScript("./initialize.js")
+loadScript("./utils.js")
+web3
+SkipTraceContract.at(SkipTraceContractAddress)
+loadScript("./utils.js")
+getRecordCountOnChain();
+loadScript("./presetValues.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+getRecordCountOnChain();
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+getRecordCountOnChain();
+loadScript("./initialize.js")
+loadScript("./utils.js")
+pass1
+getRecordCountOnChain();
+printCreateLogStringFromDB()
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+web3
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+loadScript("./presetValues.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+getRecordCountOnChain();
+getRecordCountOnChain1();
+loadScript("./events.js")\
+loadScript("./events.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+eth.mining
+if (web3.eth.mining = "true") {
+alert("Mining is is progress")
+} 
+if(web3.mining = true) console.log("true");
+if(web3.mining = "true") console.log("true");
+if(web3.eth.mining = "true") console.log("true");
+if(web3.eth.mining = "true") console.log("xxx");
+web3.eth.mining
+if(web3.eth.mining = true) console.log("xxx");
+if(web3.eth.mining = false) console.log("xxx");
+web3.eth.mining
+if(web3.eth.mining = "false") console.log("xxx");
+if(web3.eth.mining = "true") console.log("xxx");
+if(web3.eth.mining = "true") {console.log("xxx")};
+if(web3.eth.mining = "false") {console.log("xxx")};
+if(web3.eth.mining == "false") {console.log("xxx")};
+if(web3.eth.mining == "true") {console.log("xxx")};
+if(web3.eth.mining == false) {console.log("xxx")};
+if(web3.eth.mining == true) {console.log("xxx")};
+if(web3.eth.mining == false) {console.log("xxx")};
+if(web3.eth.mining == true) {console.log("xxx")};
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+loadScript("./events.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+pass1pa
+pas
+pass1
+getRecordCountOnChain();
+getRecordCountOnChain1();
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+loadScript("./presetValues.js")
+web.eth.mining == true
+web3.eth.mining == true
+web3.eth.mining == false
+web3.eth.mining != false
+web3.eth.mining != true
+loadScript("./presetValues.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./presetValues.js")
+querySkipTraceRecordOnChain(1);
+printQueryLogStringFromDB();
+loadScript("./events.js")
+printQueryLogStringFromDB();
+loadScript("./utils.js")
+printCreateLogFromDB();
+printUpdateLogFromDB();
+printQueryLogFromDB();
+updateSkipTraceRecordOnChain(1, "John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "1881 Mitchell Ave UNIT, 5000 Watkins Way, CA 92780", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "Updated - Catch me if you can!!");  
+printUpdateLogFromDB();
+querySkipTraceRecordOnChain(1);
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+loadScript("./presetValues.js")
+updateSkipTraceRecordOnChain(1, "John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "1881 Mitchell Ave UNIT, 5000 Watkins Way, CA 92780", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "Updated - Catch me if you can!!");  
+querySkipTraceRecordOnChain(1);
+printCreateLogFromDB();
+printUpdateLogFromDB();
+printQueryLogFromDB();
+printUpdateLogFromDB();
+getRecordCountOnChain();
+loadScript("./initialize.js")
+loadScript("./utils.js")
+function getCustomerRecord(customerID, transHash)
+{
+var obj = web3.eth.pendingTransactions;
+isFound = "false"
+for (i = 0; i < obj.length; i++) {
+console.log("");
+console.log("------ Record No: " + (i+1) +"-----");
+if (obj[i].hash == transHash) isFound = "true";
+}
+ return;
+}
+function getCustomerRecord(customerID, transHash)
+{
+var obj = web3.eth.pendingTransactions;
+isFound = "false"
+for (i = 0; i < obj.length; i++) {
+console.log("");
+console.log("------ Record No: " + (i+1) +"-----");
+if (obj[i].hash == transHash) isFound = "true";
+}
+}
+function getCustomerRecord(customerID, transHash)
+{
+var obj = web3.eth.pendingTransactions;
+isFound = "false";
+for (i = 0; i < obj.length; i++) {
+console.log("");
+console.log("------ Record No: " + (i+1) +"-----");
+if (obj[i].hash == transHash) isFound = "true";
+}
+}function getCustomerRecord(customerID, transHash)
+{
+var obj = web3.eth.pendingTransactions;
+for (i = 0; i < obj.length; i++) {
+console.log("");
+console.log("------ Record No: " + (i+1) +"-----");
+if (obj[i].hash == transHash) return null;
+}
+}
+function getCustomerRecord(customerID, transHash)
+{
+var obj = web3.eth.pendingTransactions;
+for (i = 0; i < obj.length; i++) {
+if (obj[i].hash == transHash) console.log("found");
+}
+}
+var obj = web3.eth.pendingTransactions;
+web3.eth.pendingTransactions
+function getCustomerRecord(customerID, transHash)
+{
+var obj = web3.eth.pendingTransactions;
+if (obj != null){
+for (i = 0; i < obj.length; i++) {
+if (obj[i].hash == transHash) console.log("found");
+}
+}
+}
+function getCustomerRecord(customerID, transHash)
+{
+var obj = web3.eth.pendingTransactions;
+if (obj != null){
+for (i = 0; i < obj.length; i++) {
+if (obj[i].hash == transHash) return null;
+}
+}
+}
+function getCustomerRecord(customerID, transHash)
+{
+var obj = web3.eth.pendingTransactions;
+if (obj != null){
+for (i = 0; i < obj.length; i++) {
+if (obj[i].hash == transHash) return ;
+}
+}
+}
+function getCustomerRecord(customerID, transHash)
+{
+var obj = web3.eth.pendingTransactions;
+if (obj != null){
+for (i = 0; i < obj.length; i++) {
+if (obj[i].hash == transHash) {} ;
+}
+}
+return null;
+}
+function getCustomerRecord(customerID, transHash)
+{
+var obj = web3.eth.pendingTransactions;
+if (obj != null){
+for (i = 0; i < obj.length; i++) {
+if (obj[i].hash == transHash) {} ;
+}
+};
+return null;
+}
+function getCustomerRecord(customerID, transHash)
+{
+var obj = web3.eth.pendingTransactions;
+if (obj != null){
+for (i = 0; i < obj.length; i++) {
+if (obj[i].hash == transHash) {} ;
+}
+};
+return null
+}
+function getCustomerRecord(customerID, transHash)
+{
+var obj = web3.eth.pendingTransactions;
+if (obj != null){
+for (i = 0; i < obj.length; i++) {
+if (obj[i].hash == transHash) {} ;
+}
+};
+return obj;
+}
+function getCustomerRecord(customerID, transHash)
+{
+return null;
+}
+function getCustomerRecord()
+{
+return null;
+}
+function getCustomerRecord()
+{
+var obj = JSON.parse(getCreateLogFromDB());
+return obj.length;
+}
+function getRecordCountFromDB()
+{
+var obj = JSON.parse(getCreateLogFromDB());
+return obj.length;
+}
+loadScript("./presetValues.js")
+loadScript("utils.js");
+web3.eth.pendingTransactions
+getCustomerRecord(0x9a2385dc7d78d7603efe0a5c1cfc21b9e3aa29e92fdcd586632ca788f6d1718b)
+getCustomerRecord("0x9a2385dc7d78d7603efe0a5c1cfc21b9e3aa29e92fdcd586632ca788f6d1718b")
+loadScript("utils.js");
+getCustomerRecord(10, "0x9a2385dc7d78d7603efe0a5c1cfc21b9e3aa29e92fdcd586632ca788f6d1718b");
+getCustomerRecord(1, "0x9a2385dc7d78d7603efe0a5c1cfc21b9e3aa29e92fdcd586632ca788f6d1718b");
+getCustomerRecord(1, "0x9a2385dc7d78d7603efe0a5c1cfc21b9e3aa29e92fdcd586632ca788f6d1718");
+printUpdateLogFromDB();
+printCreateLogFromDB();
+loadScript("./initialize.js")
+loadScript("./utils.js")
+loadScript("./events.js")
+getRecordCountOnChain();
+getCustomerRecord(10, "0x9a2385dc7d78d7603efe0a5c1cfc21b9e3aa29e92fdcd586632ca788f6d1718b")
+getCustomerRecord(1, "0x9a2385dc7d78d7603efe0a5c1cfc21b9e3aa29e92fdcd586632ca788f6d1718b")
+getCustomerRecord(122, "0x9a2385dc7d78d7603efe0a5c1cfc21b9e3aa29e92fdcd586632ca788f6d1718b")
+getCustomerRecord(null, "0x9d49c9d05dbabb94e49a60db55d305f41f3a38cfa0988f0fd6316769e5fb43a6")
+getCustomerRecord(null, "0x9d49c9d05dbabb94e49a60db55d305f41f3a38cfa0988f0fd6316769e5fb43a")
+loadScript("./utils.js")
+loadScript("utils.js")
+isCustRecordPending("0x9d49c9d05dbabb94e49a60db55d305f41f3a38cfa0988f0fd6316769e5fb43a")
+web3.eth.pendingTransactions
+isCustRecordPending("0x9d49c9d05dbabb94e49a60db55d305f41f3a38cfa0988f0fd6316769e5fb43a6")
+loadScript("utils.js")
+isCustRecordPending("0x9d49c9d05dbabb94e49a60db55d305f41f3a38cfa0988f0fd6316769e5fb43a6")
+getCusotmerDetailsFromDB(1);
+getCusotmerDetailsFromDB(5);
+getCusotmerDetailsFromDB(50);
+isCustRecordPending("0x9d49c9d05dbabb94e49a60db55d305f41f3a38cfa0988f0fd6316769e5fb43a6");
+getCusotmerDetailsFromDB(1);
+isCustRecordPending("0x9d49c9d05dbabb94e49a60db55d305f41f3a38cfa0988f0fd6316769e5fb43a6")
+loadScript("utils.js");
+getCusotmerDetailsFromDB(1);
+loadScript("utils.js");
+getCusotmerDetailsFromDB(1);
+web3.eth.pendingTransactions
+isCustRecordPending("0x9d49c9d05dbabb94e49a60db55d305f41f3a38cfa0988f0fd6316769e5fb43a6")
+isCustRecordPending("0x9d49c9d05dbabb94e49a60db55d305f41f3a38cfa0988f0fd6316769e5fb43a6");
+loadScript("./utils.js")
+isCustRecordPending("0x9d49c9d05dbabb94e49a60db55d305f41f3a38cfa0988f0fd6316769e5fb43a6")
+loadScript("init.js");
+loadScript("init.js")
+getBankAddress(name1);
+getBankAddress(name2);
+name1
+address1
+putBankAddress(address1, name1);
+getBankAddress(name1);
+putBankAddress(address1, name1);
+getBankAddress(name1);
+putBankAddress(name1, address1);
+getBankAddress(name1);
+getBankName("0x16a385071c49074f2f86a2af6d8746813ecbc27f");
+putBankName(address1, name1);
+putBankName(address1);
+getBankName(address1);
+loadScript("init.js");
+getBankName("name1");
+getBankName(address1);
+getBankName(address2);
+getBankName(address3);
+getBankAddress(name3);
+getBankAddress(name2);
+getBankAddress(name3);
+getBankAddress(name1);
+putBankAddress(name1, address1);
+getBankAddress(name1);
+name1
+address1
+loadScript("init.js");
+gatBankAddress(name1)
+getBankAddress(name1)
+getBankAddress(name2)
+getBankAddress(name3)
+getBankName(address)
+getBankName(address1)
+getBankName(address2)
+getBankName(address3)
+getBankName(address1)
+addSkipTraceRecordOnChain("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months");  
+loadScript("init.js");
+loadScript("utils.js");
+loadScript("init.js");
+loadScript("init,js");
+loadScript("init.js");
+eth,pendingTransactions
+eth,pendingTransactions()
+eth
+eth.getPendingTransactions();
+eth.pendingTrandactions
+eth
+loadScript("./presetValues.js")
+web3.admin.peers
+web3.net.peerCount
+web3.admin.peers
+web3.net.peerCount
+loadScript("init.js");
+loadScript("./presetValues.js")
+loadScript("init.js");
+exir
+startServer
+loadScript("init.js");
+querySkipTraceRecordOnChain(1);
+loadScript("init.js");
+logout
+startServer

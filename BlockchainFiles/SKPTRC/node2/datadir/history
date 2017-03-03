@@ -1,0 +1,121 @@
+acc = eth.accounts[0];
+balance = web3.fromWei(eth.getBalance(eth.accounts[0]), "ether");
+admin.nodeInfo.NodeUrl
+balance = web3.fromWei(eth.getBalance(eth.accounts[0]), "ether");
+balance = web3.fromWei(eth.getBalance("0x16a385071c49074f2f86a2af6d8746813ecbc27f"), "ether");
+balance = web3.fromWei(eth.getBalance("0x9594101c1c6d621ee97b4f88e077631bd355dd1b"), "ether");
+balance = web3.fromWei(eth.getBalance("0x16a385071c49074f2f86a2af6d8746813ecbc27f"), "ether");
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+getCashPositionFromChain(DVPcontractAddress, address1, coinBaseAddress);
+balance = web3.fromWei(eth.getBalance(eth.accounts[0]), "ether");
+getAssetPosition(name1);
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+loadScript("./DVPinitialize.js")
+getCashPositionFromChain(DVPcontractAddress, address1, coinBaseAddress);
+// Start Event Listener for DVPSettlementEvent
+DVPSettleContract.at(DVPcontractAddress).DVPSettlementEvent().watch(function(error, result){
+var jsonLogString = JSON.stringify(result.args);
+var objResult = JSON.parse(jsonLogString);
+var isCashSettled = objResult.isCashSettled;
+var reference = objResult.reference;
+if (strcmp(isCashSettled,"false")== 0){
+console.log(" ");
+console.log("DVPSettlement Event Listener - Position before Cash Transfer...");
+console.log(" ");
+console.log("Output from Blockchain Contract -> " + jsonLogString);
+console.log(" ");
+console.log(" ");
+putCashTransferPendingDetails(reference, jsonLogString);
+};
+if (strcmp(isCashSettled,"true")== 0){
+console.log(" ");
+console.log("DVPSettlement Event Listener - Position after Cash Transfer...");
+console.log(" ");
+console.log("Output from Blockchain Contract -> " + jsonLogString);
+console.log(" ");
+putCashTransferCompletedDetails(reference, jsonLogString);
+};
+// Cash Settlement done, now do assetment to finish off processing settlement instruction!
+if (strcmp(isCashSettled,"true")== 0){doAssetSettlement(JSON.stringify(result.args))};
+});
+// Start Event Listener
+DVPSettleContract.at(DVPcontractAddress).CashQueryEvent().watch(function(error, result){
+console.log("DVPSettleContract.CashQueryEvent event listener output ->  " + JSON.stringify(result.args));
+console.log(" ");
+});
+getCashPositionFromChain(DVPcontractAddress, address1, coinBaseAddress);
+// Start Event Listener for DVPSettlementEvent
+DVPSettleContract.at(DVPcontractAddress).DVPSettlementEvent().watch(function(error, result){
+var jsonLogString = JSON.stringify(result.args);
+var objResult = JSON.parse(jsonLogString);
+var isCashSettled = objResult.isCashSettled;
+var reference = objResult.reference;
+if (strcmp(isCashSettled,"false")== 0){
+console.log(" ");
+console.log("DVPSettlement Event Listener - Position before Cash Transfer...");
+console.log(" ");
+console.log("Output from Blockchain Contract -> " + jsonLogString);
+console.log(" ");
+console.log(" ");
+putCashTransferPendingDetails(reference, jsonLogString);
+};
+if (strcmp(isCashSettled,"true")== 0){
+console.log(" ");
+console.log("DVPSettlement Event Listener - Position after Cash Transfer...");
+console.log(" ");
+console.log("Output from Blockchain Contract -> " + jsonLogString);
+console.log(" ");
+putCashTransferCompletedDetails(reference, jsonLogString);
+};
+// Cash Settlement done, now do assetment to finish off processing settlement instruction!
+if (strcmp(isCashSettled,"true")== 0){doAssetSettlement(JSON.stringify(result.args))};
+});
+// Start Event Listener
+DVPSettleContract.at(DVPcontractAddress).CashQueryEvent().watch(function(error, result){
+console.log("DVPSettleContract.CashQueryEvent event listener output ->  " + JSON.stringify(result.args));
+console.log(" ");
+});
+getCashPositionFromChain(DVPcontractAddress, address1, coinBaseAddress);
+loadScript("./mining.js)
+loadScript("./mining.js")
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+loadScript("./events.js")
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+loadScript("./events.js")
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+loadScript("./events.js")
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+loadScript("./events.js")
+web3.net.peerCount
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+loadScript("./events.js")
+getCashPositionFromChain(DVPcontractAddress, address2, coinBaseAddress);
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+loadScript("./events.js")
+getCashPositionFromChain(DVPcontractAddress, address2, coinBaseAddress);
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+loadScript("./events.js")
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+loadScript("./events.js")
+web3.net.peerCount
+loadScript("./DVPinitialize.js")
+loadScript("./DVPutils.js")
+loadScript("./events.js")
+loadScript("init.js")
+printQueryLogFromDB();
+admin.startRPC("127.0.0.1", 8546, "*", "web3,db,net,eth");
+loadScript("./presetValues.js")
+printQueryLogFromDB();
+printCreateLogFromDB();
+loadScript("init.js")
+loadScript("init.js");

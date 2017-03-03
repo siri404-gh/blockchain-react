@@ -1,0 +1,161 @@
+<html>
+<head>
+
+<title>Skip Trace Consortium using Blockchain</title>
+ 
+<script type="text/javascript" src="js/web3.min.js"></script>
+<script type="text/javascript" src="js/initialize.js"></script>
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript" src="js/presetValues.js"></script>
+
+<script type="text/javascript">
+
+function reset(){
+	resetOnDB();
+	resetOnChain();
+}
+
+function getRecordCountDB() {
+	var recordCount = getRecordCountFromDB();
+	alert(recordCount);
+}
+
+function addSkipTraceRecord(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks)
+{
+	var transHash = addSkipTraceRecordOnChain(firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks);
+	// alert(transHash);	
+}
+
+function updateSkipTraceRecord(customerID, firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks)
+{
+	var transHash = updateSkipTraceRecordOnChain(customerID, firstName, middleName, lastName, aliasName, DOB, SSN, passportNumber, homePhone1, homePhone2, homePhone3, workPhone1, workPhone2, workPhone3, mobilePhone1, mobilePhone2, mobilePhone3, currentAddress1, currentAddress2, currentAddress3, employerName1, employerName2, employerName3, productName1, productName2, productName3, remarks);
+	// alert(transHash);	
+}
+
+function querySkipTraceRecord(customerID)
+{
+	var transHash = querySkipTraceRecordOnChain(customerID);
+	// alert(transHash);	
+}
+
+function getCreateLog()
+{
+	alert(getCreateLogFromDB());
+}
+
+function getUpdateLog()
+{
+	alert(getUpdateLogFromDB());
+}
+
+function getQueryLog()
+{
+	alert(getQueryLogFromDB());
+}
+
+function presetVal(){
+	presetValues();
+}
+
+function isRecordPending(transHash){
+	alert(isCustRecordPending(transHash));
+}
+
+function getCustDetailsFromDB(customerID){
+	alert(getCusotmerDetailsFromDB(customerID));
+}
+
+function getNameBank(address){
+	alert(getBankName(address));
+}
+
+function getAddressBank(name){
+	alert(getBankAddress(name));
+}
+
+web3.eth.filter('latest').watch(function(){
+	display();
+});
+
+
+function display() {
+
+	var queryEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceQueryEvent();
+	var addEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceAddEvent();
+	var updateEvent = SkipTraceContract.at(SkipTraceContractAddress).SkipTraceUpdateEvent();
+ 
+	queryEvent.watch(function(error, result){
+		alert("Event Message from Blockchain Contract for Customer Query ->  " + deSerialize(JSON.stringify(result.args)));
+		queryEvent.stopWatching();
+		addEvent.stopWatching();
+		updateEvent.stopWatching();
+	});
+
+	// Start Event Listener for SkipTraceAddEvent
+
+	addEvent.watch(function(error, result){
+		alert("Event Message from Blockchain Contract for Customer Add ->  " + deSerialize(JSON.stringify(result.args)));
+		queryEvent.stopWatching();
+		addEvent.stopWatching();
+		updateEvent.stopWatching();
+	});
+
+	
+	// Start Event Listener for SkipTraceUpdateEvent
+
+	updateEvent.watch(function(error, result){
+		alert("Event Message from Blockchain Contract for Customer Update ->  " + deSerialize(JSON.stringify(result.args)));
+		queryEvent.stopWatching();
+		addEvent.stopWatching();
+		updateEvent.stopWatching();
+	});
+	
+}
+
+</script>
+
+</head>
+
+<body>
+
+<button onclick="reset()">Reset -> resets Chain data, resets DB data, returns nothing</button>
+<br> <br>
+
+<button onclick="presetVal()">Preset Values -> hits Chain, returns TransHash</button>
+<br><br>
+
+<button onclick='addSkipTraceRecord("John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "862, Wilto Drive, Nuker Lane, Albany, NY-12305", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "A long time defaulter and could not be traced for months")'>Add Skip Trace Record -> hits Chain, returns TransHash, event Callback happens for return data from chain</button>
+<br><br>
+
+<button onclick='updateSkipTraceRecord(1, "John", "Allen", "Davis", "Joe", "12-Aug-79", "037-593-7378", "CN676698B", "+1-456-786-3106", "+1-724-247-3088", "+1-603-214-3670", "+1-456-752-0942", "+1-456-956-0349 X702", "+1-456-359-9377", "+1-513-675-4138", "+1-513- 795-9996", "+1-579-996-5999", "1881 Mitchell Ave UNIT, 5000 Watkins Way, CA 92780", "481, New Park Street, Birlank Lace Road, Kingston, NY 17842", "25145 Copa Del Oro Dr, UNIT 102, Hayward, CA 94545", "KERNRUB Specialiaty", "Gencom Ltd", "Sardine Finneche", "Mastercard Gold", "Personal Loan", "Visacard Gold", "Updated - Catch me if you can!!")'>Update Skip Trace Record -> hits Chain, returns TransHash, event Callback happens for return data from chain</button>
+<br><br>
+
+<button onclick='querySkipTraceRecord(1)'>Query Skip Trace Record -> hits Chain, returns TransHash, event Callback happens for return data from chain</button>
+<br><br>
+
+<button onclick="getCreateLog()">Get Create Log -> hits DB, returns Log Data</button>
+<br><br>
+
+<button onclick="getUpdateLog()">Get Update Log -> hits DB, returns Log Data</button>
+<br><br>
+
+<button onclick="getQueryLog()">Get Query Log -> hits DB, returns Log Data</button>
+<br><br>
+
+<button onclick="getRecordCountDB()">Get Record Count from DB -> hits DB, returns record count</button>
+<br><br>
+
+<button onclick='isRecordPending("0x9d49c9d05dbabb94e49a60db55d305f41f3a38cfa0988f0fd6316769e5fb43a6")'>Check if record pending for mining for the TransHash -> hits chain, returns boolean</button>
+<br><br>
+
+<button onclick="getCustDetailsFromDB(1)">Get lastest Customer Details from DB (searches both Create and Update logs) -> hits DB, returns single Customer Record</button>
+<br><br>
+
+<button onclick="getNameBank(address1)">Get Name of Bank against Blockchain address -> hits DB, returns name</button>
+<br><br>
+
+<button onclick="getAddressBank(name1)">Get Blockchain address of Bank against name -> hits DB, returns Ethereum Address</button>
+<br><br>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+=============== Aug 5, 2016 (IST) ===============
+14:20:48.190255 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:20:48.191255 db@open opening
+14:20:48.192255 journal@recovery F·1
+14:20:48.193256 journal@recovery recovering @402
+14:20:48.417887 mem@flush created L0@409 N·12687 S·703KiB "\x00.\x88..\xa5K\x04,v548049":"\xff\xf6w..MOS,v541943"
+14:20:48.443908 db@janitor F·8 G·0
+14:20:48.444925 db@open done T·253.6702ms
+14:20:48.624023 table@compaction L0·1 -> L1·5 S·10MiB Q·548265
+14:20:48.921045 table@build created L1@412 N·8907 S·2MiB "\x00\x005..\xdd\xef\xae,v227776":"RN\x1a..\xcaT\xe4,v544928"
+14:20:49.119877 table@build created L1@413 N·6442 S·2MiB "RN(..`\ne,v15317":"omg..\xfb\x05\x99,v101158"
+14:20:49.337248 table@build created L1@414 N·4015 S·2MiB "ot\x8e..\x94#\xdc,v89729":"rec..\xf6z\x94,v150988"
+14:20:49.774439 table@build created L1@415 N·9623 S·2MiB "rec..\xcb;?,v241638":"\xbf\x93\xd0..\xfc\xf5\x15,v256342"
+14:20:50.141616 table@build created L1@416 N·7146 S·1MiB "\xbf\x94\xbf..\x05\x83\xae,v162071":"\xff\xfd5..\xefoj,v462224"
+14:20:50.203590 table@compaction committed F-1 S-456KiB Ke·0 D·11648 T·1.5795672s
+14:20:50.205598 table@remove removed @409
+14:20:50.206599 table@remove removed @404
+14:20:50.208600 table@remove removed @405
+14:20:50.209601 table@remove removed @406
+14:20:50.211605 table@remove removed @407
+14:20:50.212603 table@remove removed @408
+15:14:06.596239 db@close closing
+15:14:06.617244 db@close done T·21.0052ms
