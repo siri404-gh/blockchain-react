@@ -9,6 +9,8 @@ var SkipTraceContractSequence = variables.SkipTraceContractSequence;
 var SkipTraceCompiled;
 var SkipTraceContract;
 
+var MongoClient = require('mongodb').MongoClient;
+
 module.exports = {
     init: function(port, coinBaseAddress) {
         web3.setProvider(new web3.providers.HttpProvider(provider+':'+port));
@@ -91,7 +93,7 @@ module.exports = {
         }
         var position = null;
         obj = JSON.parse(web3.db.getString("UpdateLog", "logString"));
-        for (var i = obj.length - 1; i > 0; i--) {
+        for (var i = obj.length - 1; i >= 0; i--) {
             if (obj[i].customerID == customerID) {
                 obj[i].bankID = this.getBankName(obj[i].bankID);
                 return obj[i];

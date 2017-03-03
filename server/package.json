@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "browserify --node api.js | uglifyjs > ../final/server.js"
+    "build": "browserify --node api.js --exclude 'binary' | uglifyjs > ../final/server.js"
   },
   "author": "Sreeram Padmanabhan",
   "license": "ISC",
@@ -15,8 +15,9 @@
     "documentjs": "^0.4.4",
     "eslint": "^3.4.0",
     "express": "^4.14.0",
+    "mongodb": "^2.2.10",
     "nodemon": "^1.10.2",
     "path": "^0.12.7",
     "web3": "^0.14.0"
-  }
+}
 }
